@@ -1,6 +1,6 @@
 # Constitución del Evaluador de prompts
 
-**Estado:** borrador · **Versión:** 0.1 · **Perfil:** B (sube a C al abrirse a otras personas)
+**Estado:** aprobada · **Versión:** 1.0 · **Perfil:** B (sube a C al abrirse a otras personas)
 
 ## Principios
 
@@ -20,7 +20,8 @@
 - Arquitectura limpia. El **dominio** contiene prompt, problema detectado, sugerencia, versión y caso de prueba, sin depender de frameworks ni de proveedores. Los **casos de uso** son revisar, preguntar, mejorar, comprobar y consultar historial. Los **puertos** son el modelo de IA, el almacenamiento y la interfaz. Los **adaptadores** quedan en el borde.
 - Las dependencias apuntan hacia el dominio y las implementaciones se conectan en un único punto.
 - Separación de responsabilidades, composición antes que herencia, SOLID, DRY. Sirven como criterio de revisión, no como dogma.
-- Paradigma y lenguaje: [CLARIFICAR: ¿qué lenguajes dominas o quieres aprender? Se fija aquí y la elección concreta del stack se justifica en un ADR en la Fase 5.]
+- **Lenguaje principal: Python.** Tiene SDKs de todos los proveedores de modelos, el ecosistema de evaluación y métricas de texto, pruebas sencillas y es el estándar en ingeniería de IA. Si la interfaz necesita otro lenguaje (por ejemplo, HTML y JavaScript en el frontend), se decide con un ADR en la Fase 5.
+- **Paradigma:** orientado a objetos para las entidades del dominio y funciones puras para las reglas y transformaciones sin estado. Tipado estático con anotaciones de tipo comprobadas en la CI.
 
 ## Invariantes del dominio
 
@@ -76,5 +77,6 @@ Solo Àlex Marco puede enmendar esta constitución. Cada enmienda sube la versi�
 | Versión | Fecha | Cambio | Motivo |
 |---|---|---|---|
 | 0.1 | 2026-10-18 | Borrador inicial | Fase 2 |
+| 1.0 | 2026-10-18 | Lenguaje fijado (Python) y aprobación | Cierre de la Fase 2 |
 
-**Versión:** 0.1 · **Aprobada:** [pendiente] por Àlex Marco
+**Versión:** 1.0 · **Aprobada:** 2026-10-18 por Àlex Marco
