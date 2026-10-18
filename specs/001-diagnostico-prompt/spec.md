@@ -1,6 +1,6 @@
 # Especificación: Diagnóstico y mejora de un prompt
 
-**Estado:** en clarificación · **Versión:** 0.2 · **Fecha:** 2026-10-18 · **Responsable:** Àlex Marco
+**Estado:** aprobada · **Versión:** 1.0 · **Aprobada:** 2026-10-18 por Àlex Marco · **Constitución:** 1.1
 
 ## Contexto y objetivo
 
@@ -23,7 +23,8 @@ Como persona con poco dominio de la IA, quiero pegar mi prompt y lo que espero o
 **Criterios de aceptación:**
 - Dado un prompt con un objetivo ambiguo, cuando pido el diagnóstico, entonces aparece un problema de esa categoría que cita el fragmento ambiguo y explica en lenguaje llano por qué es un problema.
 - Dado un prompt sin problemas relevantes, cuando pido el diagnóstico, entonces la app dice que no ha encontrado problemas importantes y no inventa ninguno.
-- Dado cualquier diagnóstico, cuando lo leo, entonces cada problema tiene categoría, fragmento citado, explicación y gravedad.
+- Dado cualquier diagnóstico, cuando lo leo, entonces cada problema tiene tipo, categoría, explicación y gravedad. Además, si es «en el texto», cita su fragmento, y si es «por ausencia», indica qué falta.
+- Dado un prompt que no indica el formato de salida, cuando pido el diagnóstico, entonces aparece un problema por ausencia de la categoría «formato de salida no especificado» que dice qué falta, sin citar ningún fragmento.
 - Dado que no he indicado el resultado esperado, cuando pido el diagnóstico, entonces la app no lo envía y me pide que lo indique.
 
 ### P2 · Responder a preguntas aclaratorias
@@ -50,7 +51,9 @@ Como persona con poco dominio de la IA, quiero recibir una versión mejorada de 
 
 - **RF-001:** El sistema debe permitir introducir un prompt como texto libre de hasta 8.000 caracteres. (P1)
 - **RF-002:** El sistema debe exigir que el usuario indique el resultado que espera obtener con el prompt antes de diagnosticarlo. (P1)
-- **RF-003:** El sistema debe devolver un diagnóstico con una lista de problemas. Cada problema incluye categoría, fragmento citado del prompt, explicación en lenguaje llano y gravedad (alta, media o baja). (P1)
+- **RF-003:** El sistema debe devolver un diagnóstico con una lista de problemas. Cada problema incluye tipo («en el texto» o «por ausencia»), categoría, explicación en lenguaje llano y gravedad (alta, media o baja). Además:
+  - Un problema en el texto debe citar su fragmento literal.
+  - Un problema por ausencia debe indicar qué información falta y, si procede, en qué parte del prompt convendría añadirla. (P1)
 - **RF-004:** Las categorías de problemas deben salir del catálogo cerrado definido en «Entidades y glosario». (P1)
 - **RF-005:** Si no detecta problemas relevantes, el sistema debe decirlo explícitamente y no inventar ninguno. (P1)
 - **RF-006:** Antes de enviar el prompt, el sistema debe indicar a qué proveedor y modelo de IA se enviará. (Invariante de la constitución)
@@ -60,9 +63,22 @@ Como persona con poco dominio de la IA, quiero recibir una versión mejorada de 
 - **RF-010:** Si una pregunta se ha omitido, la versión mejorada no debe inventar esa información. Debe dejar un marcador visible para que el usuario la complete. (P2, P3)
 - **RF-011:** El sistema debe mostrar el prompt original y el mejorado a la vez, con las diferencias marcadas. (P3)
 - **RF-012:** El prompt original no debe modificarse en ningún momento. (Invariante de la constitución)
-- **RF-013:** La interfaz debe estar disponible en español, catalán, inglés y alemán. Las explicaciones y las preguntas deben estar en el idioma de la interfaz que ha elegido el usuario. [CLARIFICAR: si el prompt está escrito en otro idioma (p. ej., el usuario tiene la interfaz en español y escribe el prompt en inglés, o escribe en francés), ¿las explicaciones siguen en el idioma de la interfaz? ¿Y la versión mejorada se escribe en el idioma del prompt original?]
+- **RF-013:** La interfaz debe estar disponible en español, catalán, inglés y alemán. Las explicaciones y las preguntas deben estar en el idioma de la interfaz que ha elegido el usuario. La versión mejorada debe estar en el idioma del prompt original. Se acepta un prompt escrito en cualquier idioma.
 - **RF-014:** Si el proveedor de IA falla (límite de uso, caída, respuesta inválida), el sistema debe explicarlo en lenguaje llano, conservar lo que el usuario había escrito y permitir reintentar.
 - **RF-015:** Si el prompt pide contenido ilegal o peligroso, el sistema debe rechazar diagnosticarlo y mejorarlo, y explicar en lenguaje llano que no puede ayudar con esa petición. (P1)
+
+### Criterios de aceptación de requisitos transversales
+
+Son los requisitos que no cubren los criterios de las historias.
+
+- **RF-001:** Dado un prompt de 8.000 caracteres, cuando pido el diagnóstico, entonces se envía. Dado uno de 8.001, entonces no se envía y se me indica que sobra 1 carácter.
+- **RF-006:** Dado un prompt listo para enviar, cuando todavía no lo he enviado, entonces veo el nombre del proveedor y del modelo que lo recibirán.
+- **RF-013:**
+  - Dada la interfaz en catalán y un prompt en inglés, cuando recibo el diagnóstico, entonces las explicaciones y las preguntas están en catalán y la versión mejorada está en inglés.
+  - Dado un prompt en francés, cuando pido el diagnóstico, entonces se acepta y se diagnostica.
+  - Dado que cambio el idioma de la interfaz a alemán, cuando navego, entonces todos los textos de la interfaz están en alemán.
+- **RF-014:** Dado que el proveedor devuelve un error de límite de uso, cuando pido el diagnóstico, entonces veo un mensaje en lenguaje llano, mi prompt y mi resultado esperado siguen escritos y puedo reintentar con un solo clic o acción.
+- **RF-015:** Dado un prompt que pide instrucciones para fabricar un arma, cuando pido el diagnóstico, entonces no recibo diagnóstico ni versión mejorada y veo un mensaje que explica que la app no ayuda con esa petición.
 
 ## Casos límite
 
@@ -84,7 +100,7 @@ Como persona con poco dominio de la IA, quiero recibir una versión mejorada de 
 - **RNF-003 · Calidad del diagnóstico** (medida con las evals versionadas):
   - Detecta al menos el 80 % de los problemas sembrados en los prompts de prueba.
   - Como máximo el 20 % de los problemas señalados son falsos positivos.
-- **RNF-004 · Fidelidad:** el 100 % de los fragmentos citados existen literalmente en el prompt original.
+- **RNF-004 · Fidelidad:** el 100 % de los fragmentos citados en problemas en el texto existen literalmente en el prompt original.
 - **RNF-005 · Comprensibilidad:** en la prueba con 5 personas (criterio de éxito 2), al menos 4 entienden cada explicación sin ayuda.
 - **RNF-006 · Privacidad:** el texto de los prompts no aparece en ningún log.
 - **RNF-007 · Rechazo:** el 100 % de los prompts ilegales o peligrosos del conjunto de evals se rechaza (RF-015), y como máximo el 5 % de los prompts legítimos de las evals se rechaza por error.
@@ -94,11 +110,17 @@ Como persona con poco dominio de la IA, quiero recibir una versión mejorada de 
 - **Prompt:** texto que el usuario escribe para pedir algo a una IA.
 - **Resultado esperado:** descripción, en palabras del usuario, de lo que quiere obtener. Es obligatorio.
 - **Diagnóstico:** conjunto de problemas detectados en un prompt.
-- **Problema:** defecto concreto del prompt, con categoría, fragmento, explicación y gravedad.
+- **Problema:** defecto concreto del prompt, con tipo, categoría, explicación y gravedad. Hay dos tipos:
+  - **En el texto:** está en una parte escrita del prompt y cita su fragmento.
+  - **Por ausencia:** falta información y se indica cuál.
+
+  Por lo general, las categorías 2, 3, 4, 6 y 8 dan problemas por ausencia, y las 1, 5, 7 y 9, problemas en el texto.
 - **Fragmento:** parte literal del prompt a la que se refiere un problema.
 - **Pregunta aclaratoria:** pregunta al usuario sobre información que falta.
 - **Versión mejorada:** prompt nuevo derivado del original. Se compone de **cambios**, y cada cambio está ligado a problemas.
 - **Idioma de la interfaz:** uno de estos cuatro: español, catalán, inglés o alemán.
+- **Ronda:** cada vez que la app presenta preguntas aclaratorias al usuario.
+- **Evals:** conjunto versionado de prompts de prueba con problemas conocidos sembrados, prompts legítimos y prompts dañinos. Sirve para medir RNF-003, RNF-004 y RNF-007.
 - **Catálogo de categorías:**
   1. Objetivo ambiguo: no queda claro qué se pide.
   2. Falta de contexto: la IA no tiene la información de fondo necesaria.
@@ -120,8 +142,7 @@ Como persona con poco dominio de la IA, quiero recibir una versión mejorada de 
 
 ## Supuestos y dudas abiertas
 
-Dudas abiertas (responsable: Àlex Marco):
-- RF-013: idioma de las explicaciones y de la versión mejorada cuando el prompt está en otro idioma.
+No quedan dudas abiertas.
 
 ### Registro de clarificaciones
 
@@ -133,6 +154,9 @@ Dudas abiertas (responsable: Àlex Marco):
 | 2026-10-18 | Àlex Marco | Contenido ilegal o peligroso | Se rechaza (RF-015) |
 | 2026-10-18 | Àlex Marco | Límites | 8.000 caracteres, 5 preguntas por ronda, p95 < 30 s |
 | 2026-10-18 | Àlex Marco | Calidad del diagnóstico | ≥ 80 % de detección, ≤ 20 % de falsos positivos |
+| 2026-10-18 | Àlex Marco | Idioma con prompt en otro idioma | Explicaciones en el idioma de la interfaz, versión mejorada en el idioma del prompt; se acepta cualquier idioma de prompt (RF-013) |
+| 2026-10-18 | Àlex Marco | Rechazos erróneos | Como máximo un 5 % de prompts legítimos rechazados (RNF-007) |
+| 2026-10-18 | Àlex Marco | Problemas sin fragmento (conflicto con la constitución) | Opción A: dos tipos de problema, «en el texto» y «por ausencia». Constitución enmendada a 1.1 (RF-003) |
 
 ## Criterios de éxito
 

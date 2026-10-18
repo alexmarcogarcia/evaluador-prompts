@@ -1,6 +1,6 @@
 # Constitución del Evaluador de prompts
 
-**Estado:** aprobada · **Versión:** 1.0 · **Perfil:** B (sube a C al abrirse a otras personas)
+**Estado:** aprobada · **Versión:** 1.1 · **Perfil:** B (sube a C al abrirse a otras personas)
 
 ## Principios
 
@@ -26,7 +26,11 @@
 ## Invariantes del dominio
 
 - El prompt original del usuario nunca se modifica ni se pierde. Cada mejora genera una versión nueva.
-- Cada problema detectado señala el fragmento concreto del prompt al que se refiere.
+- Cada problema detectado es de uno de dos tipos:
+  - **En el texto:** señala el fragmento literal del prompt al que se refiere.
+  - **Por ausencia:** indica qué información falta y, si procede, en qué parte del prompt convendría añadirla.
+
+  Nunca se cita un fragmento que no exista en el prompt.
 - Cada sugerencia de mejora referencia el problema o los problemas que resuelve.
 - El usuario siempre sabe a qué proveedor de IA se envía su prompt.
 
@@ -78,5 +82,6 @@ Solo Àlex Marco puede enmendar esta constitución. Cada enmienda sube la versi�
 |---|---|---|---|
 | 0.1 | 2026-10-18 | Borrador inicial | Fase 2 |
 | 1.0 | 2026-10-18 | Lenguaje fijado (Python) y aprobación | Cierre de la Fase 2 |
+| 1.1 | 2026-10-18 | Invariante de problemas: tipos «en el texto» y «por ausencia» | Al validar la spec 001 se vio que los problemas de las categorías que describen una carencia no tienen fragmento que citar |
 
-**Versión:** 1.0 · **Aprobada:** 2026-10-18 por Àlex Marco
+**Versión:** 1.1 · **Aprobada:** 2026-10-18 por Àlex Marco
