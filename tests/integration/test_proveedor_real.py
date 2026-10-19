@@ -38,7 +38,7 @@ def gemini() -> ModeloOpenAICompatible:
 def test_diagnostico_real_de_c01(gemini: ModeloOpenAICompatible) -> None:
     prompt = Prompt(
         texto="Escríbeme algo sobre el cambio climático que esté bien.",
-        resultado_esperado="Un artículo de unas 500 palabras para el blog del instituto, para alumnos de 15 años.",
+        resultado_esperado="Un artículo de unas 500 palabras para el blog del instituto, para 15 años.",
     )
     depurado = reglas.depurar_diagnostico(prompt, gemini.diagnosticar(prompt, idioma_interfaz="es"))
     assert depurado.diagnostico.problemas, "un prompt flojo debería tener problemas"
