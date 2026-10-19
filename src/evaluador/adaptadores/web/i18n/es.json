@@ -36,5 +36,8 @@
   "error_respuesta_invalida": "El servicio de IA ha devuelto una respuesta que no hemos podido entender.",
   "reintentar_en": "Puedes volver a intentarlo en {s} segundos.",
   "reintentar": "Tu texto sigue aquí: pulsa el botón para volver a intentarlo.",
-  "nueva_revision": "Revisar otro prompt"
+  "nueva_revision": "Revisar otro prompt",
+  "preguntas_titulo": "Para afinar la mejora, responde si puedes",
+  "preguntas_ayuda": "Puedes dejar en blanco las que no sepas: no inventaremos esa información, la dejaremos marcada para que la completes tú.",
+  "boton_mejorar": "Mejorar mi prompt"
 }

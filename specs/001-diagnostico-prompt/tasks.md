@@ -51,8 +51,8 @@
 
 ## Historia P2 · Preguntas aclaratorias
 
-- [ ] **T040** Pruebas de aceptación de P2 en `tests/acceptance/test_p2_preguntas.py` (RF-007, RF-008, RF-010).
-- [ ] **T041** Interfaz: mostrar las preguntas, responderlas u omitirlas (RF-007, RF-008).
+- [x] **T040** Pruebas de aceptación de P2 en `tests/acceptance/test_p2_preguntas.py` (RF-007, RF-008, RF-010).
+- [x] **T041** Interfaz: mostrar las preguntas, responderlas u omitirlas (RF-007, RF-008).
 
 **Punto de control P2:** quickstart, paso 4.
 

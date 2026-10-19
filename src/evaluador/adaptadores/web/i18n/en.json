@@ -36,5 +36,8 @@
   "error_respuesta_invalida": "The AI service returned a response we couldn't understand.",
   "reintentar_en": "You can try again in {s} seconds.",
   "reintentar": "Your text is still here: press the button to try again.",
-  "nueva_revision": "Review another prompt"
+  "nueva_revision": "Review another prompt",
+  "preguntas_titulo": "To fine-tune the improvement, answer if you can",
+  "preguntas_ayuda": "You can leave blank the ones you don't know: we won't make that information up, we'll mark it for you to complete.",
+  "boton_mejorar": "Improve my prompt"
 }

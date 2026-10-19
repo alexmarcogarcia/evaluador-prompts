@@ -73,6 +73,19 @@
         <p>{{ p.explicacion }}</p>
       </article>
       {% endfor %}
+      {% if diagnostico.preguntas %}
+      <h2>{{ t.preguntas_titulo }}</h2>
+      <p class="ayuda">{{ t.preguntas_ayuda }}</p>
+      <form method="post" action="/mejorar">
+        <input type="hidden" name="idioma" value="{{ idioma }}">
+        <input type="hidden" name="estado" value="{{ estado }}">
+        {% for q in diagnostico.preguntas %}
+        <label for="respuesta_{{ q.id }}">{{ q.texto }}</label>
+        <textarea id="respuesta_{{ q.id }}" name="respuesta_{{ q.id }}" rows="2"></textarea>
+        {% endfor %}
+        <p><button type="submit">{{ t.boton_mejorar }}</button></p>
+      </form>
+      {% endif %}
     {% endif %}
   </section>
   {% endif %}
