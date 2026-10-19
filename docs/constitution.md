@@ -1,6 +1,6 @@
 # Constitución del Evaluador de prompts
 
-**Estado:** aprobada · **Versión:** 1.1 · **Perfil:** B (sube a C al abrirse a otras personas)
+**Estado:** aprobada · **Versión:** 1.2 · **Perfil:** B (sube a C al abrirse a otras personas)
 
 ## Principios
 
@@ -49,6 +49,7 @@
 - **Excepción justificada al «revisa otra persona»:** el equipo es de una sola persona. Por eso, cada cambio pasa por:
   - (1) una revisión asistida por IA contra la spec y esta constitución;
   - (2) una autorrevisión con la checklist de la DoD, en otro momento distinto al de escribirlo.
+- **Fusión de PRs en verde:** el asistente de IA fusiona en `main` sus propios PRs cuando toda la CI está en verde y la revisión (1) no encuentra problemas. La autorrevisión (2) de Àlex Marco puede hacerse después de fusionar; si encuentra algo, se corrige con un PR nuevo. Nunca se fusiona nada en rojo o pendiente.
 - Cambios pequeños: un PR por tarea o grupo de tareas de una misma historia.
 - Al abrirse a otras personas (perfil C) se revisa esta regla.
 
@@ -83,5 +84,6 @@ Solo Àlex Marco puede enmendar esta constitución. Cada enmienda sube la versi�
 | 0.1 | 2026-10-18 | Borrador inicial | Fase 2 |
 | 1.0 | 2026-10-18 | Lenguaje fijado (Python) y aprobación | Cierre de la Fase 2 |
 | 1.1 | 2026-10-18 | Invariante de problemas: tipos «en el texto» y «por ausencia» | Al validar la spec 001 se vio que los problemas de las categorías que describen una carencia no tienen fragmento que citar |
+| 1.2 | 2026-10-19 | El asistente fusiona sus PRs con la CI en verde; la autorrevisión puede ser posterior | Decisión de Àlex Marco para acelerar el trabajo en solitario sin renunciar a la CI ni a la revisión |
 
-**Versión:** 1.1 · **Aprobada:** 2026-10-18 por Àlex Marco
+**Versión:** 1.2 · **Aprobada:** 2026-10-19 por Àlex Marco
