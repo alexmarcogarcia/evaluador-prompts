@@ -32,7 +32,7 @@ dev = [
 ]
 
 [tool.setuptools.package-data]
-evaluador = ["prompts/*.md"]
+evaluador = ["prompts/*.md", "adaptadores/web/i18n/*.json", "adaptadores/web/plantillas/*.html"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

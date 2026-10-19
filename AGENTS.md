@@ -9,7 +9,7 @@ Aplicación web en Python que revisa prompts, explica sus problemas y propone c�
 - Solo pruebas: `.venv/Scripts/python -m pytest` (Windows) · `.venv/bin/python -m pytest` (Linux/macOS)
 - Pruebas contra un proveedor real (red y claves): `... -m pytest -m red`
 - Coherencia spec ↔ tareas ↔ pruebas: `.venv/Scripts/python scripts/coherencia.py`
-- Ejecutar la app: pendiente (historia P1)
+- Ejecutar la app: `.venv/Scripts/python -m evaluador` → http://127.0.0.1:8000
 
 ## Dónde está cada cosa
 - Constitución: `docs/constitution.md`. Gobierna todo lo demás.

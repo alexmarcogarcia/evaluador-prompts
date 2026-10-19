@@ -37,14 +37,14 @@
 
 - [x] **T030** Pruebas de aceptación de P1 en `tests/acceptance/test_p1_diagnostico.py`, con el doble del modelo (criterios de P1 y de RF-001, RF-002, RF-005, RF-006, RF-015).
 - [x] **T031** Caso de uso `src/evaluador/casos_uso/diagnosticar.py` (RF-001, RF-002, RF-005, RF-015, RF-016). Depende de T012 y T013.
-- [ ] **T032** Interfaz web de P1 en `src/evaluador/adaptadores/web/` (RF-006, RF-013, RF-014, RNF-010):
+- [x] **T032** Interfaz web de P1 en `src/evaluador/adaptadores/web/` (RF-006, RF-013, RF-014, RNF-010):
   - formulario con prompt y resultado esperado;
   - proveedor, modelo y aviso de datos personales visibles antes de enviar;
   - diagnóstico con los fragmentos marcados;
   - mensajes de error en lenguaje llano;
   - todo texto del usuario o del modelo se muestra escapado, con una prueba con `<script>` (RNF-010).
-- [ ] **T033** [P] Textos de la interfaz en `i18n/{es,ca,en,de}.json`, con una prueba que comprueba que los 4 tienen las mismas claves (RF-013).
-- [ ] **T034** Composición en `src/evaluador/composicion.py`: el único punto donde se conectan las implementaciones. El servidor escucha solo en 127.0.0.1 y no hay almacenamiento (RNF-008, RNF-009, ADR-0001, ADR-0002).
+- [x] **T033** [P] Textos de la interfaz en `i18n/{es,ca,en,de}.json`, con una prueba que comprueba que los 4 tienen las mismas claves (RF-013).
+- [x] **T034** Composición en `src/evaluador/composicion.py`: el único punto donde se conectan las implementaciones. El servidor escucha solo en 127.0.0.1 y no hay almacenamiento (RNF-008, RNF-009, ADR-0001, ADR-0002).
 - [x] **T035** **Elegir la estrategia de detección (ADR-0003, decisión 3):** comparar con las evals 3a (ejemplos resueltos), 3b (dos pasos) y 3c (las dos), y adoptar la más simple que cumpla RNF-003. Actualizar el ADR-0003. Depende de T022.
 
 **Punto de control P1:** se ejecuta el quickstart (pasos 1–3) y las evals cumplen RNF-001, RNF-003, RNF-004 y RNF-007.
