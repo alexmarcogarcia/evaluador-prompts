@@ -36,5 +36,8 @@
   "error_respuesta_invalida": "El servei d'IA ha retornat una resposta que no hem pogut entendre.",
   "reintentar_en": "Pots tornar-ho a provar d'aquí a {s} segons.",
   "reintentar": "El teu text continua aquí: prem el botó per tornar-ho a provar.",
-  "nueva_revision": "Revisar un altre prompt"
+  "nueva_revision": "Revisar un altre prompt",
+  "preguntas_titulo": "Per afinar la millora, respon si pots",
+  "preguntas_ayuda": "Pots deixar en blanc les que no sàpigues: no inventarem aquesta informació, la deixarem marcada perquè la completis tu.",
+  "boton_mejorar": "Millorar el meu prompt"
 }

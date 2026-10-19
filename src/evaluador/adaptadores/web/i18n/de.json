@@ -36,5 +36,8 @@
   "error_respuesta_invalida": "Der KI-Dienst hat eine Antwort geliefert, die wir nicht verstehen konnten.",
   "reintentar_en": "Du kannst es in {s} Sekunden erneut versuchen.",
   "reintentar": "Dein Text ist noch da: Drück auf den Knopf, um es erneut zu versuchen.",
-  "nueva_revision": "Einen anderen Prompt prüfen"
+  "nueva_revision": "Einen anderen Prompt prüfen",
+  "preguntas_titulo": "Für eine genauere Verbesserung: Antworte, wenn du kannst",
+  "preguntas_ayuda": "Lass leer, was du nicht weißt: Wir erfinden diese Information nicht, sondern markieren sie, damit du sie ergänzt.",
+  "boton_mejorar": "Meinen Prompt verbessern"
 }

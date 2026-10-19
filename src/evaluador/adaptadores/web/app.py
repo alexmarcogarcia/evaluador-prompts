@@ -14,6 +14,7 @@ from fastapi import FastAPI, Form
 from fastapi.responses import HTMLResponse
 from jinja2 import Environment, PackageLoader
 
+from evaluador.adaptadores.web.estado import serializar
 from evaluador.casos_uso.diagnosticar import Diagnosticar, EntradaInvalida, MotivoEntrada
 from evaluador.dominio.modelos import Diagnostico
 from evaluador.puertos.modelo_ia import ErrorProveedor
@@ -103,6 +104,7 @@ def crear_app(diagnosticar: Diagnosticar, *, proveedor: str, modelo: str) -> Fas
             errores=errores,
             diagnostico=diagnostico,
             marcado=marcado,
+            estado=serializar(diagnostico) if diagnostico and diagnostico.preguntas else "",
         )
 
     return app
