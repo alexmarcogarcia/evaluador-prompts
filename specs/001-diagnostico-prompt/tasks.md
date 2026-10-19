@@ -30,7 +30,7 @@
 ## Base: modelo y evals
 
 - [x] **T020** Adaptador `src/evaluador/adaptadores/modelo_openai_compatible.py` para Gemini y NVIDIA. Pruebas de contrato en `tests/contract/` y de integración en `tests/integration/`: errores 429/503, tiempos agotados y JSON inválido; logs solo con métricas (RF-014, RNF-006, ADR-0001). Depende de T010 y T013.
-- [ ] **T021** [P] Prompt de sistema versionado en `src/evaluador/prompts/diagnostico.md`, partiendo del de la ronda 3 del spike (RF-004, RF-013, RF-015, RF-016).
+- [x] **T021** [P] Prompt de sistema versionado en `src/evaluador/prompts/diagnostico.md`, partiendo del de la ronda 3 del spike (RF-004, RF-013, RF-015, RF-016).
 - [ ] **T022** Evals en `evals/`: llevar ahí los 14 casos y la puntuación del spike, y **ampliar a ≥ 50 casos** con ≥ 5 dañinos y ≥ 5 sensibles pero legítimos. Mide RNF-001, RNF-003, RNF-004 y RNF-007. **Los casos nuevos los valida Àlex Marco.** Depende de T020 y T021.
 
 ## Historia P1 · Diagnosticar un prompt (MVP)
