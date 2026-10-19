@@ -15,6 +15,7 @@ from fastapi.testclient import TestClient
 from evaluador import composicion
 from evaluador.adaptadores.web.app import crear_app
 from evaluador.casos_uso.diagnosticar import Diagnosticar
+from evaluador.casos_uso.mejorar import Mejorar
 from evaluador.dominio.modelos import DiagnosticoPropuesto, ProblemaPropuesto
 from evaluador.puertos.modelo_ia import ErrorProveedor, TipoError
 from tests.dobles.modelo_falso import ModeloFalso
@@ -27,7 +28,9 @@ VAGO = ProblemaPropuesto("texto", 9, "que esté bien", None, "«Bien» no dice q
 
 def cliente(modelo: ModeloFalso | None = None) -> TestClient:
     modelo = modelo or ModeloFalso(diagnostico=DiagnosticoPropuesto((VAGO,), (), False))
-    return TestClient(crear_app(Diagnosticar(modelo), proveedor=modelo.proveedor, modelo=modelo.modelo))
+    return TestClient(
+        crear_app(Diagnosticar(modelo), Mejorar(modelo), proveedor=modelo.proveedor, modelo=modelo.modelo)
+    )
 
 
 def enviar(c: TestClient, prompt: str = PROMPT, esperado: str = ESPERADO, idioma: str = "es") -> str:

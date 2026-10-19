@@ -29,6 +29,10 @@
     .etiquetas { color: var(--suave); font-size: .85rem; }
     .cita { font-style: italic; }
     .ok { background: #dafbe1; border-radius: 6px; padding: .8rem; }
+    .comparacion { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1rem; }
+    .comparacion h3 { margin: 0 0 .3rem; font-size: 1rem; color: var(--suave); }
+    del { background: #ffebe9; text-decoration: line-through; }
+    ins { background: #dafbe1; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -73,20 +77,48 @@
         <p>{{ p.explicacion }}</p>
       </article>
       {% endfor %}
-      {% if diagnostico.preguntas %}
-      <h2>{{ t.preguntas_titulo }}</h2>
-      <p class="ayuda">{{ t.preguntas_ayuda }}</p>
+      {% if estado %}
       <form method="post" action="/mejorar">
         <input type="hidden" name="idioma" value="{{ idioma }}">
         <input type="hidden" name="estado" value="{{ estado }}">
+        {% if diagnostico.preguntas %}
+        <h2>{{ t.preguntas_titulo }}</h2>
+        <p class="ayuda">{{ t.preguntas_ayuda }}</p>
         {% for q in diagnostico.preguntas %}
         <label for="respuesta_{{ q.id }}">{{ q.texto }}</label>
         <textarea id="respuesta_{{ q.id }}" name="respuesta_{{ q.id }}" rows="2"></textarea>
         {% endfor %}
+        {% endif %}
         <p><button type="submit">{{ t.boton_mejorar }}</button></p>
       </form>
       {% endif %}
     {% endif %}
+  </section>
+  {% endif %}
+
+  {% if version %}
+  <section>
+    <h2>{{ t.version_titulo }}</h2>
+    {% if "[COMPLETAR:" in version.texto %}<p class="aviso">{{ t.completar_aviso }}</p>{% endif %}
+    <div class="comparacion">
+      <div>
+        <h3>{{ t.original }}</h3>
+        <div class="marcado">{% for tramo, tipo in comparacion_original %}{% if tipo == "quitado" %}<del>{{ tramo }}</del>{% else %}{{ tramo }}{% endif %}{% endfor %}</div>
+      </div>
+      <div>
+        <h3>{{ t.mejorado }}</h3>
+        <div class="marcado">{% for tramo, tipo in comparacion_mejorado %}{% if tipo == "anadido" %}<ins>{{ tramo }}</ins>{% else %}{{ tramo }}{% endif %}{% endfor %}</div>
+      </div>
+    </div>
+    <p class="ayuda">{{ t.copiar_ayuda }}</p>
+    <h2>{{ t.cambios_titulo }}</h2>
+    {% for c in version.cambios %}
+    <article class="problema">
+      <p>{{ c.explicacion }}</p>
+      <p class="etiquetas">{{ t.resuelve }}: {% for pid in c.problema_ids %}{{ categorias[pid] }}{% if not loop.last %} · {% endif %}{% endfor %}</p>
+    </article>
+    {% endfor %}
+    <p><a href="/?idioma={{ idioma }}">{{ t.nueva_revision }}</a></p>
   </section>
   {% endif %}
 </main>

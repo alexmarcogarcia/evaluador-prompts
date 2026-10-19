@@ -14,6 +14,7 @@ from fastapi.testclient import TestClient
 from evaluador.adaptadores.web.app import crear_app
 from evaluador.adaptadores.web.estado import EstadoInvalido, leer_respuestas, restaurar, serializar
 from evaluador.casos_uso.diagnosticar import Diagnosticar
+from evaluador.casos_uso.mejorar import Mejorar
 from evaluador.dominio.modelos import Diagnostico, DiagnosticoPropuesto, PreguntaPropuesta, ProblemaPropuesto
 from tests.dobles.modelo_falso import ModeloFalso
 
@@ -27,7 +28,7 @@ PREGUNTAS = (PreguntaPropuesta("¿Qué tono quieres?", 1), PreguntaPropuesta("¿
 def diagnostico_con_preguntas(preguntas: tuple[PreguntaPropuesta, ...] = PREGUNTAS) -> str:
     propuesta = DiagnosticoPropuesto((DESTINATARIO, CONTEXTO), preguntas, False)
     modelo = ModeloFalso(diagnostico=propuesta)
-    app = crear_app(Diagnosticar(modelo), proveedor="falso", modelo="m")
+    app = crear_app(Diagnosticar(modelo), Mejorar(modelo), proveedor="falso", modelo="m")
     respuesta = TestClient(app).post(
         "/diagnosticar", data={"prompt": PROMPT, "resultado": ESPERADO, "idioma": "es"}
     )

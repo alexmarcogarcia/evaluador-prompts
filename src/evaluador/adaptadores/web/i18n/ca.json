@@ -39,5 +39,13 @@
   "nueva_revision": "Revisar un altre prompt",
   "preguntas_titulo": "Per afinar la millora, respon si pots",
   "preguntas_ayuda": "Pots deixar en blanc les que no sàpigues: no inventarem aquesta informació, la deixarem marcada perquè la completis tu.",
-  "boton_mejorar": "Millorar el meu prompt"
+  "boton_mejorar": "Millorar el meu prompt",
+  "version_titulo": "El teu prompt millorat",
+  "original": "Original",
+  "mejorado": "Millorat",
+  "cambios_titulo": "Què hem canviat i per què",
+  "resuelve": "Resol",
+  "completar_aviso": "Completa el que està marcat com a [COMPLETAR: …] abans de fer servir el prompt: és informació que no ens vas donar i que no hem volgut inventar.",
+  "copiar_ayuda": "Copia el text de la columna «Millorat» i fes-lo servir a la teva eina d'IA.",
+  "error_estado_invalido": "No hem pogut recuperar el diagnòstic. Torna a revisar el teu prompt."
 }
