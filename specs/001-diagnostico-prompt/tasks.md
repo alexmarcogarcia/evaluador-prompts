@@ -14,9 +14,9 @@
 
 ## Base: contratos y dominio
 
-- [ ] **T010** [P] `contracts/diagnostico.schema.json` y `contracts/mejora.schema.json` (RF-003, RF-007, RF-009, RF-015).
-- [ ] **T011** [P] Entidades en `src/evaluador/dominio/modelos.py`: Prompt inmutable, Problema, Categoria (catálogo de 9), TipoProblema, Gravedad, Diagnostico, Pregunta, VersionMejorada y Cambio. Pruebas en `tests/unit/test_modelos.py` (RF-003, RF-004, RF-012).
-- [ ] **T012** Reglas en `src/evaluador/dominio/reglas.py`, con pruebas en `tests/unit/test_reglas.py`: (RF-001, RF-007, RF-009, RNF-004)
+- [x] **T010** [P] `contracts/diagnostico.schema.json` y `contracts/mejora.schema.json` (RF-003, RF-007, RF-009, RF-015).
+- [x] **T011** [P] Entidades en `src/evaluador/dominio/modelos.py`: Prompt inmutable, Problema, Categoria (catálogo de 9), TipoProblema, Gravedad, Diagnostico, Pregunta, VersionMejorada y Cambio. Pruebas en `tests/unit/test_modelos.py` (RF-003, RF-004, RF-012).
+- [x] **T012** Reglas en `src/evaluador/dominio/reglas.py`, con pruebas en `tests/unit/test_reglas.py`: (RF-001, RF-007, RF-009, RNF-004)
   - longitud ≤ 8.000;
   - cita literal;
   - tipo coherente con la cita;
@@ -25,7 +25,7 @@
   - descartar los problemas inválidos.
 
   Depende de T011.
-- [ ] **T013** [P] Puerto `src/evaluador/puertos/modelo_ia.py` y un doble de prueba en `tests/dobles/modelo_falso.py` (ADR-0001). Depende de T011.
+- [x] **T013** [P] Puerto `src/evaluador/puertos/modelo_ia.py` y un doble de prueba en `tests/dobles/modelo_falso.py` (ADR-0001). Depende de T011.
 
 ## Base: modelo y evals
 

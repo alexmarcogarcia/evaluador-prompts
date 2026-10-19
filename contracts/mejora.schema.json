@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "evaluador-prompts/contracts/mejora/1.0",
+  "title": "Respuesta del modelo al mejorar un prompt",
+  "description": "Spec 001: RF-009, RF-010. Los identificadores de problema son los del diagnóstico validado (P1, P2…).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["texto", "cambios"],
+  "properties": {
+    "texto": { "type": "string", "minLength": 1, "description": "Versión mejorada, en el idioma del prompt original. Marcadores [COMPLETAR: …] donde falte información omitida." },
+    "cambios": { "type": "array", "items": { "$ref": "#/$defs/cambio" } }
+  },
+  "$defs": {
+    "cambio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["explicacion", "problemas"],
+      "properties": {
+        "explicacion": { "type": "string", "minLength": 1 },
+        "problemas": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^P[0-9]+$" } }
+      }
+    }
+  }
+}
