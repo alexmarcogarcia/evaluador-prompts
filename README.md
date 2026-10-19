@@ -2,7 +2,7 @@
 
 Aplicación que revisa un prompt, señala dónde falla, explica cómo precisarlo para obtener el resultado esperado y comprueba que la versión mejorada funciona mejor. Pensada para personas con poco dominio de la IA.
 
-> Estado: arranque del proyecto (Fase 7 · Harness). Todavía no hay funcionalidad: el harness verifica la especificación desde antes de escribirla.
+> Estado: primer incremento en curso. Ya funciona el diagnóstico de prompts (historia P1); faltan las preguntas aclaratorias (P2) y la versión mejorada (P3).
 
 ## Requisitos
 
@@ -32,7 +32,12 @@ Ejecuta lo mismo que la CI: linter y formato (ruff), tipos (mypy), pruebas (pyte
 
 ## Ejecutar
 
-Pendiente: llega con la historia P1 (`specs/001-diagnostico-prompt/tasks.md`).
+```
+.venv/Scripts/python -m evaluador      # Windows
+.venv/bin/python -m evaluador          # Linux/macOS
+```
+
+Y abre http://127.0.0.1:8000 en el navegador. La app solo acepta conexiones desde tu propio equipo y no guarda nada en disco. Por defecto usa Gemini; para usar NVIDIA, añade `PROVEEDOR=nvidia` en `.env`.
 
 ## Documentación
 
