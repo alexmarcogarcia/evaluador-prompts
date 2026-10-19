@@ -25,6 +25,8 @@ RNF-004 exige el 100 % de citas literales, y el invariante de la constitución p
    - **3c · 3a + 3b.**
 
    Se adopta la más simple que cumpla RNF-003 (principio 8).
+
+   **Resultado (T035, 2026-10-19): se adopta 3a.** Con 55 casos validados, dos rondas: detección del 87,9 % en las dos, falsos positivos del 20,0 % y del 18,3 %, p95 de 3,7 s y 1,6 s, y rechazos correctos. La línea base sin ejemplos daba 67,7 % y 23,1 %. Como 3a cumple, no se prueban 3b ni 3c. Los resultados están en `evals/resultados/`.
 4. **El rechazo (RF-015) se hace en la misma llamada del diagnóstico**, con el campo `rechazado`, en lugar de un clasificador aparte. El spike dio 100 % de rechazos correctos y ningún rechazo erróneo, y así se evita una segunda dependencia. Se revisa si las evals de RNF-007 fallan.
 5. **El prompt de sistema es un artefacto versionado.** Vive en el repositorio como archivo de texto, no dentro del código, y cualquier cambio pasa por las evals (principio 5).
 
@@ -35,5 +37,5 @@ RNF-004 exige el 100 % de citas literales, y el invariante de la constitución p
 **Consecuencias:**
 - ✅ RNF-004 queda garantizado por construcción, no por probabilidad.
 - ✅ El cambio de prompt o de modelo se mide siempre.
-- ❌ La estrategia 3 aún no está elegida: hay una tarea de evaluación antes de cerrarla.
-- ⚠️ Si se elige 3b, se duplican las llamadas y se consume el doble de cuota gratuita.
+- ✅ Estrategia 3 elegida y medida (3a): RNF-003 se cumple con una sola llamada.
+- ⚠️ Los falsos positivos quedan cerca del límite (18–20 %). Cualquier cambio del prompt o del modelo tiene que volver a pasar las evals.

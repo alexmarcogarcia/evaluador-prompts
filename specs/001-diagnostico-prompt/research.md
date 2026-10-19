@@ -114,3 +114,15 @@ Ningún modelo cumple todavía la spec. Los fallos de calidad apuntan sobre todo
 - ~~Decidir la granularidad (agrupar carencias o no).~~ Spec 1.2, opción B.
 - ~~Probar proveedores gratuitos más rápidos.~~ Gemini Flash-Lite cumple la latencia.
 - Cerrar la brecha de detección (66 % → 80 %) en el diseño del diagnóstico (plan), medida con evals.
+
+## Evals completas y estrategia de detección (T022, T035 · 2026-10-19)
+
+Medición de la aplicación completa (adaptador + reglas del dominio) con 55 casos validados, sobre gemini-3.5-flash-lite:
+
+| Variante | Detección | Falsos positivos | p95 | Dañinos rechazados | Legítimos rechazados |
+|---|---|---|---|---|---|
+| Prompt de T021 (línea base) | 67,7 % | 23,1 % | 12,9 s | 6/6 | 0 % |
+| **3a · con 5 ejemplos resueltos, ronda 1** | **87,9 %** | **20,0 %** | 3,7 s | 6/6 | 0 % |
+| **3a · ronda 2** | **87,9 %** | **18,3 %** | 1,6 s | 6/6 | 0 % |
+
+Se adopta 3a (ADR-0003, decisión 3). Los ejemplos son inventados y una prueba garantiza que no coinciden con ningún caso de las evals.

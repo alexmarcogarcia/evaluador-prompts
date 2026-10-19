@@ -30,3 +30,31 @@ Responde SOLO con JSON válido, sin texto adicional, con esta forma:
                 "falta": "qué falta o null", "explicacion": "...", "gravedad": "alta" | "media" | "baja"}],
  "preguntas": [{"texto": "pregunta aclaratoria", "problema": 1}]}
 Si rechazas: {"rechazado": true, "motivo": "...", "problemas": [], "preguntas": []}
+
+
+Ejemplos resueltos (fíjate en cómo se aplican las categorías, los tipos y la agrupación; las explicaciones de los ejemplos están en español, pero tú escríbelas en {idioma}):
+
+EJEMPLO 1
+PROMPT: Escribe algo para la reunión, que quede profesional.
+RESULTADO ESPERADO: Un orden del día de 5 puntos para la reunión de presupuesto del lunes con el equipo de ventas.
+RESPUESTA: {"rechazado": false, "problemas": [{"tipo": "texto", "categoria": 1, "fragmento": "Escribe algo para la reunión", "falta": null, "explicacion": "No dices qué quieres: puede ser un correo, un discurso o un orden del día.", "gravedad": "alta"}, {"tipo": "texto", "categoria": 9, "fragmento": "que quede profesional", "falta": null, "explicacion": "«Profesional» significa cosas distintas para cada persona.", "gravedad": "media"}, {"tipo": "ausencia", "categoria": 2, "fragmento": null, "falta": "De qué reunión se trata: la de presupuesto del lunes", "explicacion": "Sin saber el tema, la IA no puede proponer puntos útiles.", "gravedad": "alta"}, {"tipo": "ausencia", "categoria": 3, "fragmento": null, "falta": "Para quién es: el equipo de ventas", "explicacion": "El contenido cambia según quién asista.", "gravedad": "media"}, {"tipo": "ausencia", "categoria": 4, "fragmento": null, "falta": "La forma: un orden del día de 5 puntos", "explicacion": "Si no dices la forma ni la extensión, la respuesta puede ser cualquier cosa.", "gravedad": "alta"}], "preguntas": []}
+
+EJEMPLO 2
+PROMPT: Resume este informe en una línea sin dejarte nada y tradúcelo al inglés, al francés y al italiano. Informe: Las ventas subieron un 8 % y los costes bajaron un 3 % en el segundo trimestre.
+RESULTADO ESPERADO: Un resumen en español de 3 frases que incluya las cifras principales.
+RESPUESTA: {"rechazado": false, "problemas": [{"tipo": "texto", "categoria": 5, "fragmento": "en una línea sin dejarte nada", "falta": null, "explicacion": "Pides algo muy corto y a la vez completo: no se pueden cumplir las dos cosas.", "gravedad": "alta"}, {"tipo": "texto", "categoria": 7, "fragmento": "y tradúcelo al inglés, al francés y al italiano", "falta": null, "explicacion": "Mezclas tareas que no necesitas y que distraen de la principal.", "gravedad": "media"}, {"tipo": "ausencia", "categoria": 6, "fragmento": null, "falta": "Que incluya las cifras principales", "explicacion": "Si no lo pides, la IA puede omitir los datos que te importan.", "gravedad": "media"}], "preguntas": []}
+
+EJEMPLO 3
+PROMPT: Clasifica estas reseñas como hacemos siempre: «Llegó rápido pero es caro.» «Muy mala calidad.»
+RESULTADO ESPERADO: Cada reseña con la etiqueta positiva, negativa o mixta; las que mencionan el precio llevan además la marca «precio».
+RESPUESTA: {"rechazado": false, "problemas": [{"tipo": "ausencia", "categoria": 8, "fragmento": null, "falta": "Ejemplos de reseñas ya clasificadas como lo hacéis siempre", "explicacion": "La IA no sabe cómo clasificáis; con un par de ejemplos lo entendería.", "gravedad": "alta"}, {"tipo": "ausencia", "categoria": 6, "fragmento": null, "falta": "La regla de añadir la marca «precio» cuando se menciona", "explicacion": "Es una regla tuya: si no la dices, no se aplicará.", "gravedad": "alta"}], "preguntas": []}
+
+EJEMPLO 4 (prompt bueno)
+PROMPT: Escribe un SMS de 2 frases para recordar a la clienta Marta Ruiz su cita en la peluquería el jueves a las 17:00. Tono cercano, sin emojis.
+RESULTADO ESPERADO: Un recordatorio breve y cercano.
+RESPUESTA: {"rechazado": false, "problemas": [], "preguntas": []}
+
+EJEMPLO 5 (agrupación)
+PROMPT: Planifica un viaje a Lisboa.
+RESULTADO ESPERADO: Un itinerario de 3 días, día por día, para una pareja con un niño, sin coche y con un presupuesto de 600 €.
+RESPUESTA: {"rechazado": false, "problemas": [{"tipo": "ausencia", "categoria": 2, "fragmento": null, "falta": "Quién viaja: una pareja con un niño", "explicacion": "No es lo mismo planificar para adultos que con un niño.", "gravedad": "alta"}, {"tipo": "ausencia", "categoria": 6, "fragmento": null, "falta": "Sin coche y con un presupuesto de 600 €", "explicacion": "Son condiciones que el plan debe cumplir y no las mencionas.", "gravedad": "alta"}, {"tipo": "ausencia", "categoria": 4, "fragmento": null, "falta": "La forma: itinerario de 3 días, día por día", "explicacion": "Sin duración ni estructura, la IA decidirá por ti.", "gravedad": "media"}], "preguntas": []}
