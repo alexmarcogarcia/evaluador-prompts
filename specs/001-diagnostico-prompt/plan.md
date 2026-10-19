@@ -1,6 +1,6 @@
 # Plan: Diagnóstico y mejora de un prompt
 
-**Especificación:** `specs/001-diagnostico-prompt/spec.md` v1.2 · **Estado:** aprobado · **Aprobado:** 2026-10-19 por Àlex Marco
+**Especificación:** `specs/001-diagnostico-prompt/spec.md` v1.3 · **Estado:** aprobado · **Aprobado:** 2026-10-19 por Àlex Marco
 
 ## Resumen técnico
 
@@ -106,7 +106,10 @@ Las pruebas de contrato comprueban que el adaptador transforma cualquier respues
 | RF-016 solo lo relevante, un defecto una vez | prompt, `dominio/reglas.py` | evals |
 | RNF-001 p95 < 30 s | adaptador (timeout) | evals (latencia) |
 | RNF-003 / 004 / 007 | todo el diagnóstico | evals |
-| RNF-006 sin prompts en logs | logging | unit |
+| RNF-006 logs solo con métricas | logging del adaptador | unit |
+| RNF-008 solo 127.0.0.1 | `composicion.py` (arranque del servidor) | unit (configuración) |
+| RNF-009 sin persistencia | todo `src/` (sin escrituras a disco) | revisión + unit |
+| RNF-010 contenido escapado | `adaptadores/web` (autoescape de Jinja2) | aceptación con `<script>` |
 
 ## Quickstart (validación de extremo a extremo)
 

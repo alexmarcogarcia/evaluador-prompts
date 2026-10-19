@@ -42,3 +42,7 @@ Pendiente: llega con la historia P1 (`specs/001-diagnostico-prompt/tasks.md`).
 - [Decisiones de arquitectura (ADR)](docs/adr/)
 - [Registro de riesgos](docs/riesgos.md)
 - [Cómo contribuir](CONTRIBUTING.md)
+
+## Licencia
+
+[MIT](LICENSE) © 2026 Àlex Marco
