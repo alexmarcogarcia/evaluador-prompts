@@ -35,8 +35,8 @@
 
 ## Historia P1 · Diagnosticar un prompt (MVP)
 
-- [ ] **T030** Pruebas de aceptación de P1 en `tests/acceptance/test_p1_diagnostico.py`, con el doble del modelo (criterios de P1 y de RF-001, RF-002, RF-005, RF-006, RF-015).
-- [ ] **T031** Caso de uso `src/evaluador/casos_uso/diagnosticar.py` (RF-001, RF-002, RF-005, RF-015, RF-016). Depende de T012 y T013.
+- [x] **T030** Pruebas de aceptación de P1 en `tests/acceptance/test_p1_diagnostico.py`, con el doble del modelo (criterios de P1 y de RF-001, RF-002, RF-005, RF-006, RF-015).
+- [x] **T031** Caso de uso `src/evaluador/casos_uso/diagnosticar.py` (RF-001, RF-002, RF-005, RF-015, RF-016). Depende de T012 y T013.
 - [ ] **T032** Interfaz web de P1 en `src/evaluador/adaptadores/web/` (RF-006, RF-013, RF-014, RNF-010):
   - formulario con prompt y resultado esperado;
   - proveedor, modelo y aviso de datos personales visibles antes de enviar;
