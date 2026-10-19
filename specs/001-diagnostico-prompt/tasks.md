@@ -6,11 +6,11 @@
 
 ## Base: harness (Fase 7, bloquea todo lo demás)
 
-- [ ] **T001** Configurar el proyecto en `pyproject.toml`: dependencias con versión fijada, ruff, mypy y pytest. Añadir `.python-version` (3.13) y `.gitattributes` (finales de línea LF). · Verifica: `ruff check`, `mypy` y `pytest` se ejecutan.
-- [ ] **T002** Crear el entorno con un solo comando, en `scripts/` y documentado en `README.md`. · Verifica: un clon limpio queda listo siguiendo solo el README.
-- [ ] **T003** [P] Script de comprobación de coherencia en `scripts/coherencia.py`. Falla si hay un RF sin prueba que lo referencie, una tarea sin RF o un identificador que no existe en la spec. · Verifica: falla con la spec actual (no hay pruebas) y pasa al final.
+- [x] **T001** Configurar el proyecto en `pyproject.toml`: dependencias con versión fijada, ruff, mypy y pytest. Añadir `.python-version` (3.13) y `.gitattributes` (finales de línea LF). · Verifica: `ruff check`, `mypy` y `pytest` se ejecutan.
+- [x] **T002** Crear el entorno con un solo comando, en `scripts/` y documentado en `README.md`. · Verifica: un clon limpio queda listo siguiendo solo el README.
+- [x] **T003** [P] Script de comprobación de coherencia en `scripts/coherencia.py`. Falla si hay un RF sin prueba que lo referencie, una tarea sin RF o un identificador que no existe en la spec. · Verifica: falla con la spec actual (no hay pruebas) y pasa al final.
 - [ ] **T004** CI en `.github/workflows/ci.yml`: instalar, ruff, mypy, pytest, coherencia y búsqueda de secretos. · Verifica: CI en verde con el repositorio casi vacío.
-- [ ] **T005** [P] Actualizar `AGENTS.md` con los comandos reales.
+- [x] **T005** [P] Actualizar `AGENTS.md` con los comandos reales.
 
 ## Base: contratos y dominio
 
@@ -25,7 +25,7 @@
   - descartar los problemas inválidos.
 
   Depende de T011.
-- [ ] **T013** [P] Puerto `src/evaluador/puertos/modelo_ia.py` y un doble de prueba en `tests/dobles/modelo_falso.py`. Depende de T011.
+- [ ] **T013** [P] Puerto `src/evaluador/puertos/modelo_ia.py` y un doble de prueba en `tests/dobles/modelo_falso.py` (ADR-0001). Depende de T011.
 
 ## Base: modelo y evals
 
@@ -43,7 +43,7 @@
   - diagnóstico con los fragmentos marcados;
   - mensajes de error en lenguaje llano.
 - [ ] **T033** [P] Textos de la interfaz en `i18n/{es,ca,en,de}.json`, con una prueba que comprueba que los 4 tienen las mismas claves (RF-013).
-- [ ] **T034** Composición en `src/evaluador/composicion.py`: el único punto donde se conectan las implementaciones.
+- [ ] **T034** Composición en `src/evaluador/composicion.py`: el único punto donde se conectan las implementaciones (ADR-0001, ADR-0002).
 - [ ] **T035** **Elegir la estrategia de detección (ADR-0003, decisión 3):** comparar con las evals 3a (ejemplos resueltos), 3b (dos pasos) y 3c (las dos), y adoptar la más simple que cumpla RNF-003. Actualizar el ADR-0003. Depende de T022.
 
 **Punto de control P1:** se ejecuta el quickstart (pasos 1–3) y las evals cumplen RNF-001, RNF-003, RNF-004 y RNF-007.
