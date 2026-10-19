@@ -18,7 +18,7 @@ from pathlib import Path
 
 HERE = Path(__file__).parent
 CASES_FILE = HERE.parent.parent / "specs" / "001-diagnostico-prompt" / "casos-prueba.md"
-RONDA = "ronda2"  # ronda1: catálogo v1.0 · ronda2: fronteras y reglas de la spec 1.1
+RONDA = "ronda3"  # ronda1: catálogo v1.0 · ronda2: fronteras y reglas de la spec 1.1 · ronda3: + agrupación (spec 1.2)
 RESULTS_DIR = HERE / "resultados" / RONDA
 # Proveedores con API compatible con OpenAI: nombre -> (URL base, variable del .env).
 # Un modelo se indica como "proveedor:modelo"; sin prefijo se asume nvidia.
@@ -27,6 +27,8 @@ PROVIDERS = {
     "gemini": ("https://generativelanguage.googleapis.com/v1beta/openai", "GEMINI_API_KEY"),
 }
 TIMEOUT_S = 120
+RETRIES = 3
+RETRY_WAIT_S = 30  # El tiempo medido es el del intento que responde; las esperas no cuentan.
 
 SYSTEM_PROMPT = """Eres un revisor de prompts para personas sin conocimientos técnicos de IA.
 Recibes un PROMPT escrito por un usuario y el RESULTADO ESPERADO que quiere obtener con él.
@@ -46,7 +48,9 @@ Reglas:
   8 faltan ejemplos: hay que imitar un patrón o criterio difícil de describir y no hay muestras.
   9 vaguedad léxica: una palabra o expresión concreta subjetiva o imprecisa ("bien", "bonito", "good").
 - Un defecto, un problema: si encaja en dos categorías, regístralo UNA vez en la más específica, en este orden: 5, 7, 8, 9, 4, 6, 3, 2, 1.
+- Si faltan varias informaciones de la MISMA categoría, agrúpalas en un solo problema "ausencia" y nómbralas una a una en "falta". Las de categorías distintas van en problemas distintos.
 - Tipo "texto" solo si el problema lo causan palabras que están en el prompt (cita el fragmento COPIADO LITERALMENTE). Si lo causa algo que falta, tipo "ausencia" (di qué falta, sin fragmento).
+- Antes de responder, recorre las 9 preguntas clave una por una contra el PROMPT y el RESULTADO ESPERADO; no te saltes ninguna.
 - Señala SOLO lo que impide o dificulta conseguir el RESULTADO ESPERADO. No enumeres todo lo que podría faltar en general.
 - No inventes problemas. Si el prompt es bueno para el resultado esperado, devuelve una lista vacía.
 - Explicaciones en español llano, sin jerga técnica y sin palabras en otros idiomas.
@@ -118,10 +122,18 @@ def call_model(keys: dict[str, str], spec: str, case: dict) -> tuple[str, float]
     }).encode()
     req = urllib.request.Request(PROVIDERS[provider][0] + "/chat/completions", data=body, headers={
         "Authorization": f"Bearer {keys[provider]}", "Content-Type": "application/json"})
-    start = time.monotonic()
-    with urllib.request.urlopen(req, timeout=TIMEOUT_S) as resp:
-        data = json.load(resp)
-    return data["choices"][0]["message"].get("content") or "", time.monotonic() - start
+    for attempt in range(RETRIES + 1):
+        start = time.monotonic()
+        try:
+            with urllib.request.urlopen(req, timeout=TIMEOUT_S) as resp:
+                data = json.load(resp)
+            return data["choices"][0]["message"].get("content") or "", time.monotonic() - start
+        except urllib.error.HTTPError as e:  # Niveles gratuitos: saturación (503) o límite de uso (429).
+            if e.code not in (429, 503) or attempt == RETRIES:
+                raise
+            print(f"   {e.code}, reintento {attempt + 1}/{RETRIES} en {RETRY_WAIT_S} s")
+            time.sleep(RETRY_WAIT_S)
+    raise AssertionError("inalcanzable")
 
 
 def extract_json(text: str) -> dict | None:

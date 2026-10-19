@@ -1,8 +1,9 @@
 # Especificación: Diagnóstico y mejora de un prompt
 
-**Estado:** aprobada · **Versión:** 1.1 · **Aprobada:** 2026-10-19 por Àlex Marco · **Constitución:** 1.1
+**Estado:** aprobada · **Versión:** 1.2 · **Aprobada:** 2026-10-19 por Àlex Marco · **Constitución:** 1.1
 
 > Cambio 1.0 → 1.1: el spike 001 (`research.md`) mostró solapes entre categorías. Se añaden las fronteras del catálogo, las reglas de clasificación y RF-016.
+> Cambio 1.1 → 1.2: la ronda 2 del spike mostró que la granularidad no estaba definida. Se añade la regla de clasificación 4: las carencias de la misma categoría se agrupan.
 
 ## Contexto y objetivo
 
@@ -55,7 +56,7 @@ Como persona con poco dominio de la IA, quiero recibir una versión mejorada de 
 - **RF-002:** El sistema debe exigir que el usuario indique el resultado que espera obtener con el prompt antes de diagnosticarlo. (P1)
 - **RF-003:** El sistema debe devolver un diagnóstico con una lista de problemas. Cada problema incluye tipo («en el texto» o «por ausencia»), categoría, explicación en lenguaje llano y gravedad (alta, media o baja). Además:
   - Un problema en el texto debe citar su fragmento literal.
-  - Un problema por ausencia debe indicar qué información falta y, si procede, en qué parte del prompt convendría añadirla. (P1)
+  - Un problema por ausencia debe indicar qué información falta y, si procede, en qué parte del prompt convendría añadirla. Puede agrupar varias informaciones de la misma categoría si las nombra una a una (regla de clasificación 4). (P1)
 - **RF-004:** Las categorías de problemas deben salir del catálogo cerrado y aplicarse según las fronteras y reglas de la sección «Catálogo de categorías y fronteras». (P1)
 - **RF-005:** Si no detecta problemas relevantes, el sistema debe decirlo explícitamente y no inventar ninguno. (P1)
 - **RF-006:** Antes de enviar el prompt, el sistema debe indicar a qué proveedor y modelo de IA se enviará. (Invariante de la constitución)
@@ -149,6 +150,7 @@ Cada categoría responde a una **pregunta clave**. Un problema pertenece a la ca
    - Es «en el texto» si el problema lo causan palabras que están en el prompt.
    - Es «por ausencia» si lo causa algo que no está, aunque haya palabras relacionadas. Por ejemplo, la falta de formato en «hola» es por ausencia, no en el texto.
 3. **Solo lo que impide el resultado esperado.** No se señala lo que falta si no hace falta para conseguir el resultado que el usuario ha descrito (ver RF-016).
+4. **Se agrupan las carencias de la misma categoría.** Si faltan varias informaciones de la misma categoría, forman un solo problema por ausencia, siempre que se nombren una a una. Por ejemplo, en C06 «sin gluten» y «presupuesto bajo» van en un único problema de la categoría 6; «faltan restricciones», sin más, no vale. Las carencias de categorías distintas siguen siendo problemas distintos.
 
 ## Fuera de alcance
 
@@ -176,6 +178,7 @@ No quedan dudas abiertas.
 | 2026-10-18 | Àlex Marco | Rechazos erróneos | Como máximo un 5 % de prompts legítimos rechazados (RNF-007) |
 | 2026-10-18 | Àlex Marco | Problemas sin fragmento (conflicto con la constitución) | Opción A: dos tipos de problema, «en el texto» y «por ausencia». Constitución enmendada a 1.1 (RF-003) |
 | 2026-10-19 | Àlex Marco | Solapes entre categorías detectados en el spike 001 | Se validan las fronteras del catálogo, las 3 reglas de clasificación y RF-016 (spec 1.1) |
+| 2026-10-19 | Àlex Marco | Granularidad: ¿una carencia por problema o agrupadas? | Opción B: se agrupan las de la misma categoría, nombrándolas una a una (regla 4, spec 1.2) |
 
 ## Criterios de éxito
 

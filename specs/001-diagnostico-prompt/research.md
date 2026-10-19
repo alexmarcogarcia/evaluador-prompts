@@ -67,6 +67,43 @@
 5. **Idioma.** En C02, Nemotron explica en catalán, el idioma del prompt, y no en el idioma de la interfaz. Incumple RF-013.
 6. **La latencia no mejora.** Es un límite del nivel gratuito de NVIDIA, no del prompt.
 
+### Ronda 2 con Gemini (2026-10-19, nivel gratuito de Google AI Studio)
+
+| Métrica | Objetivo | gemini-3.5-flash-lite | gemini-3.8-flash |
+|---|---|---|---|
+| Respuestas válidas | — | 14/14 | 0/14 (503 saturado, 429 límite de uso) |
+| Detección | ≥ 80 % | 69 % ❌ | — |
+| Falsos positivos | ≤ 20 % | **9 %** ✅ | — |
+| Citas literales | 100 % | ✅ | — |
+| Rechazos | 100 % | ✅ | — |
+| Tiempo | p95 < 30 s | p95 34,9 s ❌ (mediana ≈ 3 s; solo C11 y C13 > 20 s) | — |
+
+**Hallazgos:**
+1. **Flash-Lite es el mejor candidato hasta ahora.** Falsos positivos bajos, explicaciones en español llano que hablan al usuario («No indicas…», «Usas la expresión…») y casi siempre responde en menos de 6 s.
+2. **Sus fallos son de detección**, no de invención:
+   - no ve «algo» (C01, 1), «good» (C12, 9) ni «professional and catchy» (C03, 9);
+   - en C06 mete «4 personas» en formato y no en contexto.
+3. **gemini-3.8-flash no está disponible en la práctica en el nivel gratuito** en este momento. Hay que reintentarlo con pausas antes de descartarlo.
+
+### Ronda 3 (2026-10-19): agrupación (spec 1.2), repaso de las 9 preguntas y reintentos
+
+| Métrica | Objetivo | Flash-Lite R2 → R3 | gemini-3.8-flash |
+|---|---|---|---|
+| Detección | ≥ 80 % | 69 % → 66 % ❌ | 0/14 respuestas (429 persistente con 3 reintentos de 30 s) |
+| Falsos positivos | ≤ 20 % | 9 % → 19 % ✅ (justo) | — |
+| Citas literales y rechazos | 100 % | ✅ | — |
+| Tiempo p95 | < 30 s | 34,9 s → **7,0 s** ✅ | — |
+
+**Hallazgos:**
+1. **Flash-Lite cumple RNF-001, RNF-002, RNF-004, RF-015 y la parte de falsos positivos de RNF-003.** Solo le falta detección, con 66 % frente al 80 % pedido.
+2. **El repaso de las 9 preguntas no sube la detección.** Cambia qué detecta: ahora ve «algo», pero señala más cosas dudosas. Por ejemplo, en C08 dice que falta el texto, cuando sí está; eso es una alucinación.
+3. **Errores que se repiten:**
+   - agrupa carencias de categorías distintas, como en C06, donde mete «4 personas» en la categoría 6, y eso va contra la regla 4;
+   - confunde contradicción con formato (C02);
+   - apenas detecta destinatario o tono (C04).
+4. **Con 14 casos, cada problema vale unos 3,4 puntos.** Las diferencias de 3 puntos entre rondas son ruido. Para medir de verdad hace falta un conjunto de evals mayor (Fase 7).
+5. **gemini-3.8-flash no es utilizable con el nivel gratuito** de esta cuenta.
+
 ### Conclusión provisional
 
 Ningún modelo cumple todavía la spec. Los fallos de calidad apuntan sobre todo a la **especificación** (catálogo con solapes) y al **prompt de sistema** (falta pedir solo los problemas relevantes para el resultado esperado). La latencia apunta al **proveedor**.
@@ -74,6 +111,6 @@ Ningún modelo cumple todavía la spec. Los fallos de calidad apuntan sobre todo
 **Pendiente:**
 - ~~Fronteras del catálogo (spec).~~ Hecho en la spec 1.1.
 - ~~Ajuste del prompt de sistema.~~ Ronda 2.
-- Decidir la granularidad (agrupar carencias o no).
-- Probar proveedores gratuitos más rápidos (Gemini, Groq).
-- Repetir el spike.
+- ~~Decidir la granularidad (agrupar carencias o no).~~ Spec 1.2, opción B.
+- ~~Probar proveedores gratuitos más rápidos.~~ Gemini Flash-Lite cumple la latencia.
+- Cerrar la brecha de detección (66 % → 80 %) en el diseño del diagnóstico (plan), medida con evals.

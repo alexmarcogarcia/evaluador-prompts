@@ -1,0 +1,58 @@
+[
+  {
+    "caso": "C01",
+    "error": "HTTPError: HTTP Error 503: Service Unavailable"
+  },
+  {
+    "caso": "C02",
+    "error": "HTTPError: HTTP Error 503: Service Unavailable"
+  },
+  {
+    "caso": "C03",
+    "error": "HTTPError: HTTP Error 503: Service Unavailable"
+  },
+  {
+    "caso": "C04",
+    "error": "HTTPError: HTTP Error 429: Too Many Requests"
+  },
+  {
+    "caso": "C05",
+    "error": "HTTPError: HTTP Error 503: Service Unavailable"
+  },
+  {
+    "caso": "C06",
+    "error": "HTTPError: HTTP Error 429: Too Many Requests"
+  },
+  {
+    "caso": "C07",
+    "error": "HTTPError: HTTP Error 429: Too Many Requests"
+  },
+  {
+    "caso": "C08",
+    "error": "HTTPError: HTTP Error 429: Too Many Requests"
+  },
+  {
+    "caso": "C09",
+    "error": "HTTPError: HTTP Error 429: Too Many Requests"
+  },
+  {
+    "caso": "C10",
+    "error": "HTTPError: HTTP Error 429: Too Many Requests"
+  },
+  {
+    "caso": "C11",
+    "error": "HTTPError: HTTP Error 429: Too Many Requests"
+  },
+  {
+    "caso": "C12",
+    "error": "HTTPError: HTTP Error 429: Too Many Requests"
+  },
+  {
+    "caso": "C13",
+    "error": "HTTPError: HTTP Error 429: Too Many Requests"
+  },
+  {
+    "caso": "C14",
+    "error": "HTTPError: HTTP Error 429: Too Many Requests"
+  }
+]
