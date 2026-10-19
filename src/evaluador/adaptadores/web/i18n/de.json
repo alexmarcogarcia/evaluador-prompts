@@ -39,5 +39,13 @@
   "nueva_revision": "Einen anderen Prompt prüfen",
   "preguntas_titulo": "Für eine genauere Verbesserung: Antworte, wenn du kannst",
   "preguntas_ayuda": "Lass leer, was du nicht weißt: Wir erfinden diese Information nicht, sondern markieren sie, damit du sie ergänzt.",
-  "boton_mejorar": "Meinen Prompt verbessern"
+  "boton_mejorar": "Meinen Prompt verbessern",
+  "version_titulo": "Dein verbesserter Prompt",
+  "original": "Original",
+  "mejorado": "Verbessert",
+  "cambios_titulo": "Was wir geändert haben und warum",
+  "resuelve": "Löst",
+  "completar_aviso": "Ergänze die mit [COMPLETAR: …] markierten Stellen, bevor du den Prompt verwendest: Das sind Informationen, die du uns nicht gegeben hast und die wir nicht erfinden wollten.",
+  "copiar_ayuda": "Kopiere den Text aus der Spalte „Verbessert“ und verwende ihn in deinem KI-Tool.",
+  "error_estado_invalido": "Wir konnten die Prüfung nicht wiederherstellen. Prüfe deinen Prompt bitte erneut."
 }

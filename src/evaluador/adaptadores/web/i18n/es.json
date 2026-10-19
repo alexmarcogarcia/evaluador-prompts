@@ -39,5 +39,13 @@
   "nueva_revision": "Revisar otro prompt",
   "preguntas_titulo": "Para afinar la mejora, responde si puedes",
   "preguntas_ayuda": "Puedes dejar en blanco las que no sepas: no inventaremos esa información, la dejaremos marcada para que la completes tú.",
-  "boton_mejorar": "Mejorar mi prompt"
+  "boton_mejorar": "Mejorar mi prompt",
+  "version_titulo": "Tu prompt mejorado",
+  "original": "Original",
+  "mejorado": "Mejorado",
+  "cambios_titulo": "Qué hemos cambiado y por qué",
+  "resuelve": "Resuelve",
+  "completar_aviso": "Completa lo marcado como [COMPLETAR: …] antes de usar el prompt: es información que no nos diste y que no hemos querido inventar.",
+  "copiar_ayuda": "Copia el texto de la columna «Mejorado» y úsalo en tu herramienta de IA.",
+  "error_estado_invalido": "No hemos podido recuperar el diagnóstico. Vuelve a revisar tu prompt."
 }

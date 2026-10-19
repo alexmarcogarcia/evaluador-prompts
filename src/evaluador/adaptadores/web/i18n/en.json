@@ -39,5 +39,13 @@
   "nueva_revision": "Review another prompt",
   "preguntas_titulo": "To fine-tune the improvement, answer if you can",
   "preguntas_ayuda": "You can leave blank the ones you don't know: we won't make that information up, we'll mark it for you to complete.",
-  "boton_mejorar": "Improve my prompt"
+  "boton_mejorar": "Improve my prompt",
+  "version_titulo": "Your improved prompt",
+  "original": "Original",
+  "mejorado": "Improved",
+  "cambios_titulo": "What we changed and why",
+  "resuelve": "Solves",
+  "completar_aviso": "Fill in what is marked [COMPLETAR: …] before using the prompt: it's information you didn't give us and we didn't want to make up.",
+  "copiar_ayuda": "Copy the text in the “Improved” column and use it in your AI tool.",
+  "error_estado_invalido": "We couldn't recover the review. Please review your prompt again."
 }

@@ -16,6 +16,7 @@ from fastapi import FastAPI
 from evaluador.adaptadores.modelo_openai_compatible import ModeloOpenAICompatible
 from evaluador.adaptadores.web.app import crear_app
 from evaluador.casos_uso.diagnosticar import Diagnosticar
+from evaluador.casos_uso.mejorar import Mejorar
 from evaluador.prompts import cargar
 
 HOST = "127.0.0.1"  # RNF-008: nunca 0.0.0.0 en este incremento.
@@ -55,9 +56,9 @@ def construir_app() -> FastAPI:
         base_url=proveedor.base_url,
         api_key=clave,
         prompt_diagnostico=cargar("diagnostico"),
-        prompt_mejora="",  # Llega con la historia P3 (T051).
+        prompt_mejora=cargar("mejora"),
     )
-    return crear_app(Diagnosticar(modelo), proveedor=modelo.proveedor, modelo=modelo.modelo)
+    return crear_app(Diagnosticar(modelo), Mejorar(modelo), proveedor=modelo.proveedor, modelo=modelo.modelo)
 
 
 def main() -> None:
