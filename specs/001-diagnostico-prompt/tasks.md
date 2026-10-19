@@ -45,7 +45,7 @@
   - todo texto del usuario o del modelo se muestra escapado, con una prueba con `<script>` (RNF-010).
 - [ ] **T033** [P] Textos de la interfaz en `i18n/{es,ca,en,de}.json`, con una prueba que comprueba que los 4 tienen las mismas claves (RF-013).
 - [ ] **T034** Composición en `src/evaluador/composicion.py`: el único punto donde se conectan las implementaciones. El servidor escucha solo en 127.0.0.1 y no hay almacenamiento (RNF-008, RNF-009, ADR-0001, ADR-0002).
-- [ ] **T035** **Elegir la estrategia de detección (ADR-0003, decisión 3):** comparar con las evals 3a (ejemplos resueltos), 3b (dos pasos) y 3c (las dos), y adoptar la más simple que cumpla RNF-003. Actualizar el ADR-0003. Depende de T022.
+- [x] **T035** **Elegir la estrategia de detección (ADR-0003, decisión 3):** comparar con las evals 3a (ejemplos resueltos), 3b (dos pasos) y 3c (las dos), y adoptar la más simple que cumpla RNF-003. Actualizar el ADR-0003. Depende de T022.
 
 **Punto de control P1:** se ejecuta el quickstart (pasos 1–3) y las evals cumplen RNF-001, RNF-003, RNF-004 y RNF-007.
 
