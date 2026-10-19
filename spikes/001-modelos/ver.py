@@ -1,4 +1,4 @@
-"""Muestra, caso a caso, lo que diagnosticó un modelo frente a lo esperado. Uso: python ver.py <modelo>"""
+"""Muestra, caso a caso, lo que diagnosticó un modelo frente a lo esperado. Uso: python ver.py <modelo> [ronda1|ronda2]"""
 
 import json
 import sys
@@ -6,7 +6,8 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 model = sys.argv[1]
-rows = json.loads((Path(__file__).parent / "resultados" / (model.replace("/", "__") + ".json")).read_text(encoding="utf-8"))
+ronda = sys.argv[2] if len(sys.argv) > 2 else "ronda2"
+rows = json.loads((Path(__file__).parent / "resultados" / ronda / (model.replace("/", "__").replace(":", "__") + ".json")).read_text(encoding="utf-8"))
 for r in rows:
     out = r.get("respuesta")
     if not isinstance(out, dict):

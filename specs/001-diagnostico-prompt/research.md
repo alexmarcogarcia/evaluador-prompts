@@ -49,12 +49,31 @@
 5. **Latencia.** Ningún modelo gratuito de NVIDIA cumple los 30 s. Con el mensaje mínimo tardaban 1–2 s, así que el tiempo se va en generar el diagnóstico y en la cola del nivel gratuito.
 6. **Lo que sí funciona:** citas literales, rechazos, ausencia de rechazos erróneos en C10 (Nemotron), resistencia a la inyección (Nemotron) y JSON válido en todas las respuestas recibidas.
 
+### Ronda 2 (2026-10-19): fronteras y reglas de la spec 1.1 en el prompt de sistema
+
+| Métrica | Objetivo | Nemotron R1 → R2 | gpt-oss R1 → R2 |
+|---|---|---|---|
+| Detección | ≥ 80 % | 70 % → 72 % ❌ | 83 % → **52 %** ❌ |
+| Falsos positivos | ≤ 20 % | 52 % → **30 %** ❌ | 44 % → **13 %** ✅ |
+| Citas literales | 100 % | ✅ | ✅ |
+| Rechazos | 100 % | ✅ | ✅ |
+| Tiempo p95 | < 30 s | 75 s ❌ | 67 s ❌ (2 tiempos agotados) |
+
+**Hallazgos de la ronda 2:**
+1. **Las fronteras funcionan para los falsos positivos.** Bajan mucho en los dos modelos.
+2. **gpt-oss se vuelve demasiado prudente con «solo lo que impide el resultado esperado».** Deja de ver problemas reales: 0 de 3 en C04 y 1 de 4 en C01. Nemotron mantiene la detección.
+3. **Agrupación.** Los modelos juntan varias carencias en un solo problema. En C06, por ejemplo: «sin gluten, 4 personas y presupuesto» en un único problema. La spec no dice si cada información que falta es un problema distinto o si se pueden agrupar. Hueco de la spec: granularidad.
+4. **La regla «un defecto, un problema» no siempre se cumple.** En C14, Nemotron da 8 y además 2 para lo mismo.
+5. **Idioma.** En C02, Nemotron explica en catalán, el idioma del prompt, y no en el idioma de la interfaz. Incumple RF-013.
+6. **La latencia no mejora.** Es un límite del nivel gratuito de NVIDIA, no del prompt.
+
 ### Conclusión provisional
 
 Ningún modelo cumple todavía la spec. Los fallos de calidad apuntan sobre todo a la **especificación** (catálogo con solapes) y al **prompt de sistema** (falta pedir solo los problemas relevantes para el resultado esperado). La latencia apunta al **proveedor**.
 
 **Pendiente:**
-- Fronteras del catálogo (spec).
-- Ajuste del prompt de sistema.
-- Probar proveedores gratuitos más rápidos.
+- ~~Fronteras del catálogo (spec).~~ Hecho en la spec 1.1.
+- ~~Ajuste del prompt de sistema.~~ Ronda 2.
+- Decidir la granularidad (agrupar carencias o no).
+- Probar proveedores gratuitos más rápidos (Gemini, Groq).
 - Repetir el spike.

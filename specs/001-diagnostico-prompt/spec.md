@@ -1,6 +1,8 @@
 # Especificación: Diagnóstico y mejora de un prompt
 
-**Estado:** aprobada · **Versión:** 1.0 · **Aprobada:** 2026-10-18 por Àlex Marco · **Constitución:** 1.1
+**Estado:** aprobada · **Versión:** 1.1 · **Aprobada:** 2026-10-19 por Àlex Marco · **Constitución:** 1.1
+
+> Cambio 1.0 → 1.1: el spike 001 (`research.md`) mostró solapes entre categorías. Se añaden las fronteras del catálogo, las reglas de clasificación y RF-016.
 
 ## Contexto y objetivo
 
@@ -54,7 +56,7 @@ Como persona con poco dominio de la IA, quiero recibir una versión mejorada de 
 - **RF-003:** El sistema debe devolver un diagnóstico con una lista de problemas. Cada problema incluye tipo («en el texto» o «por ausencia»), categoría, explicación en lenguaje llano y gravedad (alta, media o baja). Además:
   - Un problema en el texto debe citar su fragmento literal.
   - Un problema por ausencia debe indicar qué información falta y, si procede, en qué parte del prompt convendría añadirla. (P1)
-- **RF-004:** Las categorías de problemas deben salir del catálogo cerrado definido en «Entidades y glosario». (P1)
+- **RF-004:** Las categorías de problemas deben salir del catálogo cerrado y aplicarse según las fronteras y reglas de la sección «Catálogo de categorías y fronteras». (P1)
 - **RF-005:** Si no detecta problemas relevantes, el sistema debe decirlo explícitamente y no inventar ninguno. (P1)
 - **RF-006:** Antes de enviar el prompt, el sistema debe indicar a qué proveedor y modelo de IA se enviará. (Invariante de la constitución)
 - **RF-007:** El sistema debe generar como máximo 5 preguntas aclaratorias por ronda sobre la información que falta, cada una ligada al problema que la motiva. (P2)
@@ -66,6 +68,7 @@ Como persona con poco dominio de la IA, quiero recibir una versión mejorada de 
 - **RF-013:** La interfaz debe estar disponible en español, catalán, inglés y alemán. Las explicaciones y las preguntas deben estar en el idioma de la interfaz que ha elegido el usuario. La versión mejorada debe estar en el idioma del prompt original. Se acepta un prompt escrito en cualquier idioma.
 - **RF-014:** Si el proveedor de IA falla (límite de uso, caída, respuesta inválida), el sistema debe explicarlo en lenguaje llano, conservar lo que el usuario había escrito y permitir reintentar.
 - **RF-015:** Si el prompt pide contenido ilegal o peligroso, el sistema debe rechazar diagnosticarlo y mejorarlo, y explicar en lenguaje llano que no puede ayudar con esa petición. (P1)
+- **RF-016:** El sistema debe señalar solo los problemas que impiden o dificultan conseguir el resultado esperado. Cada defecto se registra una sola vez (reglas de clasificación 1 y 3). (P1)
 
 ### Criterios de aceptación de requisitos transversales
 
@@ -121,16 +124,31 @@ Son los requisitos que no cubren los criterios de las historias.
 - **Idioma de la interfaz:** uno de estos cuatro: español, catalán, inglés o alemán.
 - **Ronda:** cada vez que la app presenta preguntas aclaratorias al usuario.
 - **Evals:** conjunto versionado de prompts de prueba con problemas conocidos sembrados, prompts legítimos y prompts dañinos. Sirve para medir RNF-003, RNF-004 y RNF-007.
-- **Catálogo de categorías:**
-  1. Objetivo ambiguo: no queda claro qué se pide.
-  2. Falta de contexto: la IA no tiene la información de fondo necesaria.
-  3. Destinatario o tono no indicados.
-  4. Formato de salida no especificado: longitud, estructura, idioma.
-  5. Instrucciones contradictorias.
-  6. Restricciones ausentes: qué evitar, límites.
-  7. Tarea compuesta sin orden: varias peticiones mezcladas.
-  8. Faltan ejemplos cuando ayudarían.
-  9. Vaguedad léxica: términos subjetivos sin concretar, como «bueno», «corto» o «profesional».
+- **Catálogo de categorías:** se define en la sección siguiente, con sus fronteras.
+
+## Catálogo de categorías y fronteras
+
+Cada categoría responde a una **pregunta clave**. Un problema pertenece a la categoría cuya pregunta queda sin respuesta en el prompt.
+
+| N.º | Categoría | Pregunta clave | Incluye | No incluye (va a…) | Tipo habitual |
+|---|---|---|---|---|---|
+| 1 | Objetivo ambiguo | ¿Qué quiere conseguir el usuario? | No se sabe qué tarea o qué propósito tiene la petición: «algo», «hola», «escribe un correo» sin decir para qué | Una palabra vaga dentro de una petición clara (→ 9). Varias tareas a la vez (→ 7). Faltan los datos para hacerlo (→ 2) | En el texto |
+| 2 | Falta de contexto | ¿Con qué información o material se trabaja? | Hechos de la situación (retraso de dos semanas, 4 personas), material que hay que procesar (el texto, el informe, el plan) y características del producto | A quién va dirigido (→ 3). Reglas sobre qué incluir o evitar (→ 6). Muestras que hay que imitar (→ 8) | Por ausencia |
+| 3 | Destinatario o tono no indicados | ¿Para quién es y con qué voz? | Público o lector (dirección, alumnos de 15 años) y registro o tono (cortés, formal, cercano) | Una palabra de tono vaga que sí aparece, como «profesional» o «bonito» (→ 9) | Por ausencia |
+| 4 | Formato de salida no especificado | ¿Qué forma tiene el resultado? | Tipo de texto o género (artículo, correo, tabla), estructura (lista, 5 puntos, 3 + 3), **longitud** (500 palabras, 3 frases) e idioma de salida | Qué puede o no contener el resultado (→ 6) | Por ausencia |
+| 5 | Instrucciones contradictorias | ¿Hay dos instrucciones del prompt que no se pueden cumplir a la vez? | Dos órdenes del propio prompt incompatibles: «solo sí o no» + «explica en detalle»; «muy breve» + «sin perder ningún detalle» | Un desajuste entre el prompt y el resultado esperado (se clasifica según lo que falla: tareas de más → 7, formato → 4…) | En el texto |
+| 6 | Restricciones ausentes | ¿Qué reglas debe cumplir el contenido? | Qué incluir o excluir, prohibiciones, requisitos y reglas de decisión: sin gluten, presupuesto bajo, «la ironía cuenta como negativa» | La longitud y la estructura (→ 4). Hechos de la situación (→ 2) | Por ausencia |
+| 7 | Tarea compuesta sin orden | ¿Se piden varias tareas distintas sin orden ni prioridad? | Varias peticiones independientes mezcladas en un prompt: traducir, eslóganes y revisar la web; corregir, traducir, tuitear y escribir un poema | Una sola tarea con varios requisitos (no es un problema) | En el texto |
+| 8 | Faltan ejemplos | ¿Hay que imitar un patrón o un criterio difícil de describir sin muestras? | Estilo de nombres existentes, cómo clasificar casos dudosos (un comentario irónico) | El material sobre el que se trabaja (→ 2) | Por ausencia |
+| 9 | Vaguedad léxica | ¿Hay una palabra o expresión concreta subjetiva o imprecisa? | «bien», «bonito», «professional and catchy», «good», «same style» dentro de una petición por lo demás clara | Toda la petición es indeterminada (→ 1) | En el texto |
+
+### Reglas de clasificación
+
+1. **Un defecto, un problema.** Si un mismo defecto encaja en dos categorías, se registra una sola vez, en la más específica. El orden de especificidad, de más a menos, es: 5, 7, 8, 9, 4, 6, 3, 2, 1. Por ejemplo, «in the same style as our existing ones» es vago porque faltan los nombres existentes, así que es un solo problema: 8.
+2. **Tipo por la causa.**
+   - Es «en el texto» si el problema lo causan palabras que están en el prompt.
+   - Es «por ausencia» si lo causa algo que no está, aunque haya palabras relacionadas. Por ejemplo, la falta de formato en «hola» es por ausencia, no en el texto.
+3. **Solo lo que impide el resultado esperado.** No se señala lo que falta si no hace falta para conseguir el resultado que el usuario ha descrito (ver RF-016).
 
 ## Fuera de alcance
 
@@ -157,6 +175,7 @@ No quedan dudas abiertas.
 | 2026-10-18 | Àlex Marco | Idioma con prompt en otro idioma | Explicaciones en el idioma de la interfaz, versión mejorada en el idioma del prompt; se acepta cualquier idioma de prompt (RF-013) |
 | 2026-10-18 | Àlex Marco | Rechazos erróneos | Como máximo un 5 % de prompts legítimos rechazados (RNF-007) |
 | 2026-10-18 | Àlex Marco | Problemas sin fragmento (conflicto con la constitución) | Opción A: dos tipos de problema, «en el texto» y «por ausencia». Constitución enmendada a 1.1 (RF-003) |
+| 2026-10-19 | Àlex Marco | Solapes entre categorías detectados en el spike 001 | Se validan las fronteras del catálogo, las 3 reglas de clasificación y RF-016 (spec 1.1) |
 
 ## Criterios de éxito
 
