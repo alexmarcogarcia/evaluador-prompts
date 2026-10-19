@@ -1,9 +1,10 @@
 # Especificación: Diagnóstico y mejora de un prompt
 
-**Estado:** aprobada · **Versión:** 1.2 · **Aprobada:** 2026-10-19 por Àlex Marco · **Constitución:** 1.1
+**Estado:** aprobada · **Versión:** 1.3 · **Aprobada:** 2026-10-19 por Àlex Marco · **Constitución:** 1.1
 
 > Cambio 1.0 → 1.1: el spike 001 (`research.md`) mostró solapes entre categorías. Se añaden las fronteras del catálogo, las reglas de clasificación y RF-016.
 > Cambio 1.1 → 1.2: la ronda 2 del spike mostró que la granularidad no estaba definida. Se añade la regla de clasificación 4: las carencias de la misma categoría se agrupan.
+> Cambio 1.2 → 1.3: la revisión de seguridad (Fase 8, `docs/seguridad.md`) añade requisitos. RF-006 y RNF-006 se amplían y se crean RNF-008, RNF-009 y RNF-010.
 
 ## Contexto y objetivo
 
@@ -59,7 +60,7 @@ Como persona con poco dominio de la IA, quiero recibir una versión mejorada de 
   - Un problema por ausencia debe indicar qué información falta y, si procede, en qué parte del prompt convendría añadirla. Puede agrupar varias informaciones de la misma categoría si las nombra una a una (regla de clasificación 4). (P1)
 - **RF-004:** Las categorías de problemas deben salir del catálogo cerrado y aplicarse según las fronteras y reglas de la sección «Catálogo de categorías y fronteras». (P1)
 - **RF-005:** Si no detecta problemas relevantes, el sistema debe decirlo explícitamente y no inventar ninguno. (P1)
-- **RF-006:** Antes de enviar el prompt, el sistema debe indicar a qué proveedor y modelo de IA se enviará. (Invariante de la constitución)
+- **RF-006:** Antes de enviar el prompt, el sistema debe indicar a qué proveedor y modelo de IA se enviará, y avisar de que no se incluyan datos personales ni confidenciales. (Invariante de la constitución; amenaza A6)
 - **RF-007:** El sistema debe generar como máximo 5 preguntas aclaratorias por ronda sobre la información que falta, cada una ligada al problema que la motiva. (P2)
 - **RF-008:** El usuario debe poder responder u omitir cada pregunta. (P2)
 - **RF-009:** El sistema debe generar una versión mejorada del prompt en la que cada cambio referencia el problema o los problemas que resuelve. (P3)
@@ -76,7 +77,9 @@ Como persona con poco dominio de la IA, quiero recibir una versión mejorada de 
 Son los requisitos que no cubren los criterios de las historias.
 
 - **RF-001:** Dado un prompt de 8.000 caracteres, cuando pido el diagnóstico, entonces se envía. Dado uno de 8.001, entonces no se envía y se me indica que sobra 1 carácter.
-- **RF-006:** Dado un prompt listo para enviar, cuando todavía no lo he enviado, entonces veo el nombre del proveedor y del modelo que lo recibirán.
+- **RF-006:** Dado un prompt listo para enviar, cuando todavía no lo he enviado, entonces veo el nombre del proveedor y del modelo que lo recibirán y un aviso de que no incluya datos personales ni confidenciales.
+- **RNF-008:** Dada la app en marcha, cuando otro equipo de la red intenta conectarse, entonces la conexión no se establece.
+- **RNF-010:** Dado un prompt que contiene `<script>alert(1)</script>`, cuando se muestra el diagnóstico, entonces el texto aparece tal cual y no se ejecuta nada.
 - **RF-013:**
   - Dada la interfaz en catalán y un prompt en inglés, cuando recibo el diagnóstico, entonces las explicaciones y las preguntas están en catalán y la versión mejorada está en inglés.
   - Dado un prompt en francés, cuando pido el diagnóstico, entonces se acepta y se diagnostica.
@@ -106,8 +109,11 @@ Son los requisitos que no cubren los criterios de las historias.
   - Como máximo el 20 % de los problemas señalados son falsos positivos.
 - **RNF-004 · Fidelidad:** el 100 % de los fragmentos citados en problemas en el texto existen literalmente en el prompt original.
 - **RNF-005 · Comprensibilidad:** en la prueba con 5 personas (criterio de éxito 2), al menos 4 entienden cada explicación sin ayuda.
-- **RNF-006 · Privacidad:** el texto de los prompts no aparece en ningún log.
+- **RNF-006 · Privacidad:** los logs solo registran duración, tokens, proveedor, modelo y código de error. El texto del prompt, del resultado esperado, de las respuestas y de la versión mejorada, y las claves de API, no aparecen en ningún log.
 - **RNF-007 · Rechazo:** el 100 % de los prompts ilegales o peligrosos del conjunto de evals se rechaza (RF-015), y como máximo el 5 % de los prompts legítimos de las evals se rechaza por error.
+- **RNF-008 · Acceso local:** en este incremento, la app solo acepta conexiones desde el propio equipo (127.0.0.1), sin autenticación, para un solo usuario. (Amenaza A2)
+- **RNF-009 · Sin persistencia:** el prompt, el resultado esperado, el diagnóstico, las respuestas y la versión mejorada no se guardan en disco ni en ningún almacenamiento. Su retención es la duración de la sesión. (Amenaza A9)
+- **RNF-010 · Contenido seguro en pantalla:** el 100 % del texto procedente del usuario o del modelo se muestra como texto y nunca se interpreta como HTML ni como código. (Amenaza A3)
 
 ## Entidades y glosario
 
@@ -179,6 +185,7 @@ No quedan dudas abiertas.
 | 2026-10-18 | Àlex Marco | Problemas sin fragmento (conflicto con la constitución) | Opción A: dos tipos de problema, «en el texto» y «por ausencia». Constitución enmendada a 1.1 (RF-003) |
 | 2026-10-19 | Àlex Marco | Solapes entre categorías detectados en el spike 001 | Se validan las fronteras del catálogo, las 3 reglas de clasificación y RF-016 (spec 1.1) |
 | 2026-10-19 | Àlex Marco | Granularidad: ¿una carencia por problema o agrupadas? | Opción B: se agrupan las de la misma categoría, nombrándolas una a una (regla 4, spec 1.2) |
+| 2026-10-19 | Àlex Marco | Requisitos de seguridad (Fase 8) | Se aprueban la ampliación de RF-006 y RNF-006 y los nuevos RNF-008, RNF-009 y RNF-010 (spec 1.3) |
 
 ## Criterios de éxito
 

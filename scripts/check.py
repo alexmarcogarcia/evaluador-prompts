@@ -15,6 +15,8 @@ COMPROBACIONES = [
     ("Tipos", ["-m", "mypy"]),
     ("Pruebas", ["-m", "pytest", "-q"]),
     ("Coherencia spec ↔ tareas ↔ pruebas", ["scripts/coherencia.py"]),
+    # Solo dependencias del proyecto, no las del sistema (constitución: dependencias y licencias).
+    ("Dependencias vulnerables", ["-m", "pip_audit", "--skip-editable", "--progress-spinner", "off"]),
 ]
 
 
