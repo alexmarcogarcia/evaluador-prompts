@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "evaluador-prompts/contracts/diagnostico/1.0",
+  "title": "Respuesta del modelo al diagnosticar un prompt",
+  "description": "Spec 001: RF-003, RF-004, RF-007, RF-015. El dominio valida además las reglas absolutas (ADR-0003).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["rechazado", "problemas", "preguntas"],
+  "properties": {
+    "rechazado": { "type": "boolean" },
+    "motivo": { "type": ["string", "null"], "description": "Solo si rechazado es true." },
+    "problemas": { "type": "array", "items": { "$ref": "#/$defs/problema" } },
+    "preguntas": { "type": "array", "maxItems": 5, "items": { "$ref": "#/$defs/pregunta" } }
+  },
+  "$defs": {
+    "problema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tipo", "categoria", "fragmento", "falta", "explicacion", "gravedad"],
+      "properties": {
+        "tipo": { "enum": ["texto", "ausencia"] },
+        "categoria": { "enum": [1, 2, 3, 4, 5, 6, 7, 8, 9] },
+        "fragmento": { "type": ["string", "null"], "description": "Literal del prompt si tipo es texto; null si es ausencia." },
+        "falta": { "type": ["string", "null"], "description": "Qué falta si tipo es ausencia; null si es texto." },
+        "explicacion": { "type": "string", "minLength": 1 },
+        "gravedad": { "enum": ["alta", "media", "baja"] }
+      }
+    },
+    "pregunta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["texto", "problema"],
+      "properties": {
+        "texto": { "type": "string", "minLength": 1 },
+        "problema": { "type": "integer", "minimum": 1, "description": "Posición (desde 1) del problema que la motiva." }
+      }
+    }
+  }
+}
