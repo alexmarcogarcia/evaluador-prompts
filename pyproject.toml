@@ -49,7 +49,7 @@ ignore = ["N818"]
 
 [tool.mypy]
 strict = true
-files = ["src", "tests", "scripts"]
+files = ["src", "tests", "scripts", "evals"]
 mypy_path = ["src", "scripts"]
 explicit_package_bases = true
 
