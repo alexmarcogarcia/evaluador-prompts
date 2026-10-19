@@ -62,7 +62,7 @@
 - [x] **T051** [P] Prompt de mejora en `src/evaluador/prompts/mejora.md` (RF-009, RF-010, RF-013: mejora en el idioma del prompt).
 - [x] **T052** Caso de uso `src/evaluador/casos_uso/mejorar.py`, con marcadores `[COMPLETAR: …]` para las preguntas omitidas (RF-009, RF-010, RF-012).
 - [x] **T053** Interfaz: el original y el mejorado lado a lado, con las diferencias marcadas mediante difflib, y cada cambio con su problema (RF-011).
-- [ ] **T054** Evals de la mejora: cambios ligados a problemas, marcadores presentes e idioma del prompt (RF-009, RF-010, RF-013).
+- [ ] **T054** Evals de la mejora: cambios ligados a problemas, marcadores presentes, idioma del prompt y contenido inventado con un juez calibrado (RF-009, RF-010, RF-013, RNF-011). **Àlex Marco etiqueta los 12 casos de calibración.**
 
 **Punto de control P3:** quickstart completo, pasos 1–5. Spec, plan y código coherentes, y CI en verde. **Fin del primer incremento (Fase 9).**
 
