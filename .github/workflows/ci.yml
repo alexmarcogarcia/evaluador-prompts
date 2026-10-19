@@ -1,0 +1,36 @@
+# CI mínima desde el primer día (guía, Fase 7.3): si falla, no se fusiona.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  comprobaciones:
+    name: Linter, formato, tipos, pruebas y coherencia
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+      - name: Preparar el entorno (el mismo comando que en local)
+        run: python scripts/setup.py
+      - name: Comprobaciones de la definición de hecho
+        run: python scripts/check.py
+
+  secretos:
+    name: Búsqueda de secretos
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Todo el historial: un secreto borrado sigue siendo un secreto filtrado.
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

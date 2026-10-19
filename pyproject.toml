@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "evaluador-prompts"
+version = "0.1.0"
+description = "Revisa prompts, explica dónde fallan y cómo precisarlos, para personas sin experiencia en IA."
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+authors = [{ name = "Àlex Marco", email = "amarcoga8@gmail.com" }]
+# Versiones fijadas (constitución). Elegidas el 2026-10-19 con al menos dos semanas desde su publicación.
+dependencies = [
+    "fastapi==0.142.2",
+    "uvicorn==0.54.0",
+    "jinja2==3.1.6",
+    "python-multipart==0.0.32",
+    "openai==3.24.0",
+    "pydantic==2.13.5",
+    "python-dotenv==1.2.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==9.1.1",
+    "httpx==0.28.1",
+    "ruff==0.16.10",
+    "mypy==2.4.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py313"
+extend-exclude = ["spikes"]  # Código desechable del spike: no se mantiene.
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "N"]
+
+[tool.mypy]
+strict = true
+files = ["src", "tests", "scripts"]
+mypy_path = ["src", "scripts"]
+explicit_package_bases = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["scripts"]
+# Las pruebas que llaman a un proveedor real necesitan red y claves: no se ejecutan por defecto ni en la CI.
+markers = ["red: llama a un proveedor de IA real (requiere red y claves en .env)"]
+addopts = "-m 'not red'"
