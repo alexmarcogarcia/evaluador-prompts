@@ -1,6 +1,6 @@
 # Plan: Diagnóstico y mejora de un prompt
 
-**Especificación:** `specs/001-diagnostico-prompt/spec.md` v1.3 · **Estado:** aprobado · **Aprobado:** 2026-10-19 por Àlex Marco
+**Especificación:** `specs/001-diagnostico-prompt/spec.md` v1.5 · **Estado:** aprobado · **Aprobado:** 2026-10-19 por Àlex Marco
 
 ## Resumen técnico
 
@@ -97,7 +97,7 @@ Las pruebas de contrato comprueban que el adaptador transforma cualquier respues
 | RF-007 ≤ 5 preguntas | `dominio/reglas.py` | unit |
 | RF-008 responder u omitir | `adaptadores/web`, `casos_uso/mejorar.py` | aceptación P2 |
 | RF-009 cambios ligados a problemas | `dominio/reglas.py`, `casos_uso/mejorar.py` | unit + contract |
-| RF-010 marcador si se omite una pregunta | `casos_uso/mejorar.py` | unit + aceptación P2 |
+| RF-010 marcador si se omite una pregunta (spec 1.5) | `prompts/mejora.md` (el código no añade marcadores: no puede saber si el dato ya está en el resultado esperado) | evals de la mejora: marcadores presentes + juez (RNF-011, sin datos inventados) |
 | RF-011 original y mejorado con diferencias | `adaptadores/web` (difflib) | unit + aceptación P3 |
 | RF-012 original intacto | `dominio/modelos.py` (inmutable) | unit |
 | RF-013 4 idiomas de interfaz; mejora en el idioma del prompt | `adaptadores/web/i18n`, prompts | unit (claves i18n completas) + evals |
@@ -110,6 +110,7 @@ Las pruebas de contrato comprueban que el adaptador transforma cualquier respues
 | RNF-008 solo 127.0.0.1 | `composicion.py` (arranque del servidor) | unit (configuración) |
 | RNF-009 sin persistencia | todo `src/` (sin escrituras a disco) | revisión + unit |
 | RNF-010 contenido escapado | `adaptadores/web` (autoescape de Jinja2) | aceptación con `<script>` |
+| RNF-011 no inventar en la mejora | `prompts/mejora.md` | evals de la mejora con juez calibrado |
 
 ## Quickstart (validación de extremo a extremo)
 

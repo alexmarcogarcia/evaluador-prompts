@@ -13,11 +13,13 @@ class ModeloFalso:
     def __init__(
         self,
         diagnostico: DiagnosticoPropuesto = SIN_PROBLEMAS,
-        mejora: MejoraPropuesta | None = None,
+        mejora: MejoraPropuesta | tuple[MejoraPropuesta, ...] | None = None,
         error: ErrorProveedor | None = None,
     ) -> None:
         self._diagnostico = diagnostico
-        self._mejora = mejora or MejoraPropuesta(texto="", cambios=())
+        # Una mejora fija, o una secuencia que se devuelve llamada a llamada (la última se repite).
+        mejoras = mejora if isinstance(mejora, tuple) else (mejora or MejoraPropuesta(texto="", cambios=()),)
+        self._mejoras = list(mejoras)
         self._error = error
         self.llamadas: list[tuple[object, ...]] = []
 
@@ -28,9 +30,13 @@ class ModeloFalso:
         return self._diagnostico
 
     def mejorar(
-        self, diagnostico: Diagnostico, respuestas: dict[str, str | None], idioma_interfaz: str
+        self,
+        diagnostico: Diagnostico,
+        respuestas: dict[str, str | None],
+        idioma_interfaz: str,
+        idioma_prompt: str | None = None,
     ) -> MejoraPropuesta:
-        self.llamadas.append(("mejorar", diagnostico, respuestas, idioma_interfaz))
+        self.llamadas.append(("mejorar", diagnostico, respuestas, idioma_interfaz, idioma_prompt))
         if self._error:
             raise self._error
-        return self._mejora
+        return self._mejoras.pop(0) if len(self._mejoras) > 1 else self._mejoras[0]

@@ -1,10 +1,12 @@
 # Especificación: Diagnóstico y mejora de un prompt
 
-**Estado:** aprobada · **Versión:** 1.3 · **Aprobada:** 2026-10-19 por Àlex Marco · **Constitución:** 1.1
+**Estado:** aprobada · **Versión:** 1.5 · **Aprobada:** 2026-10-21 por Àlex Marco · **Constitución:** 1.2
 
 > Cambio 1.0 → 1.1: el spike 001 (`research.md`) mostró solapes entre categorías. Se añaden las fronteras del catálogo, las reglas de clasificación y RF-016.
 > Cambio 1.1 → 1.2: la ronda 2 del spike mostró que la granularidad no estaba definida. Se añade la regla de clasificación 4: las carencias de la misma categoría se agrupan.
 > Cambio 1.2 → 1.3: la revisión de seguridad (Fase 8, `docs/seguridad.md`) añade requisitos. RF-006 y RNF-006 se amplían y se crean RNF-008, RNF-009 y RNF-010.
+> Cambio 1.3 → 1.4: en la prueba en vivo de P3, la mejora añadió un requisito que nadie pidió. Se crea RNF-011 (no inventar en la mejora), con su definición en el glosario.
+> Cambio 1.4 → 1.5: en las evals de la mejora, el código añadía marcadores [COMPLETAR] para datos que ya estaban en el resultado esperado, lo que confunde al usuario. RF-010 se matiza: no hace falta marcador si la información ya está en el prompt o en el resultado esperado.
 
 ## Contexto y objetivo
 
@@ -64,7 +66,7 @@ Como persona con poco dominio de la IA, quiero recibir una versión mejorada de 
 - **RF-007:** El sistema debe generar como máximo 5 preguntas aclaratorias por ronda sobre la información que falta, cada una ligada al problema que la motiva. (P2)
 - **RF-008:** El usuario debe poder responder u omitir cada pregunta. (P2)
 - **RF-009:** El sistema debe generar una versión mejorada del prompt en la que cada cambio referencia el problema o los problemas que resuelve. (P3)
-- **RF-010:** Si una pregunta se ha omitido, la versión mejorada no debe inventar esa información. Debe dejar un marcador visible para que el usuario la complete. (P2, P3)
+- **RF-010:** Si una pregunta se ha omitido, la versión mejorada no debe inventar esa información. Debe dejar un marcador visible para que el usuario la complete, salvo que esa información ya esté en el prompt o en el resultado esperado. (P2, P3)
 - **RF-011:** El sistema debe mostrar el prompt original y el mejorado a la vez, con las diferencias marcadas. (P3)
 - **RF-012:** El prompt original no debe modificarse en ningún momento. (Invariante de la constitución)
 - **RF-013:** La interfaz debe estar disponible en español, catalán, inglés y alemán. Las explicaciones y las preguntas deben estar en el idioma de la interfaz que ha elegido el usuario. La versión mejorada debe estar en el idioma del prompt original. Se acepta un prompt escrito en cualquier idioma.
@@ -114,6 +116,7 @@ Son los requisitos que no cubren los criterios de las historias.
 - **RNF-008 · Acceso local:** en este incremento, la app solo acepta conexiones desde el propio equipo (127.0.0.1), sin autenticación, para un solo usuario. (Amenaza A2)
 - **RNF-009 · Sin persistencia:** el prompt, el resultado esperado, el diagnóstico, las respuestas y la versión mejorada no se guardan en disco ni en ningún almacenamiento. Su retención es la duración de la sesión. (Amenaza A9)
 - **RNF-010 · Contenido seguro en pantalla:** el 100 % del texto procedente del usuario o del modelo se muestra como texto y nunca se interpreta como HTML ni como código. (Amenaza A3)
+- **RNF-011 · No inventar en la mejora:** con todas las preguntas omitidas, como máximo el 5 % de las versiones mejoradas contienen un **dato inventado** y como máximo el 20 % contienen un **requisito añadido** (definiciones en el glosario). Se mide con un juez automático de un proveedor distinto del que mejora, calibrado con el criterio de Àlex Marco (coincidencia en al menos 10 de 12 casos). (RF-010)
 
 ## Entidades y glosario
 
@@ -128,6 +131,8 @@ Son los requisitos que no cubren los criterios de las historias.
 - **Fragmento:** parte literal del prompt a la que se refiere un problema.
 - **Pregunta aclaratoria:** pregunta al usuario sobre información que falta.
 - **Versión mejorada:** prompt nuevo derivado del original. Se compone de **cambios**, y cada cambio está ligado a problemas.
+- **Dato inventado:** hecho, cifra, nombre, fecha, lugar o característica concreta de la versión mejorada que no aparece en el prompt, en el resultado esperado ni en las respuestas del usuario, ni se deduce directamente de ellos. Ejemplo: «el pedido nº 4521». Es grave, porque un usuario no experto lo copiaría sin advertirlo.
+- **Requisito añadido:** condición de estilo, tono, formato, extensión o contenido de la versión mejorada que no pide ninguna de esas fuentes. Ejemplo: «tono divulgativo y cercano» sin que nadie lo pidiera. Es leve, porque el usuario lo ve marcado en la comparación y puede quitarlo. No cuentan como invención: reformular, reordenar, hacer explícito lo que ya dice el resultado esperado ni los marcadores `[COMPLETAR: …]`.
 - **Idioma de la interfaz:** uno de estos cuatro: español, catalán, inglés o alemán.
 - **Ronda:** cada vez que la app presenta preguntas aclaratorias al usuario.
 - **Evals:** conjunto versionado de prompts de prueba con problemas conocidos sembrados, prompts legítimos y prompts dañinos. Sirve para medir RNF-003, RNF-004 y RNF-007.
@@ -186,6 +191,8 @@ No quedan dudas abiertas.
 | 2026-10-19 | Àlex Marco | Solapes entre categorías detectados en el spike 001 | Se validan las fronteras del catálogo, las 3 reglas de clasificación y RF-016 (spec 1.1) |
 | 2026-10-19 | Àlex Marco | Granularidad: ¿una carencia por problema o agrupadas? | Opción B: se agrupan las de la misma categoría, nombrándolas una a una (regla 4, spec 1.2) |
 | 2026-10-19 | Àlex Marco | Requisitos de seguridad (Fase 8) | Se aprueban la ampliación de RF-006 y RNF-006 y los nuevos RNF-008, RNF-009 y RNF-010 (spec 1.3) |
+| 2026-10-19 | Àlex Marco | ¿Qué es «inventar» en la mejora y cuánto se tolera? | Dos niveles (dato inventado ≤ 5 %, requisito añadido ≤ 20 %), medidos con un juez de otro proveedor calibrado con 12 casos etiquetados por Àlex Marco (RNF-011, spec 1.4) |
+| 2026-10-21 | Àlex Marco | Marcadores [COMPLETAR] para datos que ya están en el resultado esperado | No hacen falta: RF-010 se matiza (spec 1.5) |
 
 ## Criterios de éxito
 

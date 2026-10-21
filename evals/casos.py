@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
+IDIOMAS = {"Español": "es", "Catalán": "ca", "Inglés": "en", "Alemán": "de"}
 ARCHIVOS = (
     RAIZ / "specs" / "001-diagnostico-prompt" / "casos-prueba.md",
     RAIZ / "evals" / "casos" / "ampliacion-v1.md",
@@ -29,6 +30,8 @@ class Caso:
     resultado: str
     esperados: tuple[Esperado, ...]
     debe_rechazar: bool
+    idioma: str | None = None
+    """Idioma del prompt (es, ca, en, de), leído de la cabecera del caso."""
 
 
 def esta_validado(md: str) -> bool:
@@ -63,6 +66,7 @@ def leer_casos(md: str) -> list[Caso]:
                 resultado=resultado.group(1).strip() if resultado else "",
                 esperados=tuple(esperados),
                 debe_rechazar="**rechazo**" in bloque,
+                idioma=next((c for n, c in IDIOMAS.items() if f"· {n}" in cabecera), None),
             )
         )
     return casos
