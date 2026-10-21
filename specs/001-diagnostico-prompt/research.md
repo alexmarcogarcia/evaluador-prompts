@@ -126,3 +126,37 @@ Medición de la aplicación completa (adaptador + reglas del dominio) con 55 cas
 | **3a · ronda 2** | **87,9 %** | **18,3 %** | 1,6 s | 6/6 | 0 % |
 
 Se adopta 3a (ADR-0003, decisión 3). Los ejemplos son inventados y una prueba garantiza que no coinciden con ningún caso de las evals.
+
+## Incidencias de proveedor y cambio de juez (T054 · 2026-10-20/21)
+
+Riesgo R-01 materializado dos veces:
+
+- **Nemotron 3 Super**, el juez calibrado, pasa a devolver 404 para la cuenta, aunque sigue en el catálogo. Con `evals/rejuzgar.py` se recalibran candidatos contra las 12 decisiones ya tomadas por Àlex Marco, sin volver a etiquetar:
+
+  | Candidato | Coincidencia |
+  |---|---|
+  | **nemotron-3.5-lightning-30b-a3b (nuevo juez)** | **11/12** |
+  | nemotron-3-ultra-550b-a55b (reserva) | 11/12 |
+  | glm-5.3-flash | 10/12 |
+  | gpt-oss-20b | JSON inválido y desacuerdos |
+  | deepseek-v4.1-flash | tiempos agotados |
+
+  **Limitación:** en la revisión de los desacuerdos, Àlex Marco veía el veredicto del juez anterior; puede haber sesgo de anclaje.
+
+- **gemini-3.5-flash-lite** sufre una saturación pasajera (33 s para responder «OK»; 2026-10-20) y se recupera al día siguiente (0,5–0,8 s). Se evalúa **gemini-3.5-flash** como alternativa: diagnostica mejor en los 11 casos que respondió (90 % de detección, 14 % de falsos positivos, p95 de 19,7 s), pero agota la cuota gratuita tras unas 15 peticiones (44 de 55 casos sin respuesta). **No es viable a 0 € (RNF-002).** Se mantiene Flash-Lite (ADR-0001 sin cambios) y Flash queda como plan B de calidad si algún día hay presupuesto.
+
+## Evals de la mejora (T054 · 2026-10-21)
+
+Mejora con gemini-3.5-flash-lite y **todas las preguntas omitidas** (peor caso para inventar). Juez: nemotron-3.5-lightning (11/12 con Àlex Marco). 37 de 38 casos juzgados.
+
+| Ronda | Cambio | Datos inventados (≤ 5 %) | Requisitos añadidos (≤ 20 %) | Idioma (RF-013) |
+|---|---|---|---|---|
+| 1 | Prompt de T051 + regla de idioma reforzada | 0 % | 5,4 % | 81 %* |
+| 2 | Idioma indicado al modelo y reintento; marcadores solo si el modelo no deja ninguno | 0 % | 8,1 % | 97 % |
+| **3** | **Detector sin empates (prompt + resultado esperado); el código no añade marcadores** | **0 %** | **2,7 %** | **100 %** |
+
+\* El detector contaba las palabras de los `[COMPLETAR]`, que van en el idioma de la interfaz. Corregido en la ronda 2.
+
+**Hallazgos:**
+- En la ronda 2, el código añadía marcadores para datos que ya estaban en el resultado esperado (C15: pedía el libro, el curso y las palabras ya escritos). El código no puede saber si un dato está en las fuentes. Por eso la spec 1.5 matiza RF-010 y el código deja de añadir marcadores; RF-010 queda vigilado por el juez (0 % de datos inventados).
+- La revisión manual de los casos sin marcador (C05, C35, C38) confirma que la información salía del resultado esperado.

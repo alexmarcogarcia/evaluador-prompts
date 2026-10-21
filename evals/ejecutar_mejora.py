@@ -91,13 +91,14 @@ def main() -> None:
         sys.stdout.reconfigure(encoding="utf-8")
     argumentos = argparse.ArgumentParser()
     argumentos.add_argument("--calibracion", type=int, default=0)
+    argumentos.add_argument("--modelo", default="gemini-3.5-flash-lite")
     argumentos.add_argument("--pausa", type=float, default=4.0)
     opciones = argumentos.parse_args()
 
     load_dotenv(RAIZ / ".env")
     gemini = ModeloOpenAICompatible(
         proveedor="Google Gemini",
-        modelo="gemini-3.5-flash-lite",
+        modelo=opciones.modelo,
         base_url=GEMINI_URL,
         api_key=os.environ.get("GEMINI_API_KEY", ""),
         prompt_diagnostico=cargar("diagnostico"),
@@ -107,7 +108,7 @@ def main() -> None:
     casos = casos_mejorables(cargar_validados()[0])
     if opciones.calibracion:
         casos = repartir(casos, opciones.calibracion)
-    print(f"{len(casos)} casos · mejora con gemini-3.5-flash-lite · juez NVIDIA Nemotron\n")
+    print(f"{len(casos)} casos · mejora con {opciones.modelo} · juez {juez.modelo}\n")
 
     filas: list[dict[str, object]] = []
     for caso in casos:
@@ -168,7 +169,7 @@ def main() -> None:
     }
     RESULTADOS.mkdir(parents=True, exist_ok=True)
     nombre = "calibracion" if opciones.calibracion else "completa"
-    salida = RESULTADOS / f"{date.today().isoformat()}_mejora_{nombre}.json"
+    salida = RESULTADOS / f"{date.today().isoformat()}_mejora_{nombre}_{opciones.modelo}.json"
     salida.write_text(
         json.dumps({"resumen": total, "casos": filas}, ensure_ascii=False, indent=2), encoding="utf-8"
     )

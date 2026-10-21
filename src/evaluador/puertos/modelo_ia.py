@@ -39,7 +39,14 @@ class ModeloIA(Protocol):
     def diagnosticar(self, prompt: Prompt, idioma_interfaz: str) -> DiagnosticoPropuesto: ...
 
     def mejorar(
-        self, diagnostico: Diagnostico, respuestas: dict[str, str | None], idioma_interfaz: str
+        self,
+        diagnostico: Diagnostico,
+        respuestas: dict[str, str | None],
+        idioma_interfaz: str,
+        idioma_prompt: str | None = None,
     ) -> MejoraPropuesta:
-        """`respuestas`: identificador de pregunta -> respuesta, o None si se omitió."""
+        """`respuestas`: pregunta -> respuesta, o None si se omitió.
+
+        `idioma_prompt`: idioma detectado del prompt original (es, ca, en, de), si se sabe (RF-013).
+        """
         ...

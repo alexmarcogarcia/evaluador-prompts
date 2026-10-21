@@ -68,16 +68,32 @@ def test_el_modelo_recibe_las_respuestas_y_las_omitidas_como_omitidas() -> None:
     """RF-008 / RF-010."""
     m = modelo()
     Mejorar(m).ejecutar(diagnostico(m), {"Q1": "Cordial", "Q2": None}, "es")
-    operacion, _, respuestas, _ = m.llamadas[-1]
+    operacion, _, respuestas, *_ = m.llamadas[-1]
     assert operacion == "mejorar"
     assert respuestas == {"Q1": "Cordial", "Q2": None}
 
 
-def test_una_pregunta_omitida_deja_un_marcador_aunque_el_modelo_lo_olvide() -> None:
-    """P2-P3 / RF-010: la información omitida no se inventa; queda marcada para completarla."""
+def test_el_codigo_no_anade_marcadores_por_su_cuenta() -> None:
+    """RF-010 (spec 1.5): si el dato ya está en el resultado esperado no hace falta marcador, y eso solo
+    lo puede juzgar quien entiende el texto. Que no se invente lo omitido lo vigilan las evals (RNF-011)."""
     m = modelo()
     version = Mejorar(m).ejecutar(diagnostico(m), {"Q1": "Cordial", "Q2": None}, "es")
-    assert f"{MARCADOR} ¿Por qué hay retraso?]" in version.texto
+    assert version.texto == MEJORADO
+
+
+def test_el_idioma_se_detecta_con_el_prompt_y_el_resultado_esperado() -> None:
+    """RF-013: un prompt catalán muy corto no basta para saber el idioma; con el resultado esperado, sí."""
+    catalan = MejoraPropuesta(
+        texto="Fes una llista de la compra per a un sopar vegà per a 6 persones.", cambios=()
+    )
+    m = ModeloFalso(diagnostico=DiagnosticoPropuesto((TONO,), (), False), mejora=catalan)
+    d = Diagnosticar(m).ejecutar(
+        "Fes una llista de la compra.",
+        "La llista per a un sopar vegà per a 6 persones, amb les seccions.",
+        "es",
+    )
+    Mejorar(m).ejecutar(d, {}, "es")
+    assert m.llamadas[-1][-1] == "ca"
 
 
 def test_si_el_modelo_ya_puso_los_marcadores_no_se_duplican() -> None:
@@ -125,3 +141,29 @@ def test_la_pagina_de_mejora_esta_en_el_idioma_de_la_interfaz(idioma: str) -> No
         TestClient(app).post("/mejorar", data={"idioma": idioma, "estado": serializar(diagnostico(m))}).text
     )
     assert {"ca": "Què hem canviat i per què", "de": "Was wir geändert haben und warum"}[idioma] in pagina
+
+
+def test_si_la_mejora_sale_en_otro_idioma_se_rehace_una_vez_indicando_el_idioma() -> None:
+    """RF-013: la mejora va en el idioma del prompt original; el código lo comprueba."""
+    prompt_en = "Write a short message for my client about the delay."
+    espanol = MejoraPropuesta(
+        texto="Escribe un mensaje breve y cordial para mi cliente sobre el retraso.", cambios=()
+    )
+    ingles = MejoraPropuesta(
+        texto="Write a short, friendly message for my client about the delay.", cambios=()
+    )
+    m = ModeloFalso(diagnostico=DiagnosticoPropuesto((TONO,), (), False), mejora=(espanol, ingles))
+    d = Diagnosticar(m).ejecutar(prompt_en, "A friendly two-sentence message.", idioma_interfaz="es")
+    version = Mejorar(m).ejecutar(d, {}, "es")
+    assert version.texto == ingles.texto
+    llamadas = [llamada for llamada in m.llamadas if llamada[0] == "mejorar"]
+    assert len(llamadas) == 2 and llamadas[-1][-1] == "en"
+
+
+def test_si_el_modelo_deja_algun_marcador_no_se_anaden_mas() -> None:
+    """RF-010 (spec 1.5): si el modelo ya decidió qué falta, no se añaden marcadores para lo que ya está."""
+    m = modelo(
+        MejoraPropuesta(texto=f"Escribe un correo cordial. {MARCADOR} motivo del retraso]", cambios=())
+    )
+    version = Mejorar(m).ejecutar(diagnostico(m), {"Q1": None, "Q2": None}, "es")
+    assert version.texto.count(MARCADOR) == 1

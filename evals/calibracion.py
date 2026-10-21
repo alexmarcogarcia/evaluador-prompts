@@ -15,6 +15,7 @@ from evals.casos import RAIZ
 
 ETIQUETAS = RAIZ / "evals" / "calibracion" / "mejora-v1.md"
 VEREDICTOS = RAIZ / "evals" / "calibracion" / "veredictos-juez-v1.json"
+REVISION = RAIZ / "evals" / "calibracion" / "revision-v1.md"  # Decisiones finales en los desacuerdos.
 MINIMO = 10
 PLANTILLA = r"(?:\[sí/no\] *· *)?"
 
@@ -43,6 +44,8 @@ def main() -> None:
     if isinstance(sys.stdout, io.TextIOWrapper):
         sys.stdout.reconfigure(encoding="utf-8")
     etiquetas = leer_etiquetas(ETIQUETAS.read_text(encoding="utf-8"))
+    if REVISION.exists():
+        etiquetas |= leer_etiquetas(REVISION.read_text(encoding="utf-8"))
     juez = {
         c: (bool(v[0]), bool(v[1])) for c, v in json.loads(VEREDICTOS.read_text(encoding="utf-8")).items()
     }

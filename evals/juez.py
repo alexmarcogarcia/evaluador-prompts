@@ -38,8 +38,9 @@ def interpretar_veredicto(texto: str) -> Veredicto:
 
 
 class Juez:
-    def __init__(self, api_key: str, modelo: str = "nvidia/nemotron-3-super-120b-a12b") -> None:
-        self._modelo = modelo
+    # Calibrado 11/12 (2026-10-20). Reserva, también 11/12: nvidia/nemotron-3-ultra-550b-a55b.
+    def __init__(self, api_key: str, modelo: str = "nvidia/nemotron-3.5-lightning-30b-a3b") -> None:
+        self.modelo = modelo
         self._cliente = openai.OpenAI(api_key=api_key, base_url=NVIDIA_URL, timeout=150, max_retries=2)
 
     def juzgar(self, prompt: str, resultado: str, respuestas: str, mejorado: str) -> Veredicto:
@@ -53,7 +54,7 @@ class Juez:
             )
         )
         respuesta = self._cliente.chat.completions.create(
-            model=self._modelo,
+            model=self.modelo,
             messages=[{"role": "system", "content": PROMPT_JUEZ}, {"role": "user", "content": usuario}],
             temperature=0,
         )

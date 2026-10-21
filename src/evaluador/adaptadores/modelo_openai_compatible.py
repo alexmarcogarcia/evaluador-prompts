@@ -145,7 +145,11 @@ class ModeloOpenAICompatible:
         return interpretar_diagnostico(texto)
 
     def mejorar(
-        self, diagnostico: Diagnostico, respuestas: dict[str, str | None], idioma_interfaz: str
+        self,
+        diagnostico: Diagnostico,
+        respuestas: dict[str, str | None],
+        idioma_interfaz: str,
+        idioma_prompt: str | None = None,
     ) -> MejoraPropuesta:
         problemas = [
             {
@@ -168,6 +172,11 @@ class ModeloOpenAICompatible:
                 _bloque("RESULTADO ESPERADO", diagnostico.prompt.resultado_esperado),
                 _bloque("PROBLEMAS", json.dumps(problemas, ensure_ascii=False)),
                 _bloque("PREGUNTAS Y RESPUESTAS", json.dumps(preguntas, ensure_ascii=False)),
+                *(
+                    [f'IDIOMA DEL PROMPT ORIGINAL: {IDIOMAS[idioma_prompt]}. Escribe "texto" en este idioma.']
+                    if idioma_prompt in IDIOMAS
+                    else []
+                ),
             ]
         )
         texto = self._completar("mejorar", self._prompt_mejora, idioma_interfaz, usuario)

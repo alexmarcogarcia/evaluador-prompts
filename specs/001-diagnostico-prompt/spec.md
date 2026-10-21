@@ -1,11 +1,12 @@
 # Especificación: Diagnóstico y mejora de un prompt
 
-**Estado:** aprobada · **Versión:** 1.4 · **Aprobada:** 2026-10-19 por Àlex Marco · **Constitución:** 1.2
+**Estado:** aprobada · **Versión:** 1.5 · **Aprobada:** 2026-10-21 por Àlex Marco · **Constitución:** 1.2
 
 > Cambio 1.0 → 1.1: el spike 001 (`research.md`) mostró solapes entre categorías. Se añaden las fronteras del catálogo, las reglas de clasificación y RF-016.
 > Cambio 1.1 → 1.2: la ronda 2 del spike mostró que la granularidad no estaba definida. Se añade la regla de clasificación 4: las carencias de la misma categoría se agrupan.
 > Cambio 1.2 → 1.3: la revisión de seguridad (Fase 8, `docs/seguridad.md`) añade requisitos. RF-006 y RNF-006 se amplían y se crean RNF-008, RNF-009 y RNF-010.
 > Cambio 1.3 → 1.4: en la prueba en vivo de P3, la mejora añadió un requisito que nadie pidió. Se crea RNF-011 (no inventar en la mejora), con su definición en el glosario.
+> Cambio 1.4 → 1.5: en las evals de la mejora, el código añadía marcadores [COMPLETAR] para datos que ya estaban en el resultado esperado, lo que confunde al usuario. RF-010 se matiza: no hace falta marcador si la información ya está en el prompt o en el resultado esperado.
 
 ## Contexto y objetivo
 
@@ -65,7 +66,7 @@ Como persona con poco dominio de la IA, quiero recibir una versión mejorada de 
 - **RF-007:** El sistema debe generar como máximo 5 preguntas aclaratorias por ronda sobre la información que falta, cada una ligada al problema que la motiva. (P2)
 - **RF-008:** El usuario debe poder responder u omitir cada pregunta. (P2)
 - **RF-009:** El sistema debe generar una versión mejorada del prompt en la que cada cambio referencia el problema o los problemas que resuelve. (P3)
-- **RF-010:** Si una pregunta se ha omitido, la versión mejorada no debe inventar esa información. Debe dejar un marcador visible para que el usuario la complete. (P2, P3)
+- **RF-010:** Si una pregunta se ha omitido, la versión mejorada no debe inventar esa información. Debe dejar un marcador visible para que el usuario la complete, salvo que esa información ya esté en el prompt o en el resultado esperado. (P2, P3)
 - **RF-011:** El sistema debe mostrar el prompt original y el mejorado a la vez, con las diferencias marcadas. (P3)
 - **RF-012:** El prompt original no debe modificarse en ningún momento. (Invariante de la constitución)
 - **RF-013:** La interfaz debe estar disponible en español, catalán, inglés y alemán. Las explicaciones y las preguntas deben estar en el idioma de la interfaz que ha elegido el usuario. La versión mejorada debe estar en el idioma del prompt original. Se acepta un prompt escrito en cualquier idioma.
@@ -191,6 +192,7 @@ No quedan dudas abiertas.
 | 2026-10-19 | Àlex Marco | Granularidad: ¿una carencia por problema o agrupadas? | Opción B: se agrupan las de la misma categoría, nombrándolas una a una (regla 4, spec 1.2) |
 | 2026-10-19 | Àlex Marco | Requisitos de seguridad (Fase 8) | Se aprueban la ampliación de RF-006 y RNF-006 y los nuevos RNF-008, RNF-009 y RNF-010 (spec 1.3) |
 | 2026-10-19 | Àlex Marco | ¿Qué es «inventar» en la mejora y cuánto se tolera? | Dos niveles (dato inventado ≤ 5 %, requisito añadido ≤ 20 %), medidos con un juez de otro proveedor calibrado con 12 casos etiquetados por Àlex Marco (RNF-011, spec 1.4) |
+| 2026-10-21 | Àlex Marco | Marcadores [COMPLETAR] para datos que ya están en el resultado esperado | No hacen falta: RF-010 se matiza (spec 1.5) |
 
 ## Criterios de éxito
 
