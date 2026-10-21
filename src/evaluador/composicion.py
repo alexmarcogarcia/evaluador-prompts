@@ -63,5 +63,6 @@ def construir_app() -> FastAPI:
 
 def main() -> None:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s %(message)s")
+    app = construir_app()  # Primero la configuración: si falta la clave, se avisa y no se anuncia nada.
     print(f"Evaluador de prompts en http://{HOST}:{PUERTO}  (Ctrl+C para salir)")
-    uvicorn.run(construir_app(), host=HOST, port=PUERTO)
+    uvicorn.run(app, host=HOST, port=PUERTO)
