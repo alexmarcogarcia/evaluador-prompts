@@ -6,6 +6,7 @@
 4. Crea .env a partir de .env.example si no existe (sin valores reales).
 """
 
+import io
 import shutil
 import subprocess
 import sys
@@ -15,6 +16,8 @@ from _entorno import RAIZ, VENV, python_del_venv
 
 
 def main() -> None:
+    if isinstance(sys.stdout, io.TextIOWrapper):  # La consola de Windows usa cp1252 por defecto.
+        sys.stdout.reconfigure(encoding="utf-8")
     esperada = (RAIZ / ".python-version").read_text(encoding="utf-8").strip()
     actual = f"{sys.version_info.major}.{sys.version_info.minor}"
     if actual != esperada:

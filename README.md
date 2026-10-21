@@ -2,7 +2,7 @@
 
 Aplicación que revisa un prompt, señala dónde falla, explica cómo precisarlo para obtener el resultado esperado y comprueba que la versión mejorada funciona mejor. Pensada para personas con poco dominio de la IA.
 
-> Estado: primer incremento en curso. Ya funciona el diagnóstico de prompts (historia P1); faltan las preguntas aclaratorias (P2) y la versión mejorada (P3).
+> Estado: primer incremento completo (diagnóstico, preguntas aclaratorias y versión mejorada). Pendiente: prueba con 5 personas no expertas. Ver `docs/cierre-arranque.md`.
 
 ## Requisitos
 
@@ -46,6 +46,8 @@ Y abre http://127.0.0.1:8000 en el navegador. La app solo acepta conexiones desd
 - [Especificaciones](specs/)
 - [Decisiones de arquitectura (ADR)](docs/adr/)
 - [Registro de riesgos](docs/riesgos.md)
+- [Seguridad](docs/seguridad.md)
+- [Cierre del arranque](docs/cierre-arranque.md)
 - [Cómo contribuir](CONTRIBUTING.md)
 
 ## Licencia
