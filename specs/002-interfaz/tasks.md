@@ -1,6 +1,6 @@
 # Tareas: Interfaz atractiva e intuitiva
 
-**Spec:** 002 v1.0 · **Plan:** propuesta · **Estado:** propuesta · **Responsable:** Àlex Marco
+**Spec:** 002 v1.0 · **Plan:** aprobado 2026-10-22 · **Estado:** aprobado 2026-10-22 por Àlex Marco · **Responsable:** Àlex Marco
 
 `[P]` = paralelizable. La prueba de cada tarea de servidor se escribe primero y debe fallar antes de implementar. El JavaScript se verifica con la lista de comprobación manual del final (ADR-0004).
 

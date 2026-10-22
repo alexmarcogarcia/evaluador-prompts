@@ -1,6 +1,6 @@
 # Plan: Interfaz atractiva e intuitiva
 
-**Especificación:** `specs/002-interfaz/spec.md` v1.0 · **Guía visual:** `specs/002-interfaz/guia-visual.md` · **Estado:** propuesta (las decisiones del ADR-0004 están aprobadas)
+**Especificación:** `specs/002-interfaz/spec.md` v1.0 · **Guía visual:** `specs/002-interfaz/guia-visual.md` · **Estado:** aprobado · **Aprobado:** 2026-10-22 por Àlex Marco
 
 ## Resumen técnico
 
