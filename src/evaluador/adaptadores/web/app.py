@@ -95,6 +95,12 @@ def crear_app(diagnosticar: Diagnosticar, mejorar: Mejorar, *, proveedor: str, m
             idiomas=[(i, textos(i)["idioma_nombre"]) for i in IDIOMAS],
             aviso=aviso,
             huella=huella,
+            # Paso del recorrido (RF-022): lo deduce lo que se muestra.
+            paso="mejorar"
+            if contexto.get("version")
+            else "revisar"
+            if contexto.get("diagnostico")
+            else "escribir",
             **contexto,
         )
         return HTMLResponse(html)

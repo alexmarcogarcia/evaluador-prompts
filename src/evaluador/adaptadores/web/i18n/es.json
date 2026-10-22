@@ -1,6 +1,6 @@
 {
   "idioma_nombre": "Español",
-  "titulo": "Evaluador de prompts",
+  "titulo": "Afila tu prompt",
   "subtitulo": "Pega tu prompt y dinos qué quieres conseguir: te diremos qué le falta y por qué.",
   "etiqueta_prompt": "Tu prompt",
   "etiqueta_resultado": "Qué resultado esperas",
@@ -49,5 +49,15 @@
   "copiar_ayuda": "Copia el texto de la columna «Mejorado» y úsalo en tu herramienta de IA.",
   "error_estado_invalido": "No hemos podido recuperar el diagnóstico. Vuelve a revisar tu prompt.",
   "progreso_revisar": "Afilando tu prompt…",
-  "progreso_mejorar": "Puliendo la versión mejorada…"
+  "progreso_mejorar": "Puliendo la versión mejorada…",
+  "paso_escribir": "1 Escribir",
+  "paso_revisar": "2 Revisar",
+  "paso_mejorar": "3 Mejorar",
+  "recorrido": "Recorrido",
+  "copiar": "Copiar",
+  "copiado": "Copiado",
+  "copiado_completar": "Copiado. Recuerda completar lo marcado con [COMPLETAR: …].",
+  "copiar_manual": "Texto seleccionado: pulsa Ctrl+C para copiarlo.",
+  "tema_oscuro": "Cambiar a modo oscuro",
+  "tema_claro": "Cambiar a modo claro"
 }

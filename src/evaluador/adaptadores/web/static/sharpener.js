@@ -34,6 +34,8 @@
     if (!lienzoNuevo || !lienzo) return false;
     lienzo.replaceChildren.apply(lienzo, Array.prototype.slice.call(lienzoNuevo.childNodes));
     document.title = nueva.title;
+    // La página nueva trae su propio botón «Copiar», oculto hasta que el script lo activa (RF-020).
+    prepararCopia();
     // Lleva la vista y el foco al título de la última sección: lo nuevo (RF-023).
     var titulos = lienzo.querySelectorAll("h2[tabindex='-1']");
     var destino = titulos[titulos.length - 1] || lienzo.querySelector("[role='alert']");
@@ -44,6 +46,72 @@
     }
     return true;
   }
+
+  // ---------- Copiar el prompt mejorado (RF-020) ----------
+  function prepararCopia() {
+    document.querySelectorAll("button.copiar").forEach(function (boton) {
+      boton.hidden = false; // Sin scripts el botón no aparece: el texto se selecciona a mano.
+    });
+  }
+
+  function anunciar(boton, mensaje) {
+    var estado = boton.closest("section").querySelector(".estado-copia");
+    if (estado) estado.textContent = mensaje;
+    var etiqueta = boton.querySelector("span");
+    var original = etiqueta.textContent;
+    etiqueta.textContent = boton.dataset.copiado;
+    setTimeout(function () { etiqueta.textContent = original; }, 2000);
+  }
+
+  function seleccionarTexto(boton) {
+    var texto = document.getElementById("texto-mejorado");
+    if (!texto) return;
+    var rango = document.createRange();
+    rango.selectNodeContents(texto);
+    var seleccion = window.getSelection();
+    seleccion.removeAllRanges();
+    seleccion.addRange(rango);
+    var estado = boton.closest("section").querySelector(".estado-copia");
+    if (estado) estado.textContent = boton.dataset.manual;
+  }
+
+  document.addEventListener("click", function (evento) {
+    var boton = evento.target.closest("button.copiar");
+    if (!boton) return;
+    var mensaje = boton.dataset.avisoCompletar || boton.dataset.copiado;
+    if (!navigator.clipboard) { seleccionarTexto(boton); return; }
+    navigator.clipboard.writeText(boton.dataset.copiar).then(
+      function () { anunciar(boton, mensaje); },
+      function () { seleccionarTexto(boton); }
+    );
+  });
+
+  // ---------- Interruptor de modo oscuro (RF-025) ----------
+  function temaActual() {
+    var elegido = document.documentElement.dataset.theme;
+    if (elegido) return elegido;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+
+  function pintarInterruptor(boton) {
+    var oscuro = temaActual() === "dark";
+    boton.setAttribute("aria-pressed", oscuro ? "true" : "false");
+    boton.setAttribute("aria-label", oscuro ? boton.dataset.claro : boton.dataset.oscuro);
+  }
+
+  var interruptor = document.getElementById("tema");
+  if (interruptor) {
+    interruptor.hidden = false;
+    pintarInterruptor(interruptor);
+    interruptor.addEventListener("click", function () {
+      var nuevo = temaActual() === "dark" ? "light" : "dark";
+      document.documentElement.dataset.theme = nuevo;
+      try { localStorage.setItem("sharpener-tema", nuevo); } catch (e) { /* Sin almacenamiento: dura la sesión. */ }
+      pintarInterruptor(interruptor);
+    });
+  }
+
+  prepararCopia();
 
   document.addEventListener("submit", function (evento) {
     var formulario = evento.target;

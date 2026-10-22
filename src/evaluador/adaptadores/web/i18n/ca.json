@@ -1,6 +1,6 @@
 {
   "idioma_nombre": "Català",
-  "titulo": "Avaluador de prompts",
+  "titulo": "Esmola el teu prompt",
   "subtitulo": "Enganxa el teu prompt i digues-nos què vols aconseguir: et direm què li falta i per què.",
   "etiqueta_prompt": "El teu prompt",
   "etiqueta_resultado": "Quin resultat esperes",
@@ -49,5 +49,15 @@
   "copiar_ayuda": "Copia el text de la columna «Millorat» i fes-lo servir a la teva eina d'IA.",
   "error_estado_invalido": "No hem pogut recuperar el diagnòstic. Torna a revisar el teu prompt.",
   "progreso_revisar": "Esmolant el teu prompt…",
-  "progreso_mejorar": "Polint la versió millorada…"
+  "progreso_mejorar": "Polint la versió millorada…",
+  "paso_escribir": "1 Escriure",
+  "paso_revisar": "2 Revisar",
+  "paso_mejorar": "3 Millorar",
+  "recorrido": "Recorregut",
+  "copiar": "Copiar",
+  "copiado": "Copiat",
+  "copiado_completar": "Copiat. Recorda completar el que està marcat amb [COMPLETAR: …].",
+  "copiar_manual": "Text seleccionat: prem Ctrl+C per copiar-lo.",
+  "tema_oscuro": "Canviar a mode fosc",
+  "tema_claro": "Canviar a mode clar"
 }

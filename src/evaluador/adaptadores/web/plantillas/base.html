@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Sharpener · {{ t.titulo }}</title>
+  <script>try { var tema = localStorage.getItem("sharpener-tema"); if (tema === "dark" || tema === "light") { document.documentElement.dataset.theme = tema; } } catch (e) {}</script>
   <link rel="icon" href="/static/logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/static/fuentes.css?v={{ huella }}">
   <link rel="stylesheet" href="/static/sharpener.css?v={{ huella }}">
@@ -15,10 +16,23 @@
       <svg viewBox="0 0 32 32" aria-hidden="true"><path class="logo-cuerpo" d="M3 22 L22 3 L29 10 L10 29 Z"/><path class="logo-punta" d="M3 22 L10 29 L3 29 Z"/></svg>
       Sharpener
     </a>
-    <nav class="idiomas" aria-label="Idioma">{% for codigo, nombre in idiomas %}<a href="/?idioma={{ codigo }}" lang="{{ codigo }}"{% if codigo == idioma %} aria-current="true"{% endif %}>{{ nombre }}</a>{% endfor %}</nav>
+    <div class="herramientas">
+      <nav class="idiomas" aria-label="Idioma">{% for codigo, nombre in idiomas %}<a href="/?idioma={{ codigo }}" lang="{{ codigo }}" title="{{ nombre }}"{% if codigo == idioma %} aria-current="true"{% endif %}>{{ codigo | upper }}</a>{% endfor %}</nav>
+      <button id="tema" class="tema" type="button" aria-pressed="false" data-oscuro="{{ t.tema_oscuro }}" data-claro="{{ t.tema_claro }}" aria-label="{{ t.tema_oscuro }}" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10Z"/></svg>
+      </button>
+    </div>
   </header>
   <div id="progreso" class="progreso" role="status" aria-live="polite" hidden><span class="progreso-barra" aria-hidden="true"><span></span></span><span class="progreso-texto"></span></div>
   <main class="lienzo">
+    {% set orden = ["escribir", "revisar", "mejorar"] %}
+    <ol class="pasos" aria-label="{{ t.recorrido }}">
+      {% for nombre in orden %}
+      {% if nombre == paso %}<li aria-current="step">{{ t["paso_" ~ nombre] }}</li>
+      {% elif orden.index(nombre) < orden.index(paso) %}<li class="hecho">{{ t["paso_" ~ nombre] }}</li>
+      {% else %}<li>{{ t["paso_" ~ nombre] }}</li>{% endif %}
+      {% endfor %}
+    </ol>
     {% block contenido %}{% endblock %}
   </main>
 </body>
