@@ -141,3 +141,13 @@ def test_los_logs_solo_llevan_metricas_nunca_texto_ni_claves(caplog: pytest.LogC
     assert "gemini-3.5-flash-lite" in registro and "tokens" in registro
     for privado in ("SECRETO-DEL-USUARIO", "ESPERADO-PRIVADO", "clave-de-prueba", "Explica en"):
         assert privado not in registro
+
+
+def test_sin_resultado_esperado_el_modelo_recibe_no_indicado() -> None:
+    """RF-002 (spec 1.6, en evaluación): si falta el resultado esperado, el modelo lo sabe."""
+    cliente = ClienteSimulado()
+    adaptador(cliente).diagnosticar(
+        Prompt(texto="Escribe algo.", resultado_esperado="  "), idioma_interfaz="es"
+    )
+    contenido = cliente.peticiones[0]["messages"][1]["content"]
+    assert "RESULTADO ESPERADO:\n<<<\n(no indicado)\n>>>" in contenido

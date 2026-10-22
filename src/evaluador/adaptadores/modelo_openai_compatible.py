@@ -113,6 +113,11 @@ def _traducir_error(error: openai.OpenAIError) -> ErrorProveedor:
     return ErrorProveedor(TipoError.NO_DISPONIBLE)
 
 
+def _o_no_indicado(texto: str) -> str:
+    """Un resultado esperado vacío se dice explícitamente, para que el modelo deduzca la intención."""
+    return texto if texto.strip() else "(no indicado)"
+
+
 def _bloque(etiqueta: str, contenido: str) -> str:
     """Delimita el texto del usuario para que el modelo lo trate como datos, no como órdenes (amenaza A4)."""
     return f"{etiqueta}:\n<<<\n{contenido}\n>>>"
@@ -150,7 +155,7 @@ class ModeloOpenAICompatible:
         usuario = (
             _bloque("PROMPT", prompt.texto)
             + "\n\n"
-            + _bloque("RESULTADO ESPERADO", prompt.resultado_esperado)
+            + _bloque("RESULTADO ESPERADO", _o_no_indicado(prompt.resultado_esperado))
         )
         texto = self._completar("diagnosticar", self._prompt_diagnostico, idioma_interfaz, usuario)
         return interpretar_diagnostico(texto)
@@ -180,7 +185,7 @@ class ModeloOpenAICompatible:
         usuario = "\n\n".join(
             [
                 _bloque("PROMPT ORIGINAL", diagnostico.prompt.texto),
-                _bloque("RESULTADO ESPERADO", diagnostico.prompt.resultado_esperado),
+                _bloque("RESULTADO ESPERADO", _o_no_indicado(diagnostico.prompt.resultado_esperado)),
                 _bloque("PROBLEMAS", json.dumps(problemas, ensure_ascii=False)),
                 _bloque("PREGUNTAS Y RESPUESTAS", json.dumps(preguntas, ensure_ascii=False)),
                 *(

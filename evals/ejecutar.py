@@ -77,6 +77,11 @@ def main() -> None:
     argumentos.add_argument(
         "--anexo", type=Path, help="variante: texto que se añade al prompt de diagnóstico (evals/variantes/)"
     )
+    argumentos.add_argument(
+        "--sin-resultado",
+        action="store_true",
+        help="diagnostica sin dar el resultado esperado (RF-002, spec 1.6)",
+    )
     opciones = argumentos.parse_args()
 
     load_dotenv(RAIZ / ".env")
@@ -99,7 +104,9 @@ def main() -> None:
 
     filas: list[dict[str, object]] = []
     for caso in casos:
-        prompt = Prompt(texto=caso.prompt, resultado_esperado=caso.resultado)
+        prompt = Prompt(
+            texto=caso.prompt, resultado_esperado="" if opciones.sin_resultado else caso.resultado
+        )
         fila: dict[str, object] = {"caso": caso.id, "debe_rechazar": caso.debe_rechazar}
         inicio = time.monotonic()
         try:
@@ -112,6 +119,7 @@ def main() -> None:
                 "segundos": round(time.monotonic() - inicio, 1),
                 "rechazado": depurado.diagnostico.rechazado,
                 "descartados": depurado.descartados,
+                "preguntas": len(depurado.diagnostico.preguntas),
                 "puntuacion": puntos.__dict__,
                 "problemas": [
                     {
@@ -130,7 +138,9 @@ def main() -> None:
 
     total = resumen(filas)
     RESULTADOS.mkdir(parents=True, exist_ok=True)
-    variante = f"_{opciones.anexo.stem}" if opciones.anexo else ""
+    variante = (f"_{opciones.anexo.stem}" if opciones.anexo else "") + (
+        "_sin-resultado" if opciones.sin_resultado else ""
+    )
     salida = RESULTADOS / f"{date.today().isoformat()}_{opciones.modelo}{variante}.json"
     salida.write_text(
         json.dumps({"resumen": total, "casos": filas}, ensure_ascii=False, indent=2), encoding="utf-8"
