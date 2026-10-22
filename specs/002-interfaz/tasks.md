@@ -11,10 +11,10 @@
 
 ## Historia P1 · Saber en todo momento qué está pasando
 
-- [ ] **T110** Pruebas de aceptación del reintento: un modelo falso que devuelve una respuesta inválida una vez y luego una válida (el usuario ve el resultado); dos veces (ve el error y conserva su texto); un error de otro tipo no se reintenta (RF-018).
-- [ ] **T111** Reintento en `Diagnosticar` y `Mejorar`, solo ante `RESPUESTA_INVALIDA` (RF-018). Depende de T110.
-- [ ] **T112** `static/sharpener.js`: al enviar, progreso inmediato con el texto del paso en una región `aria-live`, botón desactivado mientras tanto, envío con `fetch`, sustitución del contenido y desplazamiento a lo nuevo (RF-017, RF-019, RF-023, RNF-013). Prueba de aceptación de que el marcado necesario está presente.
-- [ ] **T113** [P] Textos del progreso en los 4 idiomas: «Afilando tu prompt…» y «Puliendo la versión mejorada…» (RF-017).
+- [x] **T110** Pruebas de aceptación del reintento: un modelo falso que devuelve una respuesta inválida una vez y luego una válida (el usuario ve el resultado); dos veces (ve el error y conserva su texto); un error de otro tipo no se reintenta (RF-018).
+- [x] **T111** Reintento en `Diagnosticar` y `Mejorar`, solo ante `RESPUESTA_INVALIDA` (RF-018). Depende de T110.
+- [x] **T112** `static/sharpener.js`: al enviar, progreso inmediato con el texto del paso en una región `aria-live`, botón desactivado mientras tanto, envío con `fetch`, sustitución del contenido y desplazamiento a lo nuevo (RF-017, RF-019, RF-023, RNF-013). Prueba de aceptación de que el marcado necesario está presente.
+- [x] **T113** [P] Textos del progreso en los 4 idiomas: «Afilando tu prompt…» y «Puliendo la versión mejorada…» (RF-017).
 
 **Punto de control P1:** quickstart, paso 3, con y sin scripts.
 

@@ -151,3 +151,16 @@ ins { text-decoration: none; background: var(--amarillo); color: var(--grafito);
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
 }
+
+/* ---------- Progreso (RF-017) ---------- */
+.progreso {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  max-width: calc(var(--ancho) + 4rem); margin: 0 auto 12px;
+  display: flex; align-items: center; gap: 12px;
+  background: var(--hoja); color: var(--tinta); border-radius: 10px; padding: 12px 16px; font-weight: 600;
+}
+.progreso-barra { width: 120px; height: 6px; border-radius: 99px; background: var(--velo); overflow: hidden; flex: none; }
+.progreso-barra span { display: block; width: 45%; height: 100%; background: var(--amarillo); border-radius: inherit; animation: avance 1.3s ease-in-out infinite; }
+@keyframes avance { from { transform: translateX(-100%); } to { transform: translateX(240%); } }
+.progreso[hidden] { display: none; }
+h2[tabindex="-1"]:focus { outline: none; }

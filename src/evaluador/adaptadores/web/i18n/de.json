@@ -47,5 +47,7 @@
   "resuelve": "Löst",
   "completar_aviso": "Ergänze die mit [COMPLETAR: …] markierten Stellen, bevor du den Prompt verwendest: Das sind Informationen, die du uns nicht gegeben hast und die wir nicht erfinden wollten.",
   "copiar_ayuda": "Kopiere den Text aus der Spalte „Verbessert“ und verwende ihn in deinem KI-Tool.",
-  "error_estado_invalido": "Wir konnten die Prüfung nicht wiederherstellen. Prüfe deinen Prompt bitte erneut."
+  "error_estado_invalido": "Wir konnten die Prüfung nicht wiederherstellen. Prüfe deinen Prompt bitte erneut.",
+  "progreso_revisar": "Dein Prompt wird geschärft…",
+  "progreso_mejorar": "Die verbesserte Version wird poliert…"
 }

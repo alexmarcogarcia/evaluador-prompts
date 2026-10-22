@@ -47,5 +47,7 @@
   "resuelve": "Resol",
   "completar_aviso": "Completa el que està marcat com a [COMPLETAR: …] abans de fer servir el prompt: és informació que no ens vas donar i que no hem volgut inventar.",
   "copiar_ayuda": "Copia el text de la columna «Millorat» i fes-lo servir a la teva eina d'IA.",
-  "error_estado_invalido": "No hem pogut recuperar el diagnòstic. Torna a revisar el teu prompt."
+  "error_estado_invalido": "No hem pogut recuperar el diagnòstic. Torna a revisar el teu prompt.",
+  "progreso_revisar": "Esmolant el teu prompt…",
+  "progreso_mejorar": "Polint la versió millorada…"
 }

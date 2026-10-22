@@ -8,6 +8,7 @@ con su tipo para que la interfaz los explique.
 import logging
 from enum import StrEnum
 
+from evaluador.casos_uso.reintento import con_reintento
 from evaluador.dominio import reglas
 from evaluador.dominio.modelos import Diagnostico, Prompt
 from evaluador.puertos.modelo_ia import ModeloIA
@@ -42,7 +43,8 @@ class Diagnosticar:
             raise EntradaInvalida(MotivoEntrada.DEMASIADO_LARGO, sobrantes)
 
         prompt = Prompt(texto=texto, resultado_esperado=resultado_esperado)
-        depurado = reglas.depurar_diagnostico(prompt, self._modelo.diagnosticar(prompt, idioma_interfaz))
+        propuesta = con_reintento(lambda: self._modelo.diagnosticar(prompt, idioma_interfaz))  # RF-018
+        depurado = reglas.depurar_diagnostico(prompt, propuesta)
         registro.info(
             "diagnostico problemas=%d preguntas=%d descartados=%d rechazado=%s",
             len(depurado.diagnostico.problemas),
