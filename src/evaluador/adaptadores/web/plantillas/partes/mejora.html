@@ -1,0 +1,25 @@
+<section class="hoja" aria-labelledby="titulo-mejora">
+  <h2 id="titulo-mejora">{{ t.version_titulo }}</h2>
+  {% if "[COMPLETAR:" in version.texto %}<p class="aviso">{{ t.completar_aviso }}</p>{% endif %}
+  <div class="comparacion">
+    <div>
+      <h3>{{ t.original }}</h3>
+      <div class="marcado">{% for tramo, tipo in comparacion_original %}{% if tipo == "quitado" %}<del>{{ tramo }}</del>{% else %}{{ tramo }}{% endif %}{% endfor %}</div>
+    </div>
+    <div>
+      <h3>{{ t.mejorado }}</h3>
+      <div class="marcado">{% for tramo, tipo in comparacion_mejorado %}{% if tipo == "anadido" %}<ins>{{ tramo }}</ins>{% else %}{{ tramo }}{% endif %}{% endfor %}</div>
+    </div>
+  </div>
+  <p class="ayuda">{{ t.copiar_ayuda }}</p>
+  <h2>{{ t.cambios_titulo }}</h2>
+  <div class="cambios">
+    {% for c in version.cambios %}
+    <article class="problema">
+      <p>{{ c.explicacion }}</p>
+      <p class="etiquetas">{{ t.resuelve }}: {% for pid in c.problema_ids %}{{ categorias[pid] }}{% if not loop.last %} · {% endif %}{% endfor %}</p>
+    </article>
+    {% endfor %}
+  </div>
+  <p><a href="/?idioma={{ idioma }}">{{ t.nueva_revision }}</a></p>
+</section>
