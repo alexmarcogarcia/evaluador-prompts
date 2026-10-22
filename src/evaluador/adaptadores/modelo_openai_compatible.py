@@ -64,14 +64,24 @@ def _extraer_json(texto: str) -> str:
     """Los modelos a veces envuelven el JSON en texto o en un bloque ```json."""
     inicio, fin = texto.find("{"), texto.rfind("}")
     if inicio < 0 or fin < inicio:
+        registro.warning("respuesta_invalida motivo=sin_json longitud=%d", len(texto))
         raise ErrorProveedor(TipoError.RESPUESTA_INVALIDA)
     return texto[inicio : fin + 1]
+
+
+def _registrar_invalida(contrato: str, error: ValidationError) -> None:
+    """Registra qué campos fallaron y por qué, nunca sus valores (RNF-006)."""
+    detalles = ", ".join(
+        f"{'.'.join(str(x) for x in e['loc']) or '(raíz)'}:{e['type']}" for e in error.errors()
+    )
+    registro.warning("respuesta_invalida contrato=%s errores=%s", contrato, detalles)
 
 
 def interpretar_diagnostico(texto: str) -> DiagnosticoPropuesto:
     try:
         r = RespuestaDiagnostico.model_validate_json(_extraer_json(texto))
     except ValidationError as error:
+        _registrar_invalida("diagnostico", error)
         raise ErrorProveedor(TipoError.RESPUESTA_INVALIDA) from error
     return DiagnosticoPropuesto(
         problemas=tuple(
@@ -87,6 +97,7 @@ def interpretar_mejora(texto: str) -> MejoraPropuesta:
     try:
         r = RespuestaMejora.model_validate_json(_extraer_json(texto))
     except ValidationError as error:
+        _registrar_invalida("mejora", error)
         raise ErrorProveedor(TipoError.RESPUESTA_INVALIDA) from error
     return MejoraPropuesta(
         texto=r.texto, cambios=tuple((c.explicacion, tuple(c.problemas)) for c in r.cambios)

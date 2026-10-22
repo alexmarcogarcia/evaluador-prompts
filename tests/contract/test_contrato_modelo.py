@@ -115,3 +115,21 @@ def test_los_campos_obligatorios_coinciden_con_el_contrato(
     parte = contrato["$defs"][definicion] if definicion else contrato
     obligatorios = {nombre for nombre, campo in modelo.model_fields.items() if campo.is_required()}
     assert obligatorios == set(parte["required"])
+
+
+def test_una_respuesta_invalida_registra_que_campo_fallo_sin_su_contenido(
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    """RF-014 y RNF-006: para diagnosticar hace falta saber qué campo falló, pero el log nunca lleva texto."""
+    malo = {**DIAGNOSTICO, "preguntas": [{"texto": "¿SECRETO-PRIVADO?", "problema": "uno"}]}
+    with pytest.raises(ErrorProveedor):
+        interpretar_diagnostico(json.dumps(malo))
+    assert "preguntas.0.problema" in caplog.text and "int_parsing" in caplog.text
+    assert "SECRETO-PRIVADO" not in caplog.text and "uno" not in caplog.text
+
+
+def test_una_respuesta_sin_json_tambien_se_registra(caplog: pytest.LogCaptureFixture) -> None:
+    """RF-014: si el modelo no devuelve ningún JSON, también queda constancia (sin el texto)."""
+    with pytest.raises(ErrorProveedor):
+        interpretar_diagnostico("Lo siento, no puedo ayudar con eso. TEXTO-PRIVADO")
+    assert "sin_json" in caplog.text and "TEXTO-PRIVADO" not in caplog.text
