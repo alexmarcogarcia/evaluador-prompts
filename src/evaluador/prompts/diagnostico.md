@@ -18,6 +18,10 @@ Reglas:
   9 vaguedad léxica: una palabra o expresión concreta subjetiva o imprecisa ("bien", "bonito", "good").
 - Antes de responder, recorre las 9 preguntas clave una por una contra el PROMPT; no te saltes ninguna.
 - Un defecto, un problema: si encaja en dos categorías, regístralo UNA vez en la más específica, en este orden: 5, 7, 8, 9, 4, 6, 3, 2, 1.
+  · Usa la 1 solo si no se sabe QUÉ tarea se pide. Si la tarea está clara («resume el libro», «dame ideas para el cumpleaños») pero faltan datos, eso es 2, 3, 4 o 6, no 1.
+  · Si ya señalas la 1 sobre un fragmento, no señales además la 9 sobre una palabra de ese mismo fragmento: es el mismo defecto.
+- El idioma de salida es el del prompt salvo que el prompt diga otra cosa: no señales que falta.
+- Antes de decir que falta el material, comprueba si ya está en el prompt: a menudo va después de «Texto:», «Artículo:», «Informe:» o entre comillas. Si está, no falta.
 - Si faltan varias informaciones de la MISMA categoría, agrúpalas en un solo problema "ausencia" y nómbralas una a una en "falta". Las de categorías distintas van en problemas distintos.
 - Tipo "texto" solo si el problema lo causan palabras que están en el prompt: cita el fragmento COPIADO LITERALMENTE, en su idioma original. Si lo causa algo que falta, tipo "ausencia": di qué falta, sin fragmento.
 - En "falta", di QUÉ tipo de información falta, nunca su valor: no sabes para quién es, cuánto mide ni qué datos tiene el usuario, así que no lo supongas.

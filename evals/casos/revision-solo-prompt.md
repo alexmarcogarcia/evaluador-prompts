@@ -1,6 +1,6 @@
 # Revisión de los casos para el modo «solo prompt»
 
-**Estado:** pendiente de validar por Àlex Marco · **Spec:** 001 v1.6 (RF-002)
+**Estado:** validado por Àlex Marco el 2026-10-22 («me gusta todo»; las tres dudas, no) · **Spec:** 001 v1.6 (RF-002)
 
 Los casos se etiquetaron cuando la app pedía el resultado esperado. Algunos problemas esperados solo se podían saber por ese campo, y ahora la app no lo tiene: contarlos como fallos mide algo imposible.
 
@@ -47,6 +47,6 @@ Se proponen **29 retiradas** de 99 problemas esperados. Los problemas que no apa
 
 ## Dudas: problemas que la IA señala y quizá tenga razón
 
-- **C14:** La IA señala que falta **de qué es el producto** (categoría 2). ¿Lo añadimos como problema esperado? → [sí/no]
-- **C35:** La IA señala que falta **el estilo o la personalidad del negocio** para el logotipo. ¿Lo añadimos (categoría 6)? → [sí/no]
-- **C38:** Propongo retirar «disculpa y reemplazo», pero la IA señala que falta **qué solución ofrecer al cliente**. ¿Lo mantenemos como categoría 6? → [sí/no]
+- **C14:** La IA señala que falta **de qué es el producto** (categoría 2). ¿Lo añadimos como problema esperado? → no
+- **C35:** La IA señala que falta **el estilo o la personalidad del negocio** para el logotipo. ¿Lo añadimos (categoría 6)? → no
+- **C38:** Propongo retirar «disculpa y reemplazo», pero la IA señala que falta **qué solución ofrecer al cliente**. ¿Lo mantenemos como categoría 6? → no
