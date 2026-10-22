@@ -1,4 +1,4 @@
-# Evaluador de prompts [CLARIFICAR: nombre definitivo del proyecto]
+# Sharpener · evaluador de prompts
 
 **Estado:** aprobado · **Fases:** 0 y 1 · **Versión:** 1.0 · **Aprobado:** 2026-10-18 por Àlex Marco
 
