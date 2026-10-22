@@ -6,7 +6,7 @@
 
 ## Base
 
-- [ ] **T100** [P] Archivos estáticos en `adaptadores/web/static/`: tipografías Bricolage Grotesque y Figtree en woff2 con `OFL.txt`, y logotipo SVG. Prueba de que ninguna página carga nada de Google (RF-024, ADR-0004).
+- [x] **T100** [P] Archivos estáticos en `adaptadores/web/static/`: tipografías Bricolage Grotesque y Figtree en woff2 con `OFL.txt`, y logotipo SVG. Prueba de que ninguna página carga nada de Google (RF-024, ADR-0004).
 - [ ] **T101** `static/sharpener.css` con los tokens de la guía visual en claro y oscuro, y plantilla dividida en partes. Prueba que lee los tokens y comprueba el contraste AA de cada par de la guía (RF-024, RF-025, RNF-014).
 
 ## Historia P1 · Saber en todo momento qué está pasando

@@ -8,10 +8,12 @@ seguro. El resaltado de fragmentos se construye por segmentos, sin insertar HTML
 import json
 from functools import cache
 from importlib.resources import files
+from pathlib import Path
 from typing import Annotated
 
 from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from jinja2 import Environment, PackageLoader
 
 from evaluador.adaptadores.web.comparacion import comparar
@@ -66,7 +68,9 @@ def mensajes_de_error(t: dict[str, str], error: EntradaInvalida | ErrorProveedor
 
 
 def crear_app(diagnosticar: Diagnosticar, mejorar: Mejorar, *, proveedor: str, modelo: str) -> FastAPI:
-    app = FastAPI(title="Evaluador de prompts", docs_url=None, redoc_url=None, openapi_url=None)
+    app = FastAPI(title="Sharpener", docs_url=None, redoc_url=None, openapi_url=None)
+    # Tipografías, estilos y logotipo propios: nada se carga de servicios externos (ADR-0004).
+    app.mount("/static", StaticFiles(directory=Path(__file__).parent / "static"), name="static")
 
     def pagina(idioma: str, **contexto: object) -> HTMLResponse:
         t = textos(idioma)
