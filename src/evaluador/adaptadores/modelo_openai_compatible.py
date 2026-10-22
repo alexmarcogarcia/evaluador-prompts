@@ -147,11 +147,7 @@ class ModeloOpenAICompatible:
         return self._modelo
 
     def diagnosticar(self, prompt: Prompt, idioma_interfaz: str) -> DiagnosticoPropuesto:
-        usuario = (
-            _bloque("PROMPT", prompt.texto)
-            + "\n\n"
-            + _bloque("RESULTADO ESPERADO", prompt.resultado_esperado)
-        )
+        usuario = _bloque("PROMPT", prompt.texto)
         texto = self._completar("diagnosticar", self._prompt_diagnostico, idioma_interfaz, usuario)
         return interpretar_diagnostico(texto)
 
@@ -180,7 +176,6 @@ class ModeloOpenAICompatible:
         usuario = "\n\n".join(
             [
                 _bloque("PROMPT ORIGINAL", diagnostico.prompt.texto),
-                _bloque("RESULTADO ESPERADO", diagnostico.prompt.resultado_esperado),
                 _bloque("PROBLEMAS", json.dumps(problemas, ensure_ascii=False)),
                 _bloque("PREGUNTAS Y RESPUESTAS", json.dumps(preguntas, ensure_ascii=False)),
                 *(

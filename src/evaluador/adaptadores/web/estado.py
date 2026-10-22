@@ -25,7 +25,6 @@ def serializar(diagnostico: Diagnostico) -> str:
     return json.dumps(
         {
             "prompt": diagnostico.prompt.texto,
-            "resultado": diagnostico.prompt.resultado_esperado,
             "rechazado": diagnostico.rechazado,
             "problemas": [
                 {
@@ -50,7 +49,7 @@ def serializar(diagnostico: Diagnostico) -> str:
 def restaurar(estado: str) -> Diagnostico:
     try:
         datos = json.loads(estado)
-        prompt = Prompt(texto=str(datos["prompt"]), resultado_esperado=str(datos["resultado"]))
+        prompt = Prompt(texto=str(datos["prompt"]))
         propuesta = DiagnosticoPropuesto(
             problemas=tuple(
                 ProblemaPropuesto(

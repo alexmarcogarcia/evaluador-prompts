@@ -99,7 +99,7 @@ def main() -> None:
 
     filas: list[dict[str, object]] = []
     for caso in casos:
-        prompt = Prompt(texto=caso.prompt, resultado_esperado=caso.resultado)
+        prompt = Prompt(texto=caso.prompt)  # RF-002 (spec 1.6): solo el prompt
         fila: dict[str, object] = {"caso": caso.id, "debe_rechazar": caso.debe_rechazar}
         inicio = time.monotonic()
         try:

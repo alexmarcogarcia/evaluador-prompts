@@ -19,7 +19,6 @@ from evaluador.dominio.modelos import Diagnostico, DiagnosticoPropuesto, Pregunt
 from tests.dobles.modelo_falso import ModeloFalso
 
 PROMPT = "Escribe un correo para mi cliente."
-ESPERADO = "Un correo cortés que explique un retraso de dos semanas."
 DESTINATARIO = ProblemaPropuesto("ausencia", 3, None, "Tono del correo", "No dices el tono.", "media")
 CONTEXTO = ProblemaPropuesto("ausencia", 2, None, "Motivo del retraso", "No dices qué ha pasado.", "alta")
 PREGUNTAS = (PreguntaPropuesta("¿Qué tono quieres?", 1), PreguntaPropuesta("¿Por qué hay retraso?", 2))
@@ -29,16 +28,14 @@ def diagnostico_con_preguntas(preguntas: tuple[PreguntaPropuesta, ...] = PREGUNT
     propuesta = DiagnosticoPropuesto((DESTINATARIO, CONTEXTO), preguntas, False)
     modelo = ModeloFalso(diagnostico=propuesta)
     app = crear_app(Diagnosticar(modelo), Mejorar(modelo), proveedor="falso", modelo="m")
-    respuesta = TestClient(app).post(
-        "/diagnosticar", data={"prompt": PROMPT, "resultado": ESPERADO, "idioma": "es"}
-    )
+    respuesta = TestClient(app).post("/diagnosticar", data={"prompt": PROMPT, "idioma": "es"})
     return respuesta.text
 
 
 def diagnostico_de_dominio() -> Diagnostico:
     return Diagnosticar(
         ModeloFalso(diagnostico=DiagnosticoPropuesto((DESTINATARIO, CONTEXTO), PREGUNTAS, False))
-    ).ejecutar(PROMPT, ESPERADO, idioma_interfaz="es")
+    ).ejecutar(PROMPT, idioma_interfaz="es")
 
 
 def test_las_preguntas_se_muestran_y_cada_una_se_puede_dejar_en_blanco() -> None:

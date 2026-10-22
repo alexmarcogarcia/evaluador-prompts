@@ -23,7 +23,6 @@ from evaluador.dominio.modelos import (
 from tests.dobles.modelo_falso import ModeloFalso
 
 PROMPT = "Escribe un correo para mi cliente."
-ESPERADO = "Un correo cortés que explique un retraso de dos semanas."
 TONO = ProblemaPropuesto("ausencia", 3, None, "Tono del correo", "No dices el tono.", "media")
 MOTIVO = ProblemaPropuesto("ausencia", 2, None, "Motivo del retraso", "No dices qué ha pasado.", "alta")
 PREGUNTAS = (PreguntaPropuesta("¿Qué tono quieres?", 1), PreguntaPropuesta("¿Por qué hay retraso?", 2))
@@ -39,7 +38,7 @@ def modelo(mejora: MejoraPropuesta = MEJORA) -> ModeloFalso:
 
 
 def diagnostico(m: ModeloFalso) -> Diagnostico:
-    return Diagnosticar(m).ejecutar(PROMPT, ESPERADO, idioma_interfaz="es")
+    return Diagnosticar(m).ejecutar(PROMPT, idioma_interfaz="es")
 
 
 def pedir_mejora(m: ModeloFalso, respuestas: dict[str, str], estado: str | None = None) -> str:
@@ -74,24 +73,20 @@ def test_el_modelo_recibe_las_respuestas_y_las_omitidas_como_omitidas() -> None:
 
 
 def test_el_codigo_no_anade_marcadores_por_su_cuenta() -> None:
-    """RF-010 (spec 1.5): si el dato ya está en el resultado esperado no hace falta marcador, y eso solo
-    lo puede juzgar quien entiende el texto. Que no se invente lo omitido lo vigilan las evals (RNF-011)."""
+    """RF-010 (spec 1.6): si el dato ya está en el prompt no hace falta marcador, y eso solo lo puede
+    juzgar quien entiende el texto. Que no se invente lo omitido lo vigilan las evals (RNF-011)."""
     m = modelo()
     version = Mejorar(m).ejecutar(diagnostico(m), {"Q1": "Cordial", "Q2": None}, "es")
     assert version.texto == MEJORADO
 
 
-def test_el_idioma_se_detecta_con_el_prompt_y_el_resultado_esperado() -> None:
-    """RF-013: un prompt catalán muy corto no basta para saber el idioma; con el resultado esperado, sí."""
+def test_el_idioma_de_la_mejora_es_el_del_prompt() -> None:
+    """RF-013: la mejora se pide en el idioma del prompt original, aunque la interfaz esté en otro."""
     catalan = MejoraPropuesta(
         texto="Fes una llista de la compra per a un sopar vegà per a 6 persones.", cambios=()
     )
     m = ModeloFalso(diagnostico=DiagnosticoPropuesto((TONO,), (), False), mejora=catalan)
-    d = Diagnosticar(m).ejecutar(
-        "Fes una llista de la compra.",
-        "La llista per a un sopar vegà per a 6 persones, amb les seccions.",
-        "es",
-    )
+    d = Diagnosticar(m).ejecutar("Fes una llista de la compra per al sopar de dissabte amb els amics.", "es")
     Mejorar(m).ejecutar(d, {}, "es")
     assert m.llamadas[-1][-1] == "ca"
 
@@ -153,7 +148,7 @@ def test_si_la_mejora_sale_en_otro_idioma_se_rehace_una_vez_indicando_el_idioma(
         texto="Write a short, friendly message for my client about the delay.", cambios=()
     )
     m = ModeloFalso(diagnostico=DiagnosticoPropuesto((TONO,), (), False), mejora=(espanol, ingles))
-    d = Diagnosticar(m).ejecutar(prompt_en, "A friendly two-sentence message.", idioma_interfaz="es")
+    d = Diagnosticar(m).ejecutar(prompt_en, idioma_interfaz="es")
     version = Mejorar(m).ejecutar(d, {}, "es")
     assert version.texto == ingles.texto
     llamadas = [llamada for llamada in m.llamadas if llamada[0] == "mejorar"]

@@ -2,7 +2,7 @@
 
 Verifica que el prompt de diagnóstico no diverge de la spec ni del contrato: RF-004 (las 9
 categorías y sus fronteras), RF-007 (máximo de preguntas), RF-013 (idioma de la interfaz),
-RF-015 (rechazo) y RF-016 (solo lo relevante para el resultado esperado).
+RF-015 (rechazo), RF-016 (solo lo relevante para la intención) y RF-002 (solo el prompt, spec 1.6).
 """
 
 import json
@@ -41,6 +41,6 @@ def test_el_prompt_incluye_las_reglas_de_la_spec() -> None:
     texto = cargar("diagnostico").lower()
     assert f"máximo {reglas.MAX_PREGUNTAS}" in texto
     assert "rechaz" in texto
-    assert "resultado esperado" in texto
+    assert "resultado esperado" not in texto and "deduce la intención" in texto
     assert "5, 7, 8, 9, 4, 6, 3, 2, 1" in texto
     assert "misma categoría" in texto

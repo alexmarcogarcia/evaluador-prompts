@@ -4,8 +4,8 @@ Pide la mejora al modelo y la depura con el dominio: los cambios que no enlazan 
 descartan (RF-009). Además, el código vigila el idioma (RF-013): la mejora va en el idioma del
 prompt original y, si sale en otro, se pide otra vez indicando el idioma (un solo reintento).
 
-RF-010 (spec 1.5) no se impone en código: si un dato omitido ya está en el prompt o en el
-resultado esperado no hace falta marcador, y eso solo puede juzgarlo quien entiende el texto.
+RF-010 (spec 1.5) no se impone en código: si un dato omitido ya está en el prompt no hace
+falta marcador, y eso solo puede juzgarlo quien entiende el texto.
 Que la mejora no invente lo omitido lo vigilan las evals con el juez (RNF-011).
 """
 
@@ -48,8 +48,7 @@ class Mejorar:
     ) -> VersionMejorada:
         if diagnostico.rechazado:
             raise ValueError("Un diagnóstico rechazado no se puede mejorar (RF-015).")
-        # El prompt puede ser muy corto («Fes una llista…»): el resultado esperado aporta más texto.
-        idioma_prompt = detectar(f"{diagnostico.prompt.texto}\n{diagnostico.prompt.resultado_esperado}")
+        idioma_prompt = detectar(diagnostico.prompt.texto)
         propuesta, reintentado = self._pedir(diagnostico, respuestas, idioma_interfaz, idioma_prompt)
         version = reglas.depurar_mejora(diagnostico, propuesta)
         registro.info(
