@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="{{ idioma }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sharpener · {{ t.titulo }}</title>
+  <link rel="icon" href="/static/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/fuentes.css">
+  <link rel="stylesheet" href="/static/sharpener.css">
+</head>
+<body>
+  <header class="barra">
+    <a class="marca" href="/?idioma={{ idioma }}">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path class="logo-cuerpo" d="M3 22 L22 3 L29 10 L10 29 Z"/><path class="logo-punta" d="M3 22 L10 29 L3 29 Z"/></svg>
+      Sharpener
+    </a>
+    <nav class="idiomas" aria-label="Idioma">{% for codigo, nombre in idiomas %}<a href="/?idioma={{ codigo }}" lang="{{ codigo }}"{% if codigo == idioma %} aria-current="true"{% endif %}>{{ nombre }}</a>{% endfor %}</nav>
+  </header>
+  <main class="lienzo">
+    {% block contenido %}{% endblock %}
+  </main>
+</body>
+</html>
