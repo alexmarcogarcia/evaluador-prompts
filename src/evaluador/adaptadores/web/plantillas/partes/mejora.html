@@ -1,25 +1,34 @@
 <section class="hoja" aria-labelledby="titulo-mejora">
-  <h2 id="titulo-mejora" tabindex="-1">{{ t.version_titulo }}</h2>
+  <div class="cabecera-fila">
+    <h2 id="titulo-mejora" tabindex="-1">{{ t.version_titulo }}</h2>
+    <button class="copiar" type="button" data-copiar="{{ version.texto }}" data-copiado="{{ t.copiado }}" data-manual="{{ t.copiar_manual }}"{% if "[COMPLETAR:" in version.texto %} data-aviso-completar="{{ t.copiado_completar }}"{% endif %} hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+      <span>{{ t.copiar }}</span>
+    </button>
+  </div>
   {% if "[COMPLETAR:" in version.texto %}<p class="aviso">{{ t.completar_aviso }}</p>{% endif %}
   <div class="comparacion">
-    <div>
+    <div class="columna">
       <h3>{{ t.original }}</h3>
       <div class="marcado">{% for tramo, tipo in comparacion_original %}{% if tipo == "quitado" %}<del>{{ tramo }}</del>{% else %}{{ tramo }}{% endif %}{% endfor %}</div>
     </div>
-    <div>
+    <div class="columna destacada">
       <h3>{{ t.mejorado }}</h3>
-      <div class="marcado">{% for tramo, tipo in comparacion_mejorado %}{% if tipo == "anadido" %}<ins>{{ tramo }}</ins>{% else %}{{ tramo }}{% endif %}{% endfor %}</div>
+      <div class="marcado" id="texto-mejorado">{% for tramo, tipo in comparacion_mejorado %}{% if tipo == "anadido" %}<ins>{{ tramo }}</ins>{% else %}{{ tramo }}{% endif %}{% endfor %}</div>
     </div>
   </div>
+  <p class="estado-copia" role="status" aria-live="polite"></p>
   <p class="ayuda">{{ t.copiar_ayuda }}</p>
-  <h2>{{ t.cambios_titulo }}</h2>
-  <div class="cambios">
-    {% for c in version.cambios %}
-    <article class="problema">
-      <p>{{ c.explicacion }}</p>
-      <p class="etiquetas">{{ t.resuelve }}: {% for pid in c.problema_ids %}{{ categorias[pid] }}{% if not loop.last %} · {% endif %}{% endfor %}</p>
-    </article>
-    {% endfor %}
+  <div class="bloque">
+    <h2>{{ t.cambios_titulo }}</h2>
+    <div class="cambios">
+      {% for c in version.cambios %}
+      <article class="cambio">
+        <p>{{ c.explicacion }}</p>
+        <p class="etiquetas">{{ t.resuelve }}: {% for pid in c.problema_ids %}{{ categorias[pid] }}{% if not loop.last %} · {% endif %}{% endfor %}</p>
+      </article>
+      {% endfor %}
+    </div>
   </div>
-  <p><a href="/?idioma={{ idioma }}">{{ t.nueva_revision }}</a></p>
+  <p><a class="enlace" href="/?idioma={{ idioma }}">{{ t.nueva_revision }}</a></p>
 </section>

@@ -4,27 +4,36 @@
   {% elif diagnostico.sin_problemas %}
     <h2 id="titulo-diagnostico" tabindex="-1" class="ok">{{ t.sin_problemas }}</h2>
   {% else %}
-    <h2 id="titulo-diagnostico" tabindex="-1">{{ t.tu_prompt }}</h2>
-    <div class="marcado">{% for tramo, marca in marcado %}{% if marca %}<mark>{{ tramo }}</mark>{% else %}{{ tramo }}{% endif %}{% endfor %}</div>
-    <h2>{{ t.problemas_titulo }}</h2>
-    <div class="problemas">
-      {% for p in diagnostico.problemas %}
-      <article class="problema">
-        <h3>{{ t["cat_" ~ p.categoria.value] }}</h3>
-        <p class="etiquetas">{{ t.en_texto if p.tipo.value == "texto" else t.por_ausencia }} · {{ t.gravedad }}: {{ t["gravedad_" ~ p.gravedad.value] }}</p>
-        {% if p.fragmento %}<p class="cita">«{{ p.fragmento }}»</p>{% endif %}
-        {% if p.falta %}<p><strong>{{ t.falta }}:</strong> {{ p.falta }}</p>{% endif %}
-        <p>{{ p.explicacion }}</p>
-      </article>
-      {% endfor %}
+    <div class="bloque">
+      <h2 id="titulo-diagnostico" tabindex="-1">{{ t.tu_prompt }}</h2>
+      <p class="prompt-marcado marcado">{% for tramo, marca in marcado %}{% if marca %}<mark>{{ tramo }}</mark>{% else %}{{ tramo }}{% endif %}{% endfor %}</p>
+    </div>
+    <div class="bloque">
+      <h2>{{ t.problemas_titulo }}</h2>
+      <div class="problemas">
+        {% for p in diagnostico.problemas %}
+        <article class="problema">
+          <span class="gravedad gravedad-{{ p.gravedad.value }}">{{ t["gravedad_" ~ p.gravedad.value] }}</span>
+          <div class="problema-cuerpo">
+            <h3>{{ t["cat_" ~ p.categoria.value] }}</h3>
+            {% if p.fragmento %}<p class="cita">«{{ p.fragmento }}»</p>{% endif %}
+            {% if p.falta %}<p><strong>{{ t.falta }}:</strong> {{ p.falta }}</p>{% endif %}
+            <p class="explicacion">{{ p.explicacion }}</p>
+            <p class="etiquetas">{{ t.en_texto if p.tipo.value == "texto" else t.por_ausencia }} · {{ t.gravedad }}: {{ t["gravedad_" ~ p.gravedad.value] }}</p>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
     </div>
     {% if estado %}
     <form class="preguntas" method="post" action="/mejorar" data-progreso="{{ t.progreso_mejorar }}">
       <input type="hidden" name="idioma" value="{{ idioma }}">
       <input type="hidden" name="estado" value="{{ estado }}">
       {% if diagnostico.preguntas %}
-      <h2>{{ t.preguntas_titulo }}</h2>
-      <p class="ayuda">{{ t.preguntas_ayuda }}</p>
+      <div class="cabecera">
+        <h2>{{ t.preguntas_titulo }}</h2>
+        <p class="ayuda">{{ t.preguntas_ayuda }}</p>
+      </div>
       {% for q in diagnostico.preguntas %}
       <div class="campo">
         <label for="respuesta_{{ q.id }}">{{ q.texto }}</label>

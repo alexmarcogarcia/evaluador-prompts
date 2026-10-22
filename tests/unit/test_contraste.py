@@ -1,4 +1,4 @@
-"""Paleta Grafito en `static/sharpener.css` (T101, spec 002).
+"""Paleta «Amarillo lápiz» en `static/sharpener.css` (T101, spec 002).
 
 Verifica RNF-014 (contraste WCAG 2.2 AA ≥ 4,5:1 en cada par de la guía visual, en modo claro y oscuro),
 RF-025 (los dos bloques oscuros, el automático y el del interruptor, son idénticos) y RF-024 (los
@@ -22,6 +22,9 @@ PARES = [
     ("--grafito", "--amarillo"),
     ("--sobre-accion", "--accion"),
     ("--error", "--hoja"),
+    ("--tinta", "--velo"),
+    ("--sobre-portada", "--portada"),
+    ("--tinta", "--portada"),
 ]
 
 

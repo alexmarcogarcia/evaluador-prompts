@@ -20,19 +20,19 @@
 
 ## Historia P1 · Usar el resultado sin esfuerzo
 
-- [ ] **T120** Prueba de aceptación: el botón «Copiar» lleva el texto exacto de la mejora; el aviso de `[COMPLETAR]` aparece solo si los hay; sin scripts, el texto se puede seleccionar (RF-020).
-- [ ] **T121** Copia en `sharpener.js`, con la alternativa de seleccionar el texto si el navegador no deja copiar (RF-020). Depende de T120.
+- [x] **T120** Prueba de aceptación: el botón «Copiar» lleva el texto exacto de la mejora; el aviso de `[COMPLETAR]` aparece solo si los hay; sin scripts, el texto se puede seleccionar (RF-020).
+- [x] **T121** Copia en `sharpener.js`, con la alternativa de seleccionar el texto si el navegador no deja copiar (RF-020). Depende de T120.
 
 **Punto de control:** quickstart, paso 4.
 
 ## Historia P2 · Una interfaz atractiva y coherente
 
-- [ ] **T130** Aplicar la guía visual a todas las pantallas: barra con logotipo, fosforito, bloques de problemas, botones, foco y comparación (RF-024).
-- [ ] **T131** Modo oscuro automático e interruptor que guarda la preferencia en el navegador; sin scripts, solo el automático (RF-025).
+- [x] **T130** Aplicar la guía visual a todas las pantallas: barra con logotipo, fosforito, bloques de problemas, botones, foco y comparación (RF-024).
+- [x] **T131** Modo oscuro automático e interruptor que guarda la preferencia en el navegador; sin scripts, solo el automático (RF-025).
 
 ## Historia P2 · Un recorrido fluido y guiado
 
-- [ ] **T140** Pasos «1 Escribir · 2 Revisar · 3 Mejorar», con el actual marcado en cada pantalla. Prueba de aceptación por pantalla (RF-022).
+- [x] **T140** Pasos «1 Escribir · 2 Revisar · 3 Mejorar», con el actual marcado en cada pantalla. Prueba de aceptación por pantalla (RF-022).
 - [ ] **T141** Cambio de idioma por POST, que vuelve al inicio conservando el texto escrito y sin datos en la URL. Prueba de aceptación (RF-022, RNF-006).
 
 ## Historia P2 · Empezar sin saber qué escribir (depende de la decisión sobre RF-002)

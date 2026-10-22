@@ -1,6 +1,6 @@
 {
   "idioma_nombre": "Deutsch",
-  "titulo": "Prompt-Prüfer",
+  "titulo": "Schärfe deinen Prompt",
   "subtitulo": "Füge deinen Prompt ein und sag uns, was du erreichen willst: Wir sagen dir, was fehlt und warum.",
   "etiqueta_prompt": "Dein Prompt",
   "etiqueta_resultado": "Welches Ergebnis erwartest du",
@@ -49,5 +49,15 @@
   "copiar_ayuda": "Kopiere den Text aus der Spalte „Verbessert“ und verwende ihn in deinem KI-Tool.",
   "error_estado_invalido": "Wir konnten die Prüfung nicht wiederherstellen. Prüfe deinen Prompt bitte erneut.",
   "progreso_revisar": "Dein Prompt wird geschärft…",
-  "progreso_mejorar": "Die verbesserte Version wird poliert…"
+  "progreso_mejorar": "Die verbesserte Version wird poliert…",
+  "paso_escribir": "1 Schreiben",
+  "paso_revisar": "2 Prüfen",
+  "paso_mejorar": "3 Verbessern",
+  "recorrido": "Schritte",
+  "copiar": "Kopieren",
+  "copiado": "Kopiert",
+  "copiado_completar": "Kopiert. Denk daran, die mit [COMPLETAR: …] markierten Stellen zu ergänzen.",
+  "copiar_manual": "Text markiert: Drück Strg+C, um ihn zu kopieren.",
+  "tema_oscuro": "Zum dunklen Modus wechseln",
+  "tema_claro": "Zum hellen Modus wechseln"
 }

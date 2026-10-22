@@ -1,6 +1,6 @@
 {
   "idioma_nombre": "English",
-  "titulo": "Prompt reviewer",
+  "titulo": "Sharpen your prompt",
   "subtitulo": "Paste your prompt and tell us what you want to achieve: we'll tell you what's missing and why.",
   "etiqueta_prompt": "Your prompt",
   "etiqueta_resultado": "What result do you expect",
@@ -49,5 +49,15 @@
   "copiar_ayuda": "Copy the text in the “Improved” column and use it in your AI tool.",
   "error_estado_invalido": "We couldn't recover the review. Please review your prompt again.",
   "progreso_revisar": "Sharpening your prompt…",
-  "progreso_mejorar": "Polishing the improved version…"
+  "progreso_mejorar": "Polishing the improved version…",
+  "paso_escribir": "1 Write",
+  "paso_revisar": "2 Review",
+  "paso_mejorar": "3 Improve",
+  "recorrido": "Steps",
+  "copiar": "Copy",
+  "copiado": "Copied",
+  "copiado_completar": "Copied. Remember to fill in what is marked [COMPLETAR: …].",
+  "copiar_manual": "Text selected: press Ctrl+C to copy it.",
+  "tema_oscuro": "Switch to dark mode",
+  "tema_claro": "Switch to light mode"
 }

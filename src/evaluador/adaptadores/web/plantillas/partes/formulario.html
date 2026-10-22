@@ -1,18 +1,22 @@
-<section class="hoja" aria-labelledby="titulo">
-  <h1 id="titulo">{{ t.titulo }}</h1>
-  <p class="subtitulo">{{ t.subtitulo }}</p>
-  <form class="hoja-formulario" method="post" action="/diagnosticar" data-progreso="{{ t.progreso_revisar }}">
+<section class="hoja portada" aria-labelledby="titulo">
+  <div class="cabecera">
+    <h1 id="titulo">{{ t.titulo }}</h1>
+    <p class="subtitulo">{{ t.subtitulo }}</p>
+  </div>
+  <form class="formulario" method="post" action="/diagnosticar" data-progreso="{{ t.progreso_revisar }}">
     <input type="hidden" name="idioma" value="{{ idioma }}">
     <div class="campo">
       <label for="prompt">{{ t.etiqueta_prompt }}</label>
-      <textarea id="prompt" name="prompt" rows="6" maxlength="20000">{{ prompt }}</textarea>
+      <textarea id="prompt" class="campo-prompt" name="prompt" rows="5" maxlength="20000">{{ prompt }}</textarea>
     </div>
     <div class="campo">
       <label for="resultado">{{ t.etiqueta_resultado }}</label>
       <p class="ayuda" id="ayuda-resultado">{{ t.ayuda_resultado }}</p>
-      <textarea id="resultado" name="resultado" rows="3" aria-describedby="ayuda-resultado">{{ resultado }}</textarea>
+      <textarea id="resultado" name="resultado" rows="2" aria-describedby="ayuda-resultado">{{ resultado }}</textarea>
     </div>
-    <p class="aviso">{{ aviso }}</p>
-    <div class="acciones"><button type="submit">{{ t.boton }}</button></div>
+    <div class="pie-formulario">
+      <p class="aviso">{{ aviso }}</p>
+      <button type="submit">{{ t.boton }}</button>
+    </div>
   </form>
 </section>
