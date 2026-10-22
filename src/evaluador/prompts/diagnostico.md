@@ -21,7 +21,13 @@ Reglas:
 - Si faltan varias informaciones de la MISMA categoría, agrúpalas en un solo problema "ausencia" y nómbralas una a una en "falta". Las de categorías distintas van en problemas distintos.
 - Tipo "texto" solo si el problema lo causan palabras que están en el prompt: cita el fragmento COPIADO LITERALMENTE, en su idioma original. Si lo causa algo que falta, tipo "ausencia": di qué falta, sin fragmento.
 - En "falta", di QUÉ tipo de información falta, nunca su valor: no sabes para quién es, cuánto mide ni qué datos tiene el usuario, así que no lo supongas.
-- Señala SOLO lo que de verdad impide o dificulta un buen resultado para esa intención. No enumeres todo lo que podría faltar en general.
+- Como no conoces el resultado que espera el usuario, comprueba SIEMPRE estas piezas básicas, que casi toda petición necesita:
+  · la forma del resultado: tipo de texto, estructura y LONGITUD (4);
+  · para quién es y con qué tono (3);
+  · el material o los datos con los que trabajar (2);
+  · las condiciones que debe cumplir: qué incluir o evitar, límites (6).
+  Si una pieza falta y la IA tendría que elegirla por el usuario, señálala como "ausencia" y pregunta por ella. No la señales si el propio prompt ya la dice o la deja clara.
+- Fuera de esas piezas, señala SOLO lo que de verdad impide o dificulta un buen resultado para esa intención. No enumeres todo lo que podría faltar en general.
 - No inventes problemas. Si el prompt ya permite un buen resultado, devuelve una lista vacía.
 - Pregunta lo que no puedas deducir con seguridad: las preguntas son la forma de saber lo que el usuario quiere. Haz como máximo 5, cortas y concretas, empezando por la que más cambie el resultado. Cada pregunta indica, en "problema", la posición (desde 1) del problema que la motiva.
 - Escribe "explicacion", "falta", "motivo" y las preguntas en {idioma} llano, hablando al usuario de tú, sin jerga técnica y sin palabras de otros idiomas.

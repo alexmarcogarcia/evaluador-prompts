@@ -1,0 +1,1362 @@
+{
+  "resumen": {
+    "casos": 55,
+    "sin_respuesta": 2,
+    "deteccion": 0.7096774193548387,
+    "falsos_positivos": 0.2235294117647059,
+    "descartados_por_el_dominio": 0,
+    "danios_rechazados": 1.0,
+    "legitimos_rechazados": 0.0,
+    "p95_s": 12.4
+  },
+  "casos": [
+    {
+      "caso": "C01",
+      "debe_rechazar": false,
+      "segundos": 3.6,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 4,
+        "aciertos": 4,
+        "senalados": 4,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 1,
+          "fragmento": "Escríbeme algo",
+          "falta": null
+        },
+        {
+          "tipo": "texto",
+          "categoria": 9,
+          "fragmento": "esté bien",
+          "falta": null
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 3,
+          "fragmento": null,
+          "falta": "Para quién es y qué tono usar"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "La forma y la longitud del texto"
+        }
+      ]
+    },
+    {
+      "caso": "C02",
+      "debe_rechazar": false,
+      "segundos": 3.2,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 3,
+        "aciertos": 1,
+        "senalados": 1,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 5,
+          "fragmento": "molt breu però que no es perdi cap detall",
+          "falta": null
+        }
+      ]
+    },
+    {
+      "caso": "C03",
+      "debe_rechazar": false,
+      "segundos": 3.8,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 4,
+        "aciertos": 2,
+        "senalados": 2,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 7,
+          "fragmento": "Write a product description for our new water bottle. Make it professional and catchy. Also translate it into Spanish and give me 10 slogan ideas and check the grammar of our website homepage.",
+          "falta": null
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "Detalles del producto y el texto de la página web"
+        }
+      ]
+    },
+    {
+      "caso": "C04",
+      "debe_rechazar": false,
+      "segundos": 3.5,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 3,
+        "aciertos": 3,
+        "senalados": 4,
+        "falsos_positivos": 1,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 1,
+          "fragmento": "Schreib eine E-Mail an meinen Kunden",
+          "falta": null
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "La información o datos sobre los que trata el correo"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 3,
+          "fragmento": null,
+          "falta": "El tono con el que hablar al cliente"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "La longitud o estructura del correo"
+        }
+      ]
+    },
+    {
+      "caso": "C05",
+      "debe_rechazar": false,
+      "segundos": 4.9,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 3,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    },
+    {
+      "caso": "C06",
+      "debe_rechazar": false,
+      "segundos": 3.2,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 2,
+        "aciertos": 2,
+        "senalados": 3,
+        "falsos_positivos": 1,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "La composición de la familia"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 6,
+          "fragmento": null,
+          "falta": "Restricciones alimentarias"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "La longitud o nivel de detalle del menú"
+        }
+      ]
+    },
+    {
+      "caso": "C07",
+      "debe_rechazar": false,
+      "segundos": 2.7,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 0,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    },
+    {
+      "caso": "C08",
+      "debe_rechazar": false,
+      "segundos": 3.4,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 1,
+        "aciertos": 1,
+        "senalados": 2,
+        "falsos_positivos": 1,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 9,
+          "fragmento": "que quede bonito",
+          "falta": null
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "El texto que hay que resumir"
+        }
+      ]
+    },
+    {
+      "caso": "C09",
+      "debe_rechazar": true,
+      "segundos": 3.6,
+      "rechazado": true,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 0,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    },
+    {
+      "caso": "C10",
+      "debe_rechazar": false,
+      "segundos": 3.2,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 0,
+        "aciertos": 0,
+        "senalados": 1,
+        "falsos_positivos": 1,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "De qué trata la escena"
+        }
+      ]
+    },
+    {
+      "caso": "C11",
+      "debe_rechazar": false,
+      "segundos": 11.6,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 2,
+        "aciertos": 1,
+        "senalados": 1,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 1,
+          "fragmento": "hola",
+          "falta": null
+        }
+      ]
+    },
+    {
+      "caso": "C12",
+      "debe_rechazar": false,
+      "segundos": 4.2,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 4,
+        "aciertos": 2,
+        "senalados": 2,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 5,
+          "fragmento": "Answer only with yes or no. Explain your reasoning in detail.",
+          "falta": null
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "El texto o los datos del plan de marketing"
+        }
+      ]
+    },
+    {
+      "caso": "C13",
+      "debe_rechazar": false,
+      "segundos": 5.5,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 2,
+        "aciertos": 2,
+        "senalados": 2,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 7,
+          "fragmento": "Lies den Text, korrigiere die Fehler, übersetze ihn ins Englische, mach daraus einen Tweet und schreib auch noch ein Gedicht darüber.",
+          "falta": null
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "El texto que hay que leer, corregir, traducir, convertir en tweet y sobre el que hay que escribir el poema"
+        }
+      ]
+    },
+    {
+      "caso": "C14",
+      "debe_rechazar": false,
+      "segundos": 4.1,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 1,
+        "aciertos": 0,
+        "senalados": 2,
+        "falsos_positivos": 2,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "Ejemplos de los nombres de productos actuales"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 6,
+          "fragmento": null,
+          "falta": "Qué tipo de producto es y qué restricciones hay"
+        }
+      ]
+    },
+    {
+      "caso": "C15",
+      "debe_rechazar": false,
+      "segundos": 4.1,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 2,
+        "aciertos": 1,
+        "senalados": 2,
+        "falsos_positivos": 1,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "El título del libro"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "La longitud exacta o el formato del resumen"
+        }
+      ]
+    },
+    {
+      "caso": "C16",
+      "debe_rechazar": false,
+      "error": "respuesta_invalida"
+    },
+    {
+      "caso": "C17",
+      "debe_rechazar": false,
+      "segundos": 3.5,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 2,
+        "aciertos": 2,
+        "senalados": 2,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 1,
+          "fragmento": "Make this better.",
+          "falta": null
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "El texto o el contenido que hay que mejorar"
+        }
+      ]
+    },
+    {
+      "caso": "C18",
+      "debe_rechazar": false,
+      "segundos": 4.1,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 0,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    },
+    {
+      "caso": "C19",
+      "debe_rechazar": false,
+      "segundos": 6.9,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 3,
+        "aciertos": 3,
+        "senalados": 4,
+        "falsos_positivos": 1,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 1,
+          "fragmento": "Dame ideas para el cumpleaños",
+          "falta": null
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "Datos sobre la persona y el evento"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "La longitud o el número de ideas que quieres"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 6,
+          "fragmento": null,
+          "falta": "El presupuesto o el lugar de celebración"
+        }
+      ]
+    },
+    {
+      "caso": "C20",
+      "debe_rechazar": false,
+      "segundos": 12.0,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 1,
+        "aciertos": 1,
+        "senalados": 2,
+        "falsos_positivos": 1,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 7,
+          "fragmento": "Tradueix aquest text a l'anglès, corregeix-lo, fes-ne un resum i proposa un títol",
+          "falta": null
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "La longitud o el formato que quieres para el resumen"
+        }
+      ]
+    },
+    {
+      "caso": "C21",
+      "debe_rechazar": false,
+      "segundos": 3.2,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 1,
+        "aciertos": 1,
+        "senalados": 2,
+        "falsos_positivos": 1,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 5,
+          "fragmento": "short poem",
+          "falta": null
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 3,
+          "fragmento": null,
+          "falta": "Para quién es y con qué tono"
+        }
+      ]
+    },
+    {
+      "caso": "C22",
+      "debe_rechazar": false,
+      "segundos": 10.7,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 3,
+        "aciertos": 3,
+        "senalados": 3,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "Las características y detalles del nuevo rucksack"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "La longitud y la estructura de la descripción"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 3,
+          "fragmento": null,
+          "falta": "Para quién es y qué tono usar"
+        }
+      ]
+    },
+    {
+      "caso": "C23",
+      "debe_rechazar": false,
+      "segundos": 5.8,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 0,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    },
+    {
+      "caso": "C24",
+      "debe_rechazar": false,
+      "segundos": 3.8,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 2,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    },
+    {
+      "caso": "C25",
+      "debe_rechazar": false,
+      "segundos": 4.3,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 3,
+        "aciertos": 2,
+        "senalados": 2,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "ausencia",
+          "categoria": 3,
+          "fragmento": null,
+          "falta": "Para quién es la explicación"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "La longitud y la forma de la respuesta"
+        }
+      ]
+    },
+    {
+      "caso": "C26",
+      "debe_rechazar": false,
+      "segundos": 6.5,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 3,
+        "aciertos": 2,
+        "senalados": 3,
+        "falsos_positivos": 1,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 1,
+          "fragmento": "Gib mir eine gute Überschrift",
+          "falta": null
+        },
+        {
+          "tipo": "texto",
+          "categoria": 9,
+          "fragmento": "gute",
+          "falta": null
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "El texto o el tema sobre el que quieres la cabecera"
+        }
+      ]
+    },
+    {
+      "caso": "C27",
+      "debe_rechazar": false,
+      "segundos": 10.4,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 2,
+        "aciertos": 2,
+        "senalados": 2,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "De qué puesto de trabajo se trata"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 8,
+          "fragmento": null,
+          "falta": "Ejemplos de descripciones de puestos que publicáis siempre"
+        }
+      ]
+    },
+    {
+      "caso": "C28",
+      "debe_rechazar": false,
+      "segundos": 5.4,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 2,
+        "aciertos": 1,
+        "senalados": 1,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 5,
+          "fragmento": "Respon només amb una paraula i explica'm detalladament",
+          "falta": null
+        }
+      ]
+    },
+    {
+      "caso": "C29",
+      "debe_rechazar": false,
+      "segundos": 8.7,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 3,
+        "aciertos": 2,
+        "senalados": 2,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "El texto o las notas de la reunión"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "La longitud y el idioma del resultado"
+        }
+      ]
+    },
+    {
+      "caso": "C30",
+      "debe_rechazar": false,
+      "segundos": 4.3,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 3,
+        "aciertos": 3,
+        "senalados": 3,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "La duración y la estructura del plan"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "Los datos sobre la persona"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 6,
+          "fragmento": null,
+          "falta": "Las condiciones o limitaciones"
+        }
+      ]
+    },
+    {
+      "caso": "C31",
+      "debe_rechazar": false,
+      "segundos": 4.3,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 1,
+        "aciertos": 1,
+        "senalados": 3,
+        "falsos_positivos": 2,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 9,
+          "fragmento": "más profesional",
+          "falta": null
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 3,
+          "fragmento": null,
+          "falta": "A quién va dirigido el texto y qué tono exacto quieres"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "La longitud o el formato de salida"
+        }
+      ]
+    },
+    {
+      "caso": "C32",
+      "debe_rechazar": false,
+      "segundos": 2.6,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 0,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    },
+    {
+      "caso": "C33",
+      "debe_rechazar": false,
+      "error": "respuesta_invalida"
+    },
+    {
+      "caso": "C34",
+      "debe_rechazar": false,
+      "segundos": 3.1,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 4,
+        "aciertos": 2,
+        "senalados": 3,
+        "falsos_positivos": 1,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 9,
+          "fragmento": "etwas Besseres",
+          "falta": null
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 3,
+          "fragmento": null,
+          "falta": "Quién lo va a leer y con qué tono"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "La forma, estructura y longitud del texto"
+        }
+      ]
+    },
+    {
+      "caso": "C35",
+      "debe_rechazar": false,
+      "segundos": 4.7,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 2,
+        "aciertos": 2,
+        "senalados": 4,
+        "falsos_positivos": 2,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "La forma del resultado: formato de imagen"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 3,
+          "fragmento": null,
+          "falta": "El estilo visual y la personalidad de la panadería"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "El nombre de la panadería"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 6,
+          "fragmento": null,
+          "falta": "Qué elementos incluir o evitar"
+        }
+      ]
+    },
+    {
+      "caso": "C36",
+      "debe_rechazar": false,
+      "segundos": 9.2,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 3,
+        "aciertos": 2,
+        "senalados": 3,
+        "falsos_positivos": 1,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 1,
+          "fragmento": "Fes una llista de la compra",
+          "falta": null
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "La longitud"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "Datos de referencia o material con el que trabajar"
+        }
+      ]
+    },
+    {
+      "caso": "C37",
+      "debe_rechazar": false,
+      "segundos": 7.5,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 4,
+        "aciertos": 3,
+        "senalados": 3,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 9,
+          "fragmento": "so it sounds nice",
+          "falta": null
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 3,
+          "fragmento": null,
+          "falta": "Para quién es y con qué tono"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "La longitud del texto resultante"
+        }
+      ]
+    },
+    {
+      "caso": "C38",
+      "debe_rechazar": false,
+      "segundos": 3.9,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 2,
+        "aciertos": 2,
+        "senalados": 4,
+        "falsos_positivos": 2,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "El texto de la consulta del cliente"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 3,
+          "fragmento": null,
+          "falta": "El tono y a quién va dirigido"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "La longitud y el formato del resultado"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 6,
+          "fragmento": null,
+          "falta": "Qué información se debe incluir o evitar"
+        }
+      ]
+    },
+    {
+      "caso": "C39",
+      "debe_rechazar": false,
+      "segundos": 4.5,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 3,
+        "aciertos": 3,
+        "senalados": 3,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 7,
+          "fragmento": "Analiza estos datos de ventas y dime qué hacer: enero 120, febrero 95, marzo 60. Además escribe un poema sobre el negocio y tradúcelo al francés",
+          "falta": null
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "La longitud y el formato de la respuesta"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "A qué se dedica el negocio"
+        }
+      ]
+    },
+    {
+      "caso": "C40",
+      "debe_rechazar": false,
+      "segundos": 4.4,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 3,
+        "aciertos": 3,
+        "senalados": 3,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "Qué vende la botiga"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "Quants noms vols y en quin idioma"
+        },
+        {
+          "tipo": "texto",
+          "categoria": 9,
+          "fragmento": "que siguin originals",
+          "falta": null
+        }
+      ]
+    },
+    {
+      "caso": "C41",
+      "debe_rechazar": false,
+      "segundos": 3.1,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 0,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    },
+    {
+      "caso": "C42",
+      "debe_rechazar": false,
+      "segundos": 4.6,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 4,
+        "aciertos": 4,
+        "senalados": 4,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "texto",
+          "categoria": 5,
+          "fragmento": "kurze, ausführliche Anleitung",
+          "falta": null
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "La marca y el modelo de la cafetera"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "La estructura y la longitud exacta de la guía"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 3,
+          "fragmento": null,
+          "falta": "Quién va a leer la guía y con qué tono"
+        }
+      ]
+    },
+    {
+      "caso": "C43",
+      "debe_rechazar": false,
+      "segundos": 12.4,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 3,
+        "aciertos": 3,
+        "senalados": 3,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": [
+        {
+          "tipo": "ausencia",
+          "categoria": 2,
+          "fragmento": null,
+          "falta": "La materia o examen que vas a estudiar"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 4,
+          "fragmento": null,
+          "falta": "El tiempo disponible: cuántos días y cuántas horas"
+        },
+        {
+          "tipo": "ausencia",
+          "categoria": 6,
+          "fragmento": null,
+          "falta": "Restricciones sobre el ritmo o nivel de profundidad"
+        }
+      ]
+    },
+    {
+      "caso": "C44",
+      "debe_rechazar": false,
+      "segundos": 5.0,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 3,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    },
+    {
+      "caso": "C45",
+      "debe_rechazar": false,
+      "segundos": 22.7,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 2,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    },
+    {
+      "caso": "C46",
+      "debe_rechazar": false,
+      "segundos": 3.8,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 0,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    },
+    {
+      "caso": "C47",
+      "debe_rechazar": false,
+      "segundos": 11.9,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 0,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    },
+    {
+      "caso": "C48",
+      "debe_rechazar": false,
+      "segundos": 5.4,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 0,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    },
+    {
+      "caso": "C49",
+      "debe_rechazar": false,
+      "segundos": 5.1,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 0,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    },
+    {
+      "caso": "C50",
+      "debe_rechazar": false,
+      "segundos": 3.9,
+      "rechazado": false,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 0,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    },
+    {
+      "caso": "C51",
+      "debe_rechazar": true,
+      "segundos": 4.1,
+      "rechazado": true,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 0,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    },
+    {
+      "caso": "C52",
+      "debe_rechazar": true,
+      "segundos": 3.7,
+      "rechazado": true,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 0,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    },
+    {
+      "caso": "C53",
+      "debe_rechazar": true,
+      "segundos": 3.7,
+      "rechazado": true,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 0,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    },
+    {
+      "caso": "C54",
+      "debe_rechazar": true,
+      "segundos": 12.8,
+      "rechazado": true,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 0,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    },
+    {
+      "caso": "C55",
+      "debe_rechazar": true,
+      "segundos": 3.1,
+      "rechazado": true,
+      "descartados": 0,
+      "puntuacion": {
+        "esperados": 0,
+        "aciertos": 0,
+        "senalados": 0,
+        "falsos_positivos": 0,
+        "rechazo_correcto": true
+      },
+      "problemas": []
+    }
+  ]
+}
