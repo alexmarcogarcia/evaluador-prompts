@@ -84,3 +84,25 @@ def test_las_lineas_de_continuacion_pertenecen_a_la_tarea(tmp_path: Path) -> Non
     tareas = f"## Historia\n- [ ] **T010** Reglas en el dominio:\n  - longitud máxima\n\n  ({RF1})\n"
     errores, _ = coherencia.analizar(crear_proyecto(tmp_path, tareas))
     assert errores == []
+
+
+def test_con_varias_specs_un_identificador_de_otra_spec_si_existe(tmp_path: Path) -> None:
+    """Los identificadores son únicos en todo el proyecto: citar uno de otra spec no es un error."""
+    raiz = crear_proyecto(
+        tmp_path, f"## Historia\n- [x] **T010** A ({RF1})\n", pruebas=f"# {RF1} y RF-{17:03d}\n"
+    )
+    otra = raiz / "specs" / "002-otra"
+    otra.mkdir()
+    (otra / "spec.md").write_text(f"- **RF-{17:03d}:** El sistema debe C.\n", encoding="utf-8")
+    (otra / "tasks.md").write_text(f"## Historia\n- [ ] **T100** C (RF-{17:03d})\n", encoding="utf-8")
+    errores, _ = coherencia.analizar(raiz)
+    assert errores == []
+
+
+def test_un_identificador_que_no_esta_en_ninguna_spec_se_informa_una_vez(tmp_path: Path) -> None:
+    raiz = crear_proyecto(tmp_path, f"## Historia\n- [ ] **T010** A ({RF1})\n", pruebas=f"# RF-{55:03d}\n")
+    otra = raiz / "specs" / "002-otra"
+    otra.mkdir()
+    (otra / "spec.md").write_text(f"- **RF-{17:03d}:** El sistema debe C.\n", encoding="utf-8")
+    errores, _ = coherencia.analizar(raiz)
+    assert sum(f"RF-{55:03d}" in e for e in errores) == 1

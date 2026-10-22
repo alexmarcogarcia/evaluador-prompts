@@ -2,12 +2,12 @@
 
 Falla (código 1) si:
 - una tarea no referencia ningún requisito (RF/RNF) ni ADR, salvo las de las secciones de harness;
-- tareas, plan, código, pruebas o evals citan un RF/RNF que no existe en la spec;
+- tareas, plan, código, pruebas o evals citan un RF/RNF que no existe en ninguna spec;
 - un requisito tiene todas sus tareas terminadas y ninguna prueba ni eval lo referencia
   («un requisito sin prueba no está terminado»).
 
 Los requisitos cuyas tareas siguen abiertas se listan como pendientes, sin fallar.
-Limitación conocida: los identificadores son globales; con varias specs habrá que cualificarlos.
+Los identificadores son únicos en todo el proyecto: cada spec nueva continúa la numeración.
 """
 
 import io
@@ -57,20 +57,28 @@ def analizar(raiz: Path) -> tuple[list[str], list[str]]:
     """Devuelve (errores, requisitos pendientes de prueba)."""
     errores: list[str] = []
     pendientes: list[str] = []
-    for spec in sorted((raiz / "specs").glob("*/spec.md")):
-        definidos = set(DEFINICION.findall(spec.read_text(encoding="utf-8")))
-        tasks_md = spec.parent / "tasks.md"
-        tareas = leer_tareas(tasks_md.read_text(encoding="utf-8")) if tasks_md.exists() else []
+    specs = sorted((raiz / "specs").glob("*/spec.md"))
 
-        citados: dict[str, set[str]] = referencias_en(raiz, CARPETAS_CON_REFERENCIAS)
+    # Los identificadores son únicos en todo el proyecto (la spec 002 sigue la numeración de la 001):
+    # citar uno de otra spec es correcto; solo es error si no está definido en ninguna.
+    todos_definidos: set[str] = set()
+    citados: dict[str, set[str]] = referencias_en(raiz, CARPETAS_CON_REFERENCIAS)
+    for spec in specs:
+        todos_definidos |= set(DEFINICION.findall(spec.read_text(encoding="utf-8")))
         for nombre in ("tasks.md", "plan.md"):
             doc = spec.parent / nombre
             if doc.exists():
                 for ident in ID_REQUISITO.findall(doc.read_text(encoding="utf-8")):
                     citados.setdefault(ident, set()).add(str(doc.relative_to(raiz)))
-        for ident in sorted(set(citados) - definidos):
-            donde = ", ".join(sorted(citados[ident]))
-            errores.append(f"{ident} no existe en {spec.relative_to(raiz)} (citado en {donde})")
+    for ident in sorted(set(citados) - todos_definidos):
+        donde = ", ".join(sorted(citados[ident]))
+        errores.append(f"{ident} no existe en ninguna spec (citado en {donde})")
+
+    probados = referencias_en(raiz, CARPETAS_DE_PRUEBA)
+    for spec in specs:
+        definidos = set(DEFINICION.findall(spec.read_text(encoding="utf-8")))
+        tasks_md = spec.parent / "tasks.md"
+        tareas = leer_tareas(tasks_md.read_text(encoding="utf-8")) if tasks_md.exists() else []
 
         tareas_por_requisito: dict[str, list[bool]] = {}
         for ident, hecha, texto, exenta in tareas:
@@ -80,7 +88,6 @@ def analizar(raiz: Path) -> tuple[list[str], list[str]]:
             for req in requisitos:
                 tareas_por_requisito.setdefault(req, []).append(hecha)
 
-        probados = referencias_en(raiz, CARPETAS_DE_PRUEBA)
         for req in sorted(definidos):
             if req in probados:
                 continue
