@@ -33,17 +33,17 @@
 ## Historia P2 · Un recorrido fluido y guiado
 
 - [x] **T140** Pasos «1 Escribir · 2 Revisar · 3 Mejorar», con el actual marcado en cada pantalla. Prueba de aceptación por pantalla (RF-022).
-- [ ] **T141** Cambio de idioma por POST, que vuelve al inicio conservando el texto escrito y sin datos en la URL. Prueba de aceptación (RF-022, RNF-006).
+- [x] **T141** Cambio de idioma por POST, que vuelve al inicio conservando el texto escrito y sin datos en la URL. Prueba de aceptación (RF-022, RNF-006).
 
-## Historia P2 · Empezar sin saber qué escribir (depende de la decisión sobre RF-002)
+## Historia P2 · Empezar sin saber qué escribir
 
-- [ ] **T150** Cuatro ejemplos por idioma en `adaptadores/web/ejemplos.py`, sintéticos, que rellenan el prompt (y el resultado esperado, si sigue existiendo). Prueba de aceptación (RF-021).
-- [ ] **T151** Pantalla de inicio según la decisión sobre RF-002: campo de resultado esperado obligatorio u opcional (RF-021).
+- [x] **T150** Cuatro ejemplos por idioma en `adaptadores/web/ejemplos.py`, sintéticos, que rellenan el prompt; con scripts al momento y sin scripts a través del servidor. Prueba de aceptación (RF-021).
+- [x] **T151** Pantalla de inicio solo con el prompt: el resultado esperado se elimina (spec 001 v1.6, RF-002; RF-021).
 
 ## Cierre
 
-- [ ] **T160** Revisión de accesibilidad: recorrido completo solo con teclado, lector de pantalla en los controles y comprobación a 360 px (RNF-014, RNF-015).
-- [ ] **T161** Lista de comprobación manual del JavaScript en Chrome y Firefox, con el resultado registrado en `research.md` de la spec 002 (RF-017, RF-019, RF-020, RF-023, RF-025, RNF-013).
+- [x] **T160** Revisión de accesibilidad: comprobación automática del HTML (`test_p2_accesibilidad.py`), enlace para saltar al contenido y comprobación a 360 px. Las pruebas con teclado real y lector de pantalla pasan a la lista manual de la T161 (RNF-014, RNF-015).
+- [ ] **T161** Lista de comprobación manual del JavaScript, del teclado y del lector de pantalla en Chrome y Firefox, con el resultado registrado en `research.md` de la spec 002 (RF-017, RF-019, RF-020, RF-023, RF-025, RNF-013).
 
 **Fin del incremento 002:** quickstart completo, con y sin scripts. Después, la T060 (spec 001) mide RNF-012 y RNF-016.
 

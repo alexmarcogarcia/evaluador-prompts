@@ -18,6 +18,8 @@ from fastapi.staticfiles import StaticFiles
 from jinja2 import Environment, PackageLoader
 
 from evaluador.adaptadores.web.comparacion import comparar
+from evaluador.adaptadores.web.ejemplos import EJEMPLOS
+from evaluador.adaptadores.web.ejemplos import ejemplo as buscar_ejemplo
 from evaluador.adaptadores.web.estado import EstadoInvalido, leer_respuestas, restaurar, serializar
 from evaluador.casos_uso.diagnosticar import Diagnosticar, EntradaInvalida, MotivoEntrada
 from evaluador.casos_uso.mejorar import Mejorar
@@ -92,6 +94,7 @@ def crear_app(diagnosticar: Diagnosticar, mejorar: Mejorar, *, proveedor: str, m
             t=t,
             idioma=idioma,
             idiomas=[(i, textos(i)["idioma_nombre"]) for i in IDIOMAS],
+            ejemplos=EJEMPLOS[idioma],
             aviso=aviso,
             huella=huella,
             # Paso del recorrido (RF-022): lo deduce lo que se muestra.
@@ -132,6 +135,26 @@ def crear_app(diagnosticar: Diagnosticar, mejorar: Mejorar, *, proveedor: str, m
         except (EntradaInvalida, ErrorProveedor) as error:
             return pagina(idioma, prompt=prompt, errores=mensajes_de_error(textos(idioma), error))
         return resultado_del_diagnostico(idioma, diagnostico, [])
+
+    @app.post("/idioma", response_class=HTMLResponse)
+    def cambiar_idioma(
+        nuevo_idioma: Annotated[str, Form()] = "es",
+        prompt: Annotated[str, Form()] = "",
+    ) -> HTMLResponse:
+        """T141: vuelve al inicio en el idioma elegido con el prompt tal cual. No se traduce: es del
+        usuario (RF-012) y se acepta en cualquier idioma (RF-013); el idioma solo cambia la interfaz."""
+        return pagina(nuevo_idioma if nuevo_idioma in IDIOMAS else "es", prompt=prompt)
+
+    @app.post("/ejemplo", response_class=HTMLResponse)
+    def elegir_ejemplo(
+        ejemplo: Annotated[str, Form()] = "",
+        prompt: Annotated[str, Form()] = "",
+        idioma: Annotated[str, Form()] = "es",
+    ) -> HTMLResponse:
+        """RF-021 sin scripts: devuelve el inicio con el ejemplo elegido en el campo del prompt."""
+        idioma = idioma if idioma in IDIOMAS else "es"
+        elegido = buscar_ejemplo(idioma, ejemplo)
+        return pagina(idioma, prompt=elegido.prompt if elegido else prompt)
 
     @app.post("/mejorar", response_class=HTMLResponse)
     async def mejorar_prompt(request: Request) -> HTMLResponse:

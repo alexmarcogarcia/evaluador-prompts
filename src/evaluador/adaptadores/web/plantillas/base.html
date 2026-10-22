@@ -11,20 +11,24 @@
   <script src="/static/sharpener.js?v={{ huella }}" defer></script>
 </head>
 <body>
+  <a class="saltar" href="#contenido">{{ t.saltar }}</a>
   <header class="barra">
     <a class="marca" href="/?idioma={{ idioma }}">
       <svg viewBox="0 0 32 32" aria-hidden="true"><path class="logo-cuerpo" d="M3 22 L22 3 L29 10 L10 29 Z"/><path class="logo-punta" d="M3 22 L10 29 L3 29 Z"/></svg>
       Sharpener
     </a>
     <div class="herramientas">
-      <nav class="idiomas" aria-label="Idioma">{% for codigo, nombre in idiomas %}<a href="/?idioma={{ codigo }}" lang="{{ codigo }}" title="{{ nombre }}"{% if codigo == idioma %} aria-current="true"{% endif %}>{{ codigo | upper }}</a>{% endfor %}</nav>
+      {# T141: el idioma se cambia por POST para conservar el texto sin ponerlo en la URL (RNF-006). Los botones envían el formulario del prompt, que está en todas las pantallas, con lo que haya escrito. #}
+      <div class="idiomas" role="group" aria-label="{{ t.selector_idioma }}">
+        {% for codigo, nombre in idiomas %}<button type="submit" name="nuevo_idioma" value="{{ codigo }}" lang="{{ codigo }}" title="{{ nombre }}" aria-label="{{ nombre }}" form="formulario" formaction="/idioma" formnovalidate{% if codigo == idioma %} aria-current="true"{% endif %}>{{ codigo | upper }}</button>{% endfor %}
+      </div>
       <button id="tema" class="tema" type="button" aria-pressed="false" data-oscuro="{{ t.tema_oscuro }}" data-claro="{{ t.tema_claro }}" aria-label="{{ t.tema_oscuro }}" hidden>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10Z"/></svg>
       </button>
     </div>
   </header>
   <div id="progreso" class="progreso" role="status" aria-live="polite" hidden><span class="progreso-barra" aria-hidden="true"><span></span></span><span class="progreso-texto"></span></div>
-  <main class="lienzo">
+  <main class="lienzo" id="contenido">
     {% set orden = ["escribir", "revisar", "mejorar"] %}
     <ol class="pasos" aria-label="{{ t.recorrido }}">
       {% for nombre in orden %}

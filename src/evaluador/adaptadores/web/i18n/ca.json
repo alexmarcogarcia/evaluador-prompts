@@ -1,7 +1,7 @@
 {
   "idioma_nombre": "Català",
   "titulo": "Esmola el teu prompt",
-  "subtitulo": "Enganxa el teu prompt i digues-nos què vols aconseguir: et direm què li falta i per què.",
+  "subtitulo": "Enganxa el que li demanes a la IA. Et direm què li falta, et preguntarem el just i et donarem una versió millorada.",
   "etiqueta_prompt": "El teu prompt",
   "aviso_envio": "El teu prompt s'enviarà a {proveedor} (model {modelo}). No hi incloguis dades personals ni confidencials.",
   "boton": "Revisar el meu prompt",
@@ -56,5 +56,8 @@
   "copiado_completar": "Copiat. Recorda completar el que està marcat amb [COMPLETAR: …].",
   "copiar_manual": "Text seleccionat: prem Ctrl+C per copiar-lo.",
   "tema_oscuro": "Canviar a mode fosc",
-  "tema_claro": "Canviar a mode clar"
+  "tema_claro": "Canviar a mode clar",
+  "selector_idioma": "Idioma de la interfície",
+  "ejemplos_titulo": "No saps per on començar? Prova amb un exemple:",
+  "saltar": "Salta al contingut"
 }

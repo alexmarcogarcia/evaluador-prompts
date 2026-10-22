@@ -1,7 +1,7 @@
 {
   "idioma_nombre": "English",
   "titulo": "Sharpen your prompt",
-  "subtitulo": "Paste your prompt and tell us what you want to achieve: we'll tell you what's missing and why.",
+  "subtitulo": "Paste what you ask the AI. We'll tell you what's missing, ask only what we need and give you an improved version.",
   "etiqueta_prompt": "Your prompt",
   "aviso_envio": "Your prompt will be sent to {proveedor} (model {modelo}). Don't include personal or confidential data.",
   "boton": "Review my prompt",
@@ -56,5 +56,8 @@
   "copiado_completar": "Copied. Remember to fill in what is marked [COMPLETAR: …].",
   "copiar_manual": "Text selected: press Ctrl+C to copy it.",
   "tema_oscuro": "Switch to dark mode",
-  "tema_claro": "Switch to light mode"
+  "tema_claro": "Switch to light mode",
+  "selector_idioma": "Interface language",
+  "ejemplos_titulo": "Not sure where to start? Try an example:",
+  "saltar": "Skip to content"
 }

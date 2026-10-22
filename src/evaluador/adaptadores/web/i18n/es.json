@@ -1,7 +1,7 @@
 {
   "idioma_nombre": "Español",
   "titulo": "Afila tu prompt",
-  "subtitulo": "Pega tu prompt y dinos qué quieres conseguir: te diremos qué le falta y por qué.",
+  "subtitulo": "Pega lo que le pides a la IA. Te diremos qué le falta, te preguntaremos lo justo y te daremos una versión mejorada.",
   "etiqueta_prompt": "Tu prompt",
   "aviso_envio": "Tu prompt se enviará a {proveedor} (modelo {modelo}). No incluyas datos personales ni confidenciales.",
   "boton": "Revisar mi prompt",
@@ -56,5 +56,8 @@
   "copiado_completar": "Copiado. Recuerda completar lo marcado con [COMPLETAR: …].",
   "copiar_manual": "Texto seleccionado: pulsa Ctrl+C para copiarlo.",
   "tema_oscuro": "Cambiar a modo oscuro",
-  "tema_claro": "Cambiar a modo claro"
+  "tema_claro": "Cambiar a modo claro",
+  "selector_idioma": "Idioma de la interfaz",
+  "ejemplos_titulo": "¿No sabes por dónde empezar? Prueba con un ejemplo:",
+  "saltar": "Saltar al contenido"
 }

@@ -3,7 +3,7 @@
     <h1 id="titulo">{{ t.titulo }}</h1>
     <p class="subtitulo">{{ t.subtitulo }}</p>
   </div>
-  <form class="formulario" method="post" action="/diagnosticar" data-progreso="{{ t.progreso_revisar }}">
+  <form id="formulario" class="formulario" method="post" action="/diagnosticar" data-progreso="{{ t.progreso_revisar }}">
     <input type="hidden" name="idioma" value="{{ idioma }}">
     <div class="campo">
       <label for="prompt">{{ t.etiqueta_prompt }}</label>
@@ -14,4 +14,14 @@
       <button type="submit">{{ t.boton }}</button>
     </div>
   </form>
+  {# RF-021: elegir un ejemplo rellena el prompt. Sin scripts, lo hace el servidor (/ejemplo). Solo en el inicio. #}
+  {% if paso == "escribir" %}
+  <div class="ejemplos">
+    <p class="ejemplos-titulo" id="titulo-ejemplos">{{ t.ejemplos_titulo }}</p>
+    <div class="ejemplos-lista" role="group" aria-labelledby="titulo-ejemplos">
+      {% for e in ejemplos %}<button type="submit" class="ejemplo" form="formulario" formaction="/ejemplo" formnovalidate name="ejemplo" value="{{ loop.index0 }}" data-prompt="{{ e.prompt }}"><span class="ejemplo-etiqueta">{{ e.etiqueta }}</span><span class="ejemplo-texto">{{ e.prompt }}</span></button>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
 </section>
