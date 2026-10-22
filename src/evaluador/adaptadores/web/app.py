@@ -5,6 +5,7 @@ texto del usuario o del modelo pasa por el autoescape de Jinja2 (RNF-010): nunca
 seguro. El resaltado de fragmentos se construye por segmentos, sin insertar HTML.
 """
 
+import hashlib
 import json
 from functools import cache
 from importlib.resources import files
@@ -31,6 +32,18 @@ ERROR_POR_MOTIVO = {
 }
 
 plantillas = Environment(loader=PackageLoader("evaluador.adaptadores.web", "plantillas"), autoescape=True)
+
+
+ESTATICOS = Path(__file__).parent / "static"
+
+
+def version_estaticos() -> str:
+    """Huella de los archivos propios: cambia cuando cambian, para que el navegador no use la caché vieja."""
+    huella = hashlib.sha256()
+    for archivo in sorted(ESTATICOS.rglob("*")):
+        if archivo.is_file():
+            huella.update(archivo.read_bytes())
+    return huella.hexdigest()[:8]
 
 
 @cache
@@ -70,7 +83,8 @@ def mensajes_de_error(t: dict[str, str], error: EntradaInvalida | ErrorProveedor
 def crear_app(diagnosticar: Diagnosticar, mejorar: Mejorar, *, proveedor: str, modelo: str) -> FastAPI:
     app = FastAPI(title="Sharpener", docs_url=None, redoc_url=None, openapi_url=None)
     # Tipografías, estilos y logotipo propios: nada se carga de servicios externos (ADR-0004).
-    app.mount("/static", StaticFiles(directory=Path(__file__).parent / "static"), name="static")
+    app.mount("/static", StaticFiles(directory=ESTATICOS), name="static")
+    huella = version_estaticos()
 
     def pagina(idioma: str, **contexto: object) -> HTMLResponse:
         t = textos(idioma)
@@ -80,6 +94,7 @@ def crear_app(diagnosticar: Diagnosticar, mejorar: Mejorar, *, proveedor: str, m
             idioma=idioma,
             idiomas=[(i, textos(i)["idioma_nombre"]) for i in IDIOMAS],
             aviso=aviso,
+            huella=huella,
             **contexto,
         )
         return HTMLResponse(html)

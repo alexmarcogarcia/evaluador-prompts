@@ -1,7 +1,7 @@
 <section class="hoja" aria-labelledby="titulo">
   <h1 id="titulo">{{ t.titulo }}</h1>
   <p class="subtitulo">{{ t.subtitulo }}</p>
-  <form class="hoja-formulario" method="post" action="/diagnosticar">
+  <form class="hoja-formulario" method="post" action="/diagnosticar" data-progreso="{{ t.progreso_revisar }}">
     <input type="hidden" name="idioma" value="{{ idioma }}">
     <div class="campo">
       <label for="prompt">{{ t.etiqueta_prompt }}</label>

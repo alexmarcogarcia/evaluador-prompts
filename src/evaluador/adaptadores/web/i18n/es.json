@@ -47,5 +47,7 @@
   "resuelve": "Resuelve",
   "completar_aviso": "Completa lo marcado como [COMPLETAR: …] antes de usar el prompt: es información que no nos diste y que no hemos querido inventar.",
   "copiar_ayuda": "Copia el texto de la columna «Mejorado» y úsalo en tu herramienta de IA.",
-  "error_estado_invalido": "No hemos podido recuperar el diagnóstico. Vuelve a revisar tu prompt."
+  "error_estado_invalido": "No hemos podido recuperar el diagnóstico. Vuelve a revisar tu prompt.",
+  "progreso_revisar": "Afilando tu prompt…",
+  "progreso_mejorar": "Puliendo la versión mejorada…"
 }

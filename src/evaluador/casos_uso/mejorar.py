@@ -11,6 +11,7 @@ Que la mejora no invente lo omitido lo vigilan las evals con el juez (RNF-011).
 
 import logging
 
+from evaluador.casos_uso.reintento import con_reintento
 from evaluador.dominio import reglas
 from evaluador.dominio.idioma import detectar
 from evaluador.dominio.modelos import Diagnostico, MejoraPropuesta, VersionMejorada
@@ -32,10 +33,14 @@ class Mejorar:
         idioma_prompt: str | None,
     ) -> tuple[MejoraPropuesta, bool]:
         """Devuelve (propuesta, ¿hubo que reintentar por el idioma?)."""
-        propuesta = self._modelo.mejorar(diagnostico, respuestas, idioma, idioma_prompt)
+
+        def pedir() -> MejoraPropuesta:
+            return self._modelo.mejorar(diagnostico, respuestas, idioma, idioma_prompt)
+
+        propuesta = con_reintento(pedir)  # RF-018
         idioma_mejora = detectar(propuesta.texto)
         if idioma_prompt and idioma_mejora and idioma_mejora != idioma_prompt:
-            return self._modelo.mejorar(diagnostico, respuestas, idioma, idioma_prompt), True
+            return con_reintento(pedir), True
         return propuesta, False
 
     def ejecutar(

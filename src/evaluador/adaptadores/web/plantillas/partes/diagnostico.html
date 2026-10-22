@@ -1,10 +1,10 @@
 <section class="hoja" aria-labelledby="titulo-diagnostico">
   {% if diagnostico.rechazado %}
-    <h2 id="titulo-diagnostico" class="errores">{{ t.rechazado }}</h2>
+    <h2 id="titulo-diagnostico" tabindex="-1" class="errores">{{ t.rechazado }}</h2>
   {% elif diagnostico.sin_problemas %}
-    <h2 id="titulo-diagnostico" class="ok">{{ t.sin_problemas }}</h2>
+    <h2 id="titulo-diagnostico" tabindex="-1" class="ok">{{ t.sin_problemas }}</h2>
   {% else %}
-    <h2 id="titulo-diagnostico">{{ t.tu_prompt }}</h2>
+    <h2 id="titulo-diagnostico" tabindex="-1">{{ t.tu_prompt }}</h2>
     <div class="marcado">{% for tramo, marca in marcado %}{% if marca %}<mark>{{ tramo }}</mark>{% else %}{{ tramo }}{% endif %}{% endfor %}</div>
     <h2>{{ t.problemas_titulo }}</h2>
     <div class="problemas">
@@ -19,7 +19,7 @@
       {% endfor %}
     </div>
     {% if estado %}
-    <form class="preguntas" method="post" action="/mejorar">
+    <form class="preguntas" method="post" action="/mejorar" data-progreso="{{ t.progreso_mejorar }}">
       <input type="hidden" name="idioma" value="{{ idioma }}">
       <input type="hidden" name="estado" value="{{ estado }}">
       {% if diagnostico.preguntas %}

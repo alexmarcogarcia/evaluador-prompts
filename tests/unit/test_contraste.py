@@ -72,7 +72,7 @@ def test_los_componentes_no_usan_colores_literales() -> None:
 
 def test_la_plantilla_usa_la_hoja_de_estilos_y_no_lleva_estilos_propios() -> None:
     base = (WEB / "plantillas" / "base.html").read_text(encoding="utf-8")
-    assert 'href="/static/sharpener.css"' in base
+    assert 'href="/static/sharpener.css?v={{ huella }}"' in base
     for plantilla in (WEB / "plantillas").rglob("*.html"):
         texto = plantilla.read_text(encoding="utf-8")
         assert "<style" not in texto and 'style="' not in texto, plantilla.name

@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Sharpener · {{ t.titulo }}</title>
   <link rel="icon" href="/static/logo.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/static/fuentes.css">
-  <link rel="stylesheet" href="/static/sharpener.css">
+  <link rel="stylesheet" href="/static/fuentes.css?v={{ huella }}">
+  <link rel="stylesheet" href="/static/sharpener.css?v={{ huella }}">
+  <script src="/static/sharpener.js?v={{ huella }}" defer></script>
 </head>
 <body>
   <header class="barra">
@@ -16,6 +17,7 @@
     </a>
     <nav class="idiomas" aria-label="Idioma">{% for codigo, nombre in idiomas %}<a href="/?idioma={{ codigo }}" lang="{{ codigo }}"{% if codigo == idioma %} aria-current="true"{% endif %}>{{ nombre }}</a>{% endfor %}</nav>
   </header>
+  <div id="progreso" class="progreso" role="status" aria-live="polite" hidden><span class="progreso-barra" aria-hidden="true"><span></span></span><span class="progreso-texto"></span></div>
   <main class="lienzo">
     {% block contenido %}{% endblock %}
   </main>

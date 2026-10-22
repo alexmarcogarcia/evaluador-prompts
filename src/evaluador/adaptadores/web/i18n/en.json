@@ -47,5 +47,7 @@
   "resuelve": "Solves",
   "completar_aviso": "Fill in what is marked [COMPLETAR: …] before using the prompt: it's information you didn't give us and we didn't want to make up.",
   "copiar_ayuda": "Copy the text in the “Improved” column and use it in your AI tool.",
-  "error_estado_invalido": "We couldn't recover the review. Please review your prompt again."
+  "error_estado_invalido": "We couldn't recover the review. Please review your prompt again.",
+  "progreso_revisar": "Sharpening your prompt…",
+  "progreso_mejorar": "Polishing the improved version…"
 }
