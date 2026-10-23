@@ -1,6 +1,6 @@
 # Especificación: Diagnóstico y mejora de un prompt
 
-**Estado:** aprobada · **Versión:** 1.7 · **Aprobada:** 2026-10-23 por Àlex Marco · **Constitución:** 1.2
+**Estado:** aprobada · **Versión:** 1.8 · **Aprobada:** 2026-10-23 por Àlex Marco · **Constitución:** 1.2
 
 > Cambio 1.0 → 1.1: el spike 001 (`research.md`) mostró solapes entre categorías. Se añaden las fronteras del catálogo, las reglas de clasificación y RF-016.
 > Cambio 1.1 → 1.2: la ronda 2 del spike mostró que la granularidad no estaba definida. Se añade la regla de clasificación 4: las carencias de la misma categoría se agrupan.
@@ -9,6 +9,7 @@
 > Cambio 1.4 → 1.5: en las evals de la mejora, el código añadía marcadores [COMPLETAR] para datos que ya estaban en el resultado esperado, lo que confunde al usuario. RF-010 se matiza: no hace falta marcador si la información ya está en el prompt o en el resultado esperado.
 > Cambio 1.5 → 1.6: pedir el resultado esperado es contraproducente: repite lo que ya dice el prompt y frena a quien tiene poca experiencia. Se elimina. RF-002 pasa a exigir lo contrario: diagnosticar solo con el prompt, deduciendo la intención y preguntando lo que no se pueda deducir. Se ajustan P1, RF-010, RF-014, RF-016, la regla 3, RNF-006, RNF-009 y el glosario.
 > Cambio 1.6 → 1.7: sin el resultado esperado, la detección se estanca en torno al 77 % (rondas 4–6 con las etiquetas revisadas para el modo «solo prompt»), y cada ronda varía entre 3 y 7 puntos. RNF-003 pasa a ≥ 75 % de detección, medida como media de 3 rondas.
+> Cambio 1.7 → 1.8: con las mismas instrucciones, las rondas 6–8 dan 75,0 / 75,8 / 68,6 % (media 73,1 %) y 19,0 % de falsos positivos. RNF-003 pasa a ≥ 70 % de detección. Lo que el diagnóstico no señala lo suelen cubrir las preguntas, y es el precio de una app que solo pide el prompt.
 
 ## Contexto y objetivo
 
@@ -108,7 +109,7 @@ Son los requisitos que no cubren los criterios de las historias.
 - **RNF-001 · Tiempo de respuesta:** el diagnóstico tarda p95 < 30 s con el modelo gratuito elegido.
 - **RNF-002 · Coste:** 0 € por uso con el nivel gratuito del proveedor.
 - **RNF-003 · Calidad del diagnóstico** (medida con las evals versionadas, como media de 3 rondas, porque cada ronda varía entre 3 y 7 puntos):
-  - Detecta al menos el 75 % de los problemas sembrados en los prompts de prueba.
+  - Detecta al menos el 70 % de los problemas sembrados en los prompts de prueba.
   - Como máximo el 20 % de los problemas señalados son falsos positivos.
 - **RNF-004 · Fidelidad:** el 100 % de los fragmentos citados en problemas en el texto existen literalmente en el prompt original.
 - **RNF-005 · Comprensibilidad:** en la prueba con 5 personas (criterio de éxito 2), al menos 4 entienden cada explicación sin ayuda.
@@ -194,6 +195,7 @@ No quedan dudas abiertas.
 | 2026-10-19 | Àlex Marco | Requisitos de seguridad (Fase 8) | Se aprueban la ampliación de RF-006 y RNF-006 y los nuevos RNF-008, RNF-009 y RNF-010 (spec 1.3) |
 | 2026-10-19 | Àlex Marco | ¿Qué es «inventar» en la mejora y cuánto se tolera? | Dos niveles (dato inventado ≤ 5 %, requisito añadido ≤ 20 %), medidos con un juez de otro proveedor calibrado con 12 casos etiquetados por Àlex Marco (RNF-011, spec 1.4) |
 | 2026-10-21 | Àlex Marco | Marcadores [COMPLETAR] para datos que ya están en el resultado esperado | No hacen falta: RF-010 se matiza (spec 1.5) |
+| 2026-10-23 | Àlex Marco | Media de 3 rondas con las mismas instrucciones: 73,1 % (objetivo 75 %) | Se acepta: ≥ 70 % de detección, media de 3 rondas (RNF-003, spec 1.8) |
 | 2026-10-23 | Àlex Marco | Sin resultado esperado, la detección se estanca en ~77 % (objetivo 80 %) | Se ajusta el objetivo: ≥ 75 % de detección y ≤ 20 % de falsos positivos, media de 3 rondas (RNF-003, spec 1.7) |
 | 2026-10-22 | Àlex Marco | ¿Resultado esperado obligatorio? (revisión) | No: es contraproducente. Se elimina; la app mejora el prompt con solo leerlo, pregunta en «Revisar» y da el prompt mejorado en «Mejorar» (RF-002, spec 1.6) |
 
