@@ -113,9 +113,23 @@
 
   prepararCopia();
 
+  // ---------- Ejemplos de la pantalla inicial (RF-021) ----------
+  // Con scripts, el ejemplo se coloca al momento en el campo, sin recargar la página.
+  document.addEventListener("click", function (evento) {
+    var boton = evento.target.closest("button.ejemplo");
+    var campo = document.getElementById("prompt");
+    if (!boton || !campo) return;
+    evento.preventDefault();
+    campo.value = boton.dataset.prompt;
+    campo.focus();
+    campo.setSelectionRange(campo.value.length, campo.value.length);
+  });
+
   document.addEventListener("submit", function (evento) {
     var formulario = evento.target;
     if (!(formulario instanceof HTMLFormElement) || !formulario.dataset.progreso) return;
+    // Un botón con su propia acción (el cambio de idioma, T141) se envía de la forma de siempre.
+    if (evento.submitter && evento.submitter.hasAttribute("formaction")) return;
     evento.preventDefault();
     if (formulario.dataset.enviando === "si") return; // RF-019: una sola petición a la vez.
 

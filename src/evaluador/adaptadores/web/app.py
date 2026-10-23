@@ -18,6 +18,8 @@ from fastapi.staticfiles import StaticFiles
 from jinja2 import Environment, PackageLoader
 
 from evaluador.adaptadores.web.comparacion import comparar
+from evaluador.adaptadores.web.ejemplos import EJEMPLOS
+from evaluador.adaptadores.web.ejemplos import ejemplo as buscar_ejemplo
 from evaluador.adaptadores.web.estado import EstadoInvalido, leer_respuestas, restaurar, serializar
 from evaluador.casos_uso.diagnosticar import Diagnosticar, EntradaInvalida, MotivoEntrada
 from evaluador.casos_uso.mejorar import Mejorar
@@ -27,7 +29,6 @@ from evaluador.puertos.modelo_ia import ErrorProveedor
 IDIOMAS = ("es", "ca", "en", "de")
 ERROR_POR_MOTIVO = {
     MotivoEntrada.PROMPT_VACIO: "error_prompt_vacio",
-    MotivoEntrada.FALTA_RESULTADO_ESPERADO: "error_falta_resultado",
     MotivoEntrada.DEMASIADO_LARGO: "error_demasiado_largo",
 }
 
@@ -93,6 +94,7 @@ def crear_app(diagnosticar: Diagnosticar, mejorar: Mejorar, *, proveedor: str, m
             t=t,
             idioma=idioma,
             idiomas=[(i, textos(i)["idioma_nombre"]) for i in IDIOMAS],
+            ejemplos=EJEMPLOS[idioma],
             aviso=aviso,
             huella=huella,
             # Paso del recorrido (RF-022): lo deduce lo que se muestra.
@@ -112,7 +114,6 @@ def crear_app(diagnosticar: Diagnosticar, mejorar: Mejorar, *, proveedor: str, m
         return pagina(
             idioma,
             prompt=diagnostico.prompt.texto,
-            resultado=diagnostico.prompt.resultado_esperado,
             errores=errores,
             diagnostico=diagnostico,
             marcado=marcado,
@@ -121,22 +122,39 @@ def crear_app(diagnosticar: Diagnosticar, mejorar: Mejorar, *, proveedor: str, m
 
     @app.get("/", response_class=HTMLResponse)
     def inicio(idioma: str = "es") -> HTMLResponse:
-        return pagina(idioma if idioma in IDIOMAS else "es", prompt="", resultado="")
+        return pagina(idioma if idioma in IDIOMAS else "es", prompt="")
 
     @app.post("/diagnosticar", response_class=HTMLResponse)
     def enviar(
         prompt: Annotated[str, Form()] = "",
-        resultado: Annotated[str, Form()] = "",
         idioma: Annotated[str, Form()] = "es",
     ) -> HTMLResponse:
         idioma = idioma if idioma in IDIOMAS else "es"
         try:
-            diagnostico = diagnosticar.ejecutar(prompt, resultado, idioma_interfaz=idioma)
+            diagnostico = diagnosticar.ejecutar(prompt, idioma_interfaz=idioma)
         except (EntradaInvalida, ErrorProveedor) as error:
-            return pagina(
-                idioma, prompt=prompt, resultado=resultado, errores=mensajes_de_error(textos(idioma), error)
-            )
+            return pagina(idioma, prompt=prompt, errores=mensajes_de_error(textos(idioma), error))
         return resultado_del_diagnostico(idioma, diagnostico, [])
+
+    @app.post("/idioma", response_class=HTMLResponse)
+    def cambiar_idioma(
+        nuevo_idioma: Annotated[str, Form()] = "es",
+        prompt: Annotated[str, Form()] = "",
+    ) -> HTMLResponse:
+        """T141: vuelve al inicio en el idioma elegido con el prompt tal cual. No se traduce: es del
+        usuario (RF-012) y se acepta en cualquier idioma (RF-013); el idioma solo cambia la interfaz."""
+        return pagina(nuevo_idioma if nuevo_idioma in IDIOMAS else "es", prompt=prompt)
+
+    @app.post("/ejemplo", response_class=HTMLResponse)
+    def elegir_ejemplo(
+        ejemplo: Annotated[str, Form()] = "",
+        prompt: Annotated[str, Form()] = "",
+        idioma: Annotated[str, Form()] = "es",
+    ) -> HTMLResponse:
+        """RF-021 sin scripts: devuelve el inicio con el ejemplo elegido en el campo del prompt."""
+        idioma = idioma if idioma in IDIOMAS else "es"
+        elegido = buscar_ejemplo(idioma, ejemplo)
+        return pagina(idioma, prompt=elegido.prompt if elegido else prompt)
 
     @app.post("/mejorar", response_class=HTMLResponse)
     async def mejorar_prompt(request: Request) -> HTMLResponse:
@@ -147,7 +165,7 @@ def crear_app(diagnosticar: Diagnosticar, mejorar: Mejorar, *, proveedor: str, m
         try:
             diagnostico = restaurar(formulario.get("estado", ""))
         except EstadoInvalido:
-            return pagina(idioma, prompt="", resultado="", errores=[t["error_estado_invalido"]])
+            return pagina(idioma, prompt="", errores=[t["error_estado_invalido"]])
         try:
             version = mejorar.ejecutar(diagnostico, leer_respuestas(diagnostico, formulario), idioma)
         except ErrorProveedor as error:
@@ -156,7 +174,6 @@ def crear_app(diagnosticar: Diagnosticar, mejorar: Mejorar, *, proveedor: str, m
         return pagina(
             idioma,
             prompt=version.original.texto,
-            resultado=version.original.resultado_esperado,
             version=version,
             comparacion_original=original,
             comparacion_mejorado=mejorado,

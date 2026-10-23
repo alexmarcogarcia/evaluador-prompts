@@ -40,7 +40,7 @@ def main() -> None:
         if "mejorado" not in fila:
             continue
         try:
-            v = juez.juzgar(str(fila["prompt"]), str(fila["resultado"]), "", str(fila["mejorado"]))
+            v = juez.juzgar(str(fila["prompt"]), "", str(fila["mejorado"]))
         except Exception as error:  # noqa: BLE001  # Un juez que falla no cuenta como coincidencia.
             print(f"{fila['caso']}  ERROR del juez: {type(error).__name__}")
             continue

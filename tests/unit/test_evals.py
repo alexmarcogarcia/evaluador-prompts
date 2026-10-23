@@ -62,7 +62,7 @@ def test_los_fragmentos_esperados_de_los_casos_reales_son_literales(archivo: Pat
 
 def test_puntua_aciertos_y_falsos_positivos_por_categoria() -> None:
     caso = leer_casos(MD)[0]
-    prompt = Prompt(caso.prompt, caso.resultado)
+    prompt = Prompt(caso.prompt)
     vago = Problema(
         "P1", TipoProblema.EN_TEXTO, Categoria.VAGUEDAD_LEXICA, "Vago.", Gravedad.ALTA, "bonito", None
     )

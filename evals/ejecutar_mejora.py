@@ -53,12 +53,11 @@ def archivo_de_etiquetado(filas: list[dict[str, object]]) -> str:
         "escribe después de `·` qué has visto.",
         "",
         "- **Dato inventado:** hechos, cifras, nombres, fechas o características que no están en el "
-        "prompt, en el resultado esperado ni en las respuestas (aquí no hay respuestas: todas las "
+        "prompt ni en las respuestas (aquí no hay respuestas: todas las "
         "preguntas se omitieron).",
         "- **Requisito añadido:** condiciones de estilo, tono, formato, extensión o contenido "
         "que nadie pidió.",
-        "- No cuentan: reformular, hacer explícito lo que ya dice el resultado esperado, "
-        "ni los `[COMPLETAR: …]`.",
+        "- No cuentan: reformular, hacer explícito lo que ya dice el prompt, ni los `[COMPLETAR: …]`.",
         "",
         "Lo que opinó el juez está en otro archivo, para no influirte.",
         "",
@@ -72,8 +71,6 @@ def archivo_de_etiquetado(filas: list[dict[str, object]]) -> str:
             "**Prompt original:**",
             "",
             *[f"> {linea}" for linea in str(fila["prompt"]).splitlines()],
-            "",
-            f"**Resultado esperado:** {fila['resultado']}",
             "",
             "**Versión mejorada:**",
             "",
@@ -116,10 +113,9 @@ def main() -> None:
             "caso": caso.id,
             "idioma": caso.idioma,
             "prompt": caso.prompt,
-            "resultado": caso.resultado,
         }
         try:
-            diagnostico = Diagnosticar(gemini).ejecutar(caso.prompt, caso.resultado, idioma_interfaz="es")
+            diagnostico = Diagnosticar(gemini).ejecutar(caso.prompt, idioma_interfaz="es")
             if diagnostico.rechazado or diagnostico.sin_problemas:
                 fila["omitido"] = "rechazado" if diagnostico.rechazado else "sin problemas"
             else:
@@ -135,7 +131,7 @@ def main() -> None:
                     "marcadores": version.texto.count(MARCADOR),
                     "idioma_mejora": detectar(version.texto),
                 }
-                veredicto = juez.juzgar(caso.prompt, caso.resultado, "", version.texto)
+                veredicto = juez.juzgar(caso.prompt, "", version.texto)
                 fila |= {
                     "datos_inventados": veredicto.datos_inventados,
                     "requisitos_anadidos": veredicto.requisitos_anadidos,

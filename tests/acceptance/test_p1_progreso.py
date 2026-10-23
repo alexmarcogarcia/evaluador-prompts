@@ -50,7 +50,7 @@ def test_cada_formulario_lleva_el_texto_de_su_paso_en_el_idioma_de_la_interfaz(
     assert f'data-progreso="{t["progreso_revisar"]}"' in inicio
     diagnostico = cliente.post(
         "/diagnosticar",
-        data={"prompt": "Escríbeme algo que esté bien.", "resultado": "Un poema.", "idioma": idioma},
+        data={"prompt": "Escríbeme algo que esté bien.", "idioma": idioma},
     ).text
     assert f'data-progreso="{t["progreso_mejorar"]}"' in diagnostico
 
@@ -66,9 +66,7 @@ def test_hay_una_region_de_estado_para_anunciar_el_progreso(cliente: TestClient)
 
 def test_cada_seccion_nueva_se_puede_enfocar_para_llevar_la_vista_a_ella(cliente: TestClient) -> None:
     """RF-023: el script desplaza la vista y el foco al título de la sección nueva."""
-    pagina = cliente.post(
-        "/diagnosticar", data={"prompt": "Escríbeme algo que esté bien.", "resultado": "Un poema."}
-    ).text
+    pagina = cliente.post("/diagnosticar", data={"prompt": "Escríbeme algo que esté bien."}).text
     assert re.search(r'<h2 id="titulo-diagnostico" tabindex="-1"', pagina)
 
 

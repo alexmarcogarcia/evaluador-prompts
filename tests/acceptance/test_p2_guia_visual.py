@@ -21,7 +21,6 @@ from tests.dobles.modelo_falso import ModeloFalso
 
 WEB = Path(__file__).resolve().parents[2] / "src" / "evaluador" / "adaptadores" / "web"
 PROMPT = "Escríbeme algo que esté bien."
-ESPERADO = "Un artículo de 500 palabras."
 VAGO = ProblemaPropuesto("texto", 9, "que esté bien", None, "«Bien» no dice qué quieres.", "alta")
 MEJORADO = "Escribe un artículo de 500 palabras para el blog del instituto."
 
@@ -42,9 +41,9 @@ def cliente(mejorado: str = MEJORADO) -> tuple[TestClient, ModeloFalso]:
 def paginas(idioma: str = "es", mejorado: str = MEJORADO) -> dict[str, str]:
     c, modelo = cliente(mejorado)
     inicio = c.get(f"/?idioma={idioma}").text
-    datos = {"prompt": PROMPT, "resultado": ESPERADO, "idioma": idioma}
+    datos = {"prompt": PROMPT, "idioma": idioma}
     revisar = c.post("/diagnosticar", data=datos).text
-    diagnostico = Diagnosticar(modelo).ejecutar(PROMPT, ESPERADO, idioma_interfaz=idioma)
+    diagnostico = Diagnosticar(modelo).ejecutar(PROMPT, idioma_interfaz=idioma)
     mejorar = c.post("/mejorar", data={"idioma": idioma, "estado": serializar(diagnostico)}).text
     return {"escribir": inicio, "revisar": revisar, "mejorar": mejorar}
 

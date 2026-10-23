@@ -22,7 +22,6 @@ from tests.dobles.modelo_falso import ModeloFalso
 
 I18N = Path(composicion.__file__).parent / "adaptadores" / "web" / "i18n"
 PROMPT = "Escríbeme algo que esté bien."
-ESPERADO = "Un artículo de 500 palabras."
 VAGO = ProblemaPropuesto("texto", 9, "que esté bien", None, "«Bien» no dice qué quieres.", "alta")
 
 
@@ -33,8 +32,8 @@ def cliente(modelo: ModeloFalso | None = None) -> TestClient:
     )
 
 
-def enviar(c: TestClient, prompt: str = PROMPT, esperado: str = ESPERADO, idioma: str = "es") -> str:
-    respuesta = c.post("/diagnosticar", data={"prompt": prompt, "resultado": esperado, "idioma": idioma})
+def enviar(c: TestClient, prompt: str = PROMPT, idioma: str = "es") -> str:
+    respuesta = c.post("/diagnosticar", data={"prompt": prompt, "idioma": idioma})
     assert respuesta.status_code == 200
     return respuesta.text
 
@@ -90,11 +89,11 @@ def test_el_texto_del_usuario_y_del_modelo_se_muestra_escapado() -> None:
     assert "&lt;script&gt;alert(1)&lt;/script&gt;" in pagina
 
 
-def test_sin_resultado_esperado_se_pide_y_se_conserva_el_prompt() -> None:
-    """RF-002 / RF-014: lo escrito no se pierde."""
-    pagina = enviar(cliente(), esperado="")
-    assert textos("es")["error_falta_resultado"] in pagina
-    assert PROMPT in pagina
+def test_el_formulario_solo_pide_el_prompt() -> None:
+    """RF-002 (spec 1.6): nada de «qué resultado esperas»."""
+    pagina = cliente().get("/").text
+    assert 'name="prompt"' in pagina
+    assert pagina.count("<textarea") == 1
 
 
 def test_un_prompt_demasiado_largo_indica_cuanto_sobra() -> None:
@@ -109,7 +108,7 @@ def test_un_limite_de_uso_se_explica_y_se_puede_reintentar_sin_reescribir() -> N
     pagina = enviar(cliente(modelo))
     assert textos("es")["error_limite_de_uso"] in pagina
     assert textos("es")["reintentar_en"].replace("{s}", "7") in pagina
-    assert PROMPT in pagina and ESPERADO in pagina
+    assert PROMPT in pagina
 
 
 def test_el_servidor_solo_escucha_en_el_propio_equipo(monkeypatch: pytest.MonkeyPatch) -> None:

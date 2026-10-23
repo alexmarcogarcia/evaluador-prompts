@@ -25,7 +25,7 @@ from evaluador.dominio.modelos import (
 )
 from evaluador.puertos.modelo_ia import ErrorProveedor, TipoError
 
-PROMPT = Prompt(texto="Escribe algo SECRETO-DEL-USUARIO", resultado_esperado="Un poema ESPERADO-PRIVADO")
+PROMPT = Prompt(texto="Escribe algo SECRETO-DEL-USUARIO")
 RESPUESTA = json.dumps({"rechazado": False, "problemas": [], "preguntas": []})
 PETICION = httpx2.Request("POST", "https://proveedor.invalid/chat/completions")
 
@@ -77,7 +77,7 @@ def test_envia_el_modelo_y_el_idioma_de_la_interfaz_en_el_prompt_de_sistema() ->
     assert peticion["model"] == "gemini-3.5-flash-lite"
     assert peticion["messages"][0] == {"role": "system", "content": "Explica en catalán."}
     assert "SECRETO-DEL-USUARIO" in peticion["messages"][1]["content"]
-    assert "ESPERADO-PRIVADO" in peticion["messages"][1]["content"]
+    assert "RESULTADO" not in peticion["messages"][1]["content"]  # RF-002 (spec 1.6)
 
 
 def test_la_mejora_envia_diagnostico_y_respuestas() -> None:
@@ -139,5 +139,5 @@ def test_los_logs_solo_llevan_metricas_nunca_texto_ni_claves(caplog: pytest.LogC
         adaptador(ClienteSimulado(error=openai.APITimeoutError(request=PETICION))).diagnosticar(PROMPT, "es")
     registro = caplog.text
     assert "gemini-3.5-flash-lite" in registro and "tokens" in registro
-    for privado in ("SECRETO-DEL-USUARIO", "ESPERADO-PRIVADO", "clave-de-prueba", "Explica en"):
+    for privado in ("SECRETO-DEL-USUARIO", "clave-de-prueba", "Explica en"):
         assert privado not in registro

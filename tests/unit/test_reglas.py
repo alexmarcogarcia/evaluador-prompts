@@ -15,7 +15,7 @@ from evaluador.dominio.modelos import (
     TipoProblema,
 )
 
-PROMPT = Prompt(texto="Escríbeme algo sobre el clima que esté bien.", resultado_esperado="Un artículo.")
+PROMPT = Prompt(texto="Escríbeme algo sobre el clima que esté bien.")
 
 
 def propuesto(**cambios: object) -> ProblemaPropuesto:

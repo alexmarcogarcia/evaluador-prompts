@@ -20,7 +20,7 @@ from evaluador.dominio.modelos import (
     TipoProblema,
 )
 
-PROMPT = Prompt(texto="Escríbeme algo que esté bien.", resultado_esperado="Un artículo de 500 palabras.")
+PROMPT = Prompt(texto="Escríbeme algo que esté bien.")
 
 
 def problema_en_texto(**cambios: object) -> Problema:

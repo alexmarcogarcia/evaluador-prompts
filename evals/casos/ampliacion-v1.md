@@ -1,6 +1,6 @@
 # Evals del diagnóstico · Ampliación v1 (T022)
 
-**Estado:** validado por Àlex Marco el 2026-10-19 (C15–C50 redactados por el asistente y validados; C51–C55 redactados por Àlex Marco) · **Versión:** 1.0 · **Spec:** 001 v1.3
+**Estado:** validado por Àlex Marco el 2026-10-19 (C15–C50 redactados por el asistente y validados; C51–C55 redactados por Àlex Marco) · **Versión:** 1.1 (modo «solo prompt»: revisión validada el 2026-10-22 en `revision-solo-prompt.md`) · **Spec:** 001 v1.6
 
 Amplía `specs/001-diagnostico-prompt/casos-prueba.md` (C01–C14) para medir RNF-003 y RNF-007 con menos ruido (riesgo R-03). Mismo formato, mismos tipos (**T** en el texto · **A** por ausencia) y mismas categorías y reglas de clasificación de la spec 1.3. Todos los prompts son sintéticos.
 
@@ -34,7 +34,7 @@ Amplía `specs/001-diagnostico-prompt/casos-prueba.md` (C01–C14) para medir RN
 |---|---|---|
 | T | 5 | «formal i informal alhora» |
 | A | 2 | Data i lloc del sopar |
-| A | 4 | Longitud: menys de 150 paraules |
+| ~~A~~ | ~~4~~ | ~~Longitud: menys de 150 paraules~~ (retirado: solo prompt) |
 
 ### C17 · Inglés
 **Prompt:**
@@ -66,7 +66,7 @@ Amplía `specs/001-diagnostico-prompt/casos-prueba.md` (C01–C14) para medir RN
 | Tipo | Cat. | Fragmento / qué falta |
 |---|---|---|
 | A | 2 | Para quién y dónde: un niño de 8 años, en casa |
-| A | 4 | Cuántas ideas: 5 |
+| ~~A~~ | ~~4~~ | ~~Cuántas ideas: 5~~ (retirado: solo prompt) |
 | A | 6 | Presupuesto: menos de 50 € |
 
 ### C20 · Catalán
@@ -77,7 +77,7 @@ Amplía `specs/001-diagnostico-prompt/casos-prueba.md` (C01–C14) para medir RN
 
 | Tipo | Cat. | Fragmento / qué falta |
 |---|---|---|
-| T | 7 | «corregeix-lo, fes-ne un resum i proposa un títol» |
+| ~~T~~ | ~~7~~ | ~~«corregeix-lo, fes-ne un resum i proposa un títol»~~ (retirado: solo prompt) |
 
 ### C21 · Inglés
 **Prompt:**
@@ -123,7 +123,7 @@ Amplía `specs/001-diagnostico-prompt/casos-prueba.md` (C01–C14) para medir RN
 | Tipo | Cat. | Fragmento / qué falta |
 |---|---|---|
 | A | 6 | Regla: pagos pendientes de más de 30 días son urgentes |
-| A | 4 | Formato: lista con cada correo y su etiqueta |
+| ~~A~~ | ~~4~~ | ~~Formato: lista con cada correo y su etiqueta~~ (retirado: solo prompt) |
 
 ### C25 · Inglés
 **Prompt:**
@@ -135,7 +135,7 @@ Amplía `specs/001-diagnostico-prompt/casos-prueba.md` (C01–C14) para medir RN
 |---|---|---|
 | A | 3 | Público: abuela de 70 años, sin conocimientos técnicos |
 | A | 4 | Longitud: 5 frases |
-| A | 6 | Requisito: una analogía cotidiana |
+| ~~A~~ | ~~6~~ | ~~Requisito: una analogía cotidiana~~ (retirado: solo prompt) |
 
 ### C26 · Alemán
 **Prompt:**
@@ -147,7 +147,7 @@ Amplía `specs/001-diagnostico-prompt/casos-prueba.md` (C01–C14) para medir RN
 |---|---|---|
 | T | 9 | «gute» |
 | A | 2 | Tema: artículo de blog sobre reducir el estrés teletrabajando |
-| A | 4 | Cuántos y longitud: tres titulares de menos de 60 caracteres |
+| ~~A~~ | ~~4~~ | ~~Cuántos y longitud: tres titulares de menos de 60 caracteres~~ (retirado: solo prompt) |
 
 ### C27 · Español
 **Prompt:**
@@ -169,7 +169,7 @@ Amplía `specs/001-diagnostico-prompt/casos-prueba.md` (C01–C14) para medir RN
 | Tipo | Cat. | Fragmento / qué falta |
 |---|---|---|
 | T | 5 | «Respon només amb una paraula i explica'm detalladament» |
-| A | 4 | Formato: tabla con 3 ventajas y 3 inconvenientes |
+| ~~A~~ | ~~4~~ | ~~Formato: tabla con 3 ventajas y 3 inconvenientes~~ (retirado: solo prompt) |
 
 ### C29 · Inglés
 **Prompt:**
@@ -180,8 +180,8 @@ Amplía `specs/001-diagnostico-prompt/casos-prueba.md` (C01–C14) para medir RN
 | Tipo | Cat. | Fragmento / qué falta |
 |---|---|---|
 | A | 2 | Las notas de la reunión no están incluidas |
-| A | 4 | Formato: lista de puntos |
-| A | 6 | Qué incluir: solo las decisiones |
+| ~~A~~ | ~~4~~ | ~~Formato: lista de puntos~~ (retirado: solo prompt) |
+| ~~A~~ | ~~6~~ | ~~Qué incluir: solo las decisiones~~ (retirado: solo prompt) |
 
 ### C30 · Alemán
 **Prompt:**
@@ -225,7 +225,7 @@ Amplía `specs/001-diagnostico-prompt/casos-prueba.md` (C01–C14) para medir RN
 |---|---|---|
 | T | 5 | «Keep it humble but also brag about all my achievements» |
 | A | 2 | El puesto y la empresa: analista de datos en una empresa de logística |
-| A | 4 | Longitud: 100 palabras |
+| ~~A~~ | ~~4~~ | ~~Longitud: 100 palabras~~ (retirado: solo prompt) |
 
 ### C34 · Alemán
 **Prompt:**
@@ -236,8 +236,8 @@ Amplía `specs/001-diagnostico-prompt/casos-prueba.md` (C01–C14) para medir RN
 | Tipo | Cat. | Fragmento / qué falta |
 |---|---|---|
 | T | 1 | «Mach daraus etwas Besseres» |
-| A | 2 | El motivo: inventario |
-| A | 3 | Tono: amable |
+| ~~A~~ | ~~2~~ | ~~El motivo: inventario~~ (retirado: solo prompt) |
+| ~~A~~ | ~~3~~ | ~~Tono: amable~~ (retirado: solo prompt) |
 | A | 4 | Tipo y longitud: cartel para la puerta, como máximo dos frases |
 
 ### C35 · Español
@@ -261,7 +261,7 @@ Amplía `specs/001-diagnostico-prompt/casos-prueba.md` (C01–C14) para medir RN
 |---|---|---|
 | A | 2 | Para qué: una cena para 6 personas |
 | A | 6 | Restricción: vegana |
-| A | 4 | Estructura: organizada por secciones del supermercado |
+| ~~A~~ | ~~4~~ | ~~Estructura: organizada por secciones del supermercado~~ (retirado: solo prompt) |
 
 ### C37 · Inglés
 **Prompt:**
@@ -272,7 +272,7 @@ Amplía `specs/001-diagnostico-prompt/casos-prueba.md` (C01–C14) para medir RN
 | Tipo | Cat. | Fragmento / qué falta |
 |---|---|---|
 | T | 9 | «sounds nice» |
-| A | 2 | El dato: los cierres inesperados bajan un 40 % |
+| ~~A~~ | ~~2~~ | ~~El dato: los cierres inesperados bajan un 40 %~~ (retirado: solo prompt) |
 | A | 3 | Público: usuarios de la tienda de aplicaciones |
 | A | 4 | Tipo y longitud: nota de versión de una frase |
 
@@ -285,7 +285,7 @@ Amplía `specs/001-diagnostico-prompt/casos-prueba.md` (C01–C14) para medir RN
 | Tipo | Cat. | Fragmento / qué falta |
 |---|---|---|
 | A | 2 | La consulta del cliente no está incluida (queja por un paquete dañado) |
-| A | 6 | Qué incluir: disculpa y ofrecer un reemplazo |
+| ~~A~~ | ~~6~~ | ~~Qué incluir: disculpa y ofrecer un reemplazo~~ (retirado: solo prompt) |
 
 ### C39 · Español
 **Prompt:**
@@ -297,7 +297,7 @@ Amplía `specs/001-diagnostico-prompt/casos-prueba.md` (C01–C14) para medir RN
 |---|---|---|
 | T | 7 | «Además escribe un poema sobre el negocio y tradúcelo al francés» |
 | A | 2 | Qué negocio es: una tienda de bicicletas |
-| A | 4 | Formato: tres recomendaciones concretas |
+| ~~A~~ | ~~4~~ | ~~Formato: tres recomendaciones concretas~~ (retirado: solo prompt) |
 
 ### C40 · Catalán
 **Prompt:**
@@ -309,7 +309,7 @@ Amplía `specs/001-diagnostico-prompt/casos-prueba.md` (C01–C14) para medir RN
 |---|---|---|
 | T | 9 | «originals» |
 | A | 2 | Qué tienda: té e infusiones, en el barrio de Gràcia |
-| A | 4 | Cuántos, longitud e idioma: 10 nombres cortos en catalán |
+| ~~A~~ | ~~4~~ | ~~Cuántos, longitud e idioma: 10 nombres cortos en catalán~~ (retirado: solo prompt) |
 
 ### C41 · Inglés · Prompt bueno
 **Prompt:**
@@ -331,8 +331,8 @@ Amplía `specs/001-diagnostico-prompt/casos-prueba.md` (C01–C14) para medir RN
 |---|---|---|
 | T | 5 | «kurze, ausführliche» |
 | A | 2 | Qué máquina: la cafetera de portafiltro de la oficina |
-| A | 3 | Público: compañeros nuevos |
-| A | 4 | Estructura: 5 pasos |
+| ~~A~~ | ~~3~~ | ~~Público: compañeros nuevos~~ (retirado: solo prompt) |
+| ~~A~~ | ~~4~~ | ~~Estructura: 5 pasos~~ (retirado: solo prompt) |
 
 ### C43 · Español
 **Prompt:**
@@ -354,9 +354,9 @@ Amplía `specs/001-diagnostico-prompt/casos-prueba.md` (C01–C14) para medir RN
 
 | Tipo | Cat. | Fragmento / qué falta |
 |---|---|---|
-| T | 3 | «com si tingués cinc anys» |
-| A | 4 | Longitud: 4 frases |
-| A | 6 | Requisito: un ejemplo de la vida cotidiana |
+| ~~T~~ | ~~3~~ | ~~«com si tingués cinc anys»~~ (retirado: solo prompt) |
+| ~~A~~ | ~~4~~ | ~~Longitud: 4 frases~~ (retirado: solo prompt) |
+| ~~A~~ | ~~6~~ | ~~Requisito: un ejemplo de la vida cotidiana~~ (retirado: solo prompt) |
 
 ### C45 · Inglés
 **Prompt:**
@@ -366,8 +366,8 @@ Amplía `specs/001-diagnostico-prompt/casos-prueba.md` (C01–C14) para medir RN
 
 | Tipo | Cat. | Fragmento / qué falta |
 |---|---|---|
-| A | 3 | Registro: cortés, con «usted»; público: huéspedes de un hotel |
-| A | 4 | Idioma de salida: variedad de México; tipo: cartel |
+| ~~A~~ | ~~3~~ | ~~Registro: cortés, con «usted»; público: huéspedes de un hotel~~ (retirado: solo prompt) |
+| ~~A~~ | ~~4~~ | ~~Idioma de salida: variedad de México; tipo: cartel~~ (retirado: solo prompt) |
 
 ---
 

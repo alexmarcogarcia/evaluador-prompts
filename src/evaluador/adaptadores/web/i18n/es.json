@@ -1,10 +1,8 @@
 {
   "idioma_nombre": "Español",
   "titulo": "Afila tu prompt",
-  "subtitulo": "Pega tu prompt y dinos qué quieres conseguir: te diremos qué le falta y por qué.",
+  "subtitulo": "Pega lo que le pides a la IA. Te diremos qué le falta, te preguntaremos lo justo y te daremos una versión mejorada.",
   "etiqueta_prompt": "Tu prompt",
-  "etiqueta_resultado": "Qué resultado esperas",
-  "ayuda_resultado": "Describe con tus palabras lo que quieres obtener. Es obligatorio.",
   "aviso_envio": "Tu prompt se enviará a {proveedor} (modelo {modelo}). No incluyas datos personales ni confidenciales.",
   "boton": "Revisar mi prompt",
   "problemas_titulo": "Problemas encontrados",
@@ -28,7 +26,6 @@
   "cat_8": "Faltan ejemplos",
   "cat_9": "Palabras demasiado vagas",
   "error_prompt_vacio": "Escribe un prompt para poder revisarlo.",
-  "error_falta_resultado": "Indica qué resultado esperas: sin eso no podemos saber qué le falta a tu prompt.",
   "error_demasiado_largo": "Tu prompt supera en {n} caracteres el máximo de 8.000.",
   "error_limite_de_uso": "El servicio de IA ha llegado a su límite de uso gratuito por ahora.",
   "error_no_disponible": "El servicio de IA no está disponible en este momento.",
@@ -59,5 +56,8 @@
   "copiado_completar": "Copiado. Recuerda completar lo marcado con [COMPLETAR: …].",
   "copiar_manual": "Texto seleccionado: pulsa Ctrl+C para copiarlo.",
   "tema_oscuro": "Cambiar a modo oscuro",
-  "tema_claro": "Cambiar a modo claro"
+  "tema_claro": "Cambiar a modo claro",
+  "selector_idioma": "Idioma de la interfaz",
+  "ejemplos_titulo": "¿No sabes por dónde empezar? Prueba con un ejemplo:",
+  "saltar": "Saltar al contenido"
 }

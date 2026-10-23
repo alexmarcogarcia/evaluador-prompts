@@ -1,10 +1,8 @@
 {
   "idioma_nombre": "Català",
   "titulo": "Esmola el teu prompt",
-  "subtitulo": "Enganxa el teu prompt i digues-nos què vols aconseguir: et direm què li falta i per què.",
+  "subtitulo": "Enganxa el que li demanes a la IA. Et direm què li falta, et preguntarem el just i et donarem una versió millorada.",
   "etiqueta_prompt": "El teu prompt",
-  "etiqueta_resultado": "Quin resultat esperes",
-  "ayuda_resultado": "Descriu amb les teves paraules el que vols obtenir. És obligatori.",
   "aviso_envio": "El teu prompt s'enviarà a {proveedor} (model {modelo}). No hi incloguis dades personals ni confidencials.",
   "boton": "Revisar el meu prompt",
   "problemas_titulo": "Problemes trobats",
@@ -28,7 +26,6 @@
   "cat_8": "Falten exemples",
   "cat_9": "Paraules massa vagues",
   "error_prompt_vacio": "Escriu un prompt per poder revisar-lo.",
-  "error_falta_resultado": "Indica quin resultat esperes: sense això no podem saber què li falta al teu prompt.",
   "error_demasiado_largo": "El teu prompt supera en {n} caràcters el màxim de 8.000.",
   "error_limite_de_uso": "El servei d'IA ha arribat al seu límit d'ús gratuït de moment.",
   "error_no_disponible": "El servei d'IA no està disponible en aquest moment.",
@@ -59,5 +56,8 @@
   "copiado_completar": "Copiat. Recorda completar el que està marcat amb [COMPLETAR: …].",
   "copiar_manual": "Text seleccionat: prem Ctrl+C per copiar-lo.",
   "tema_oscuro": "Canviar a mode fosc",
-  "tema_claro": "Canviar a mode clar"
+  "tema_claro": "Canviar a mode clar",
+  "selector_idioma": "Idioma de la interfície",
+  "ejemplos_titulo": "No saps per on començar? Prova amb un exemple:",
+  "saltar": "Salta al contingut"
 }

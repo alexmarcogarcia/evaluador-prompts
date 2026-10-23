@@ -1,6 +1,8 @@
 # Especificación: Interfaz atractiva e intuitiva
 
-**Estado:** aprobada · **Versión:** 1.0 · **Aprobada:** 2026-10-22 por Àlex Marco · **Constitución:** 1.2 · **Depende de:** spec 001 v1.5
+**Estado:** aprobada · **Versión:** 1.1 · **Aprobada:** 2026-10-22 por Àlex Marco · **Constitución:** 1.2 · **Depende de:** spec 001 v1.6
+
+> Cambio 1.0 → 1.1: la spec 001 v1.6 elimina el resultado esperado. Los ejemplos (RF-021) solo rellenan el prompt, y al cambiar de idioma se conserva el prompt tal cual, sin traducirlo.
 
 > Los identificadores continúan los de la spec 001 (RF-017 en adelante, RNF-012 en adelante) para que sean únicos en todo el proyecto.
 
@@ -45,7 +47,7 @@ Como persona sin experiencia, quiero ver ejemplos de prompts, para entender qué
 
 **Criterios de aceptación:**
 - Dado que entro por primera vez, cuando miro la pantalla inicial, entonces veo ejemplos de prompts típicos en el idioma de la interfaz.
-- Dado un ejemplo, cuando lo elijo, entonces se rellenan el prompt y el resultado esperado, y puedo pulsar «Revisar».
+- Dado un ejemplo, cuando lo elijo, entonces se rellena el prompt y puedo pulsar «Revisar».
 
 ### P2 · Un recorrido fluido y guiado
 Como persona que usa la app, quiero ver en qué paso estoy y pasar de uno a otro sin saltos, para no perderme.
@@ -71,7 +73,7 @@ Como persona que usa la app, quiero que sea agradable a la vista, para que me ap
 - **RF-018:** Si la IA devuelve una respuesta inválida, el sistema debe reintentarla automáticamente una vez antes de mostrar el error. Solo las respuestas inválidas: si el servicio no está disponible o tarda demasiado, reintentar solo alarga la espera. (P1)
 - **RF-019:** Mientras haya una petición en curso, el sistema no debe enviar otra igual al pulsar de nuevo el botón. (P1)
 - **RF-020:** El sistema debe ofrecer un botón «Copiar» que copie el texto exacto del prompt mejorado y confirme la acción, recordando los `[COMPLETAR: …]` si los hay. (P1)
-- **RF-021:** La pantalla inicial debe ofrecer 4 ejemplos de prompts en el idioma de la interfaz que, al elegirlos, rellenen el prompt y el resultado esperado. (P2)
+- **RF-021:** La pantalla inicial debe ofrecer 4 ejemplos de prompts en el idioma de la interfaz que, al elegirlos, rellenen el prompt. (P2)
 - **RF-022:** El sistema debe mostrar los pasos del recorrido y destacar el actual. (P2)
 - **RF-023:** Al pasar de un paso al siguiente, el sistema debe conservar visible lo anterior y llevar la vista al contenido nuevo, sin dejar la pantalla en blanco. (P2)
 - **RF-024:** La interfaz debe seguir una guía visual aprobada para la app **Sharpener**: logotipo, paleta, tipografía y componentes. (P2)
@@ -81,7 +83,7 @@ Como persona que usa la app, quiero que sea agradable a la vista, para que me ap
 
 - La IA tarda más de 30 s: el indicador sigue visible y, al final, aparece el error de tiempo agotado (RF-014) sin perder el texto.
 - El navegador no permite copiar al portapapeles: se selecciona el texto y se indica cómo copiarlo a mano.
-- El usuario cambia de idioma con un resultado en pantalla: se vuelve al inicio conservando el texto escrito (prompt y resultado esperado), porque las explicaciones ya generadas están en el idioma anterior.
+- El usuario cambia de idioma con un resultado en pantalla: se vuelve al inicio conservando el prompt tal como está escrito, porque las explicaciones ya generadas están en el idioma anterior. El prompt no se traduce: es del usuario (RF-012) y se acepta en cualquier idioma (RF-013); el idioma solo cambia la interfaz y las explicaciones.
 - Pantalla pequeña (móvil de 360 px): el recorrido completo sigue siendo usable y la comparación original/mejorado se apila.
 - El navegador bloquea los scripts: la app sigue funcionando como en el incremento 001, sin las mejoras que dependen de ellos.
 
@@ -99,7 +101,7 @@ Como persona que usa la app, quiero que sea agradable a la vista, para que me ap
 - **Recorrido:** los pasos 1 Escribir → 2 Revisar (diagnóstico y preguntas) → 3 Mejorar (comparación y copia).
 - **Sharpener:** nombre de la app («afilador»: afila los prompts). Decidido por Àlex Marco el 2026-10-22.
 - **Guía visual:** documento con logotipo, paleta (claro y oscuro), tipografía y componentes de Sharpener, aprobado por Àlex Marco.
-- **Ejemplo:** prompt típico, con su resultado esperado, pensado para enseñar qué hace la app. Sintético.
+- **Ejemplo:** prompt típico pensado para enseñar qué hace la app. Sintético.
 
 ## Fuera de alcance
 
@@ -124,6 +126,8 @@ No quedan dudas abiertas.
 | 2026-10-22 | Àlex Marco | Scripts bloqueados | La app sigue funcionando sin las mejoras |
 | 2026-10-22 | Àlex Marco | Tiempo del recorrido en T060 | Menos de 5 minutos (RNF-012) |
 | 2026-10-22 | Àlex Marco | Medida de «atractiva» | 4 o más sobre 5 en al menos 4 de 5 personas (RNF-016) |
+| 2026-10-22 | Àlex Marco | Resultado esperado | Se elimina (spec 001 v1.6): la pantalla inicial solo pide el prompt y los ejemplos solo lo rellenan (spec 1.1) |
+| 2026-10-22 | Àlex Marco | ¿Traducir el prompt al cambiar de idioma? | No, por recomendación: el prompt es del usuario y la versión mejorada sale en su idioma (RF-012, RF-013). Pendiente de confirmar por Àlex Marco |
 
 ## Criterios de éxito
 

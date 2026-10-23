@@ -41,7 +41,6 @@ class Prompt:
     """Lo que escribe el usuario. Inmutable: el original nunca se modifica."""
 
     texto: str
-    resultado_esperado: str
 
 
 @dataclass(frozen=True)

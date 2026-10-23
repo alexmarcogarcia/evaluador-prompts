@@ -87,6 +87,13 @@ a { color: inherit; text-underline-offset: 3px; text-decoration-thickness: 2px; 
 h2[tabindex="-1"]:focus { outline: none; }
 svg { fill: currentColor; }
 
+/* ---------- Saltar al contenido (RNF-014): invisible hasta que llega el foco del teclado ---------- */
+.saltar {
+  position: absolute; left: max(16px, env(safe-area-inset-left, 0px)); top: -100px; z-index: 10;
+  background: var(--accion); color: var(--sobre-accion); padding: 10px 16px; border-radius: var(--radio); font-weight: 700;
+}
+.saltar:focus { top: calc(8px + env(safe-area-inset-top, 0px)); }
+
 /* ---------- Barra ---------- */
 .barra {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
@@ -101,12 +108,12 @@ svg { fill: currentColor; }
 .logo-punta { fill: var(--tinta); }
 .herramientas { display: flex; align-items: center; gap: 10px; }
 .idiomas { display: flex; gap: 2px; font-size: var(--t-pequeno); }
-.idiomas a {
-  min-width: 36px; min-height: 36px; display: inline-flex; align-items: center; justify-content: center;
-  border-radius: var(--radio); color: var(--tinta-suave); text-decoration: none; font-weight: 600;
+.idiomas button {
+  min-width: 40px; min-height: 40px; padding: 0 6px; justify-content: center;
+  font: 600 var(--t-pequeno) var(--letra-texto); background: transparent; color: var(--tinta-suave);
 }
-.idiomas a:hover { color: var(--tinta); }
-.idiomas a[aria-current] { color: var(--grafito); background: var(--amarillo); }
+.idiomas button:hover { color: var(--tinta); transform: none; }
+.idiomas button[aria-current] { color: var(--grafito); background: var(--amarillo); }
 .tema {
   width: 40px; height: 40px; display: grid; place-items: center; border: 0; border-radius: 50%;
   background: var(--velo); color: var(--tinta); cursor: pointer; padding: 0;
@@ -137,6 +144,19 @@ svg { fill: currentColor; }
 .portada textarea { background: var(--hoja); color: var(--tinta); border-color: var(--sobre-portada); }
 .portada textarea:hover { border-color: var(--sobre-portada); }
 .portada textarea:focus-visible { border-color: var(--foco); }
+
+/* ---------- Ejemplos (RF-021) ---------- */
+.ejemplos { display: grid; gap: 12px; }
+.ejemplos-titulo { font-weight: 700; }
+.ejemplos-lista { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); gap: 10px; }
+.ejemplo {
+  display: grid; gap: 4px; align-content: start; text-align: left; min-height: 0; padding: 14px 16px;
+  background: var(--hoja); color: var(--tinta); border-radius: 10px; box-shadow: inset 0 0 0 2px var(--sobre-portada);
+  font-weight: 400;
+}
+.ejemplo:hover { transform: translateY(-2px); }
+.ejemplo-etiqueta { font-size: var(--t-pequeno); font-weight: 700; color: var(--tinta-suave); }
+.ejemplo-texto { font: 500 var(--t-texto)/1.35 var(--letra-titulos); }
 
 /* ---------- Formularios ---------- */
 .formulario, .preguntas { display: grid; gap: 20px; }
@@ -223,6 +243,7 @@ ins { text-decoration: none; background: var(--amarillo); color: var(--grafito);
 
 @media (max-width: 520px) {
   .problema { grid-template-columns: 1fr; }
+  .problema .gravedad { justify-self: start; }
   .pie-formulario button { width: 100%; justify-content: center; }
 }
 

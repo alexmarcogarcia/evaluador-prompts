@@ -43,12 +43,11 @@ class Juez:
         self.modelo = modelo
         self._cliente = openai.OpenAI(api_key=api_key, base_url=NVIDIA_URL, timeout=150, max_retries=2)
 
-    def juzgar(self, prompt: str, resultado: str, respuestas: str, mejorado: str) -> Veredicto:
+    def juzgar(self, prompt: str, respuestas: str, mejorado: str) -> Veredicto:
         usuario = "\n\n".join(
             f"{etiqueta}:\n<<<\n{texto}\n>>>"
             for etiqueta, texto in (
                 ("PROMPT ORIGINAL", prompt),
-                ("RESULTADO ESPERADO", resultado),
                 ("RESPUESTAS DEL USUARIO", respuestas or "(ninguna: todas las preguntas se omitieron)"),
                 ("VERSIÓN MEJORADA", mejorado),
             )

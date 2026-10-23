@@ -1,10 +1,8 @@
 {
   "idioma_nombre": "Deutsch",
   "titulo": "Schärfe deinen Prompt",
-  "subtitulo": "Füge deinen Prompt ein und sag uns, was du erreichen willst: Wir sagen dir, was fehlt und warum.",
+  "subtitulo": "Füge ein, worum du die KI bittest. Wir sagen dir, was fehlt, fragen nur das Nötige und geben dir eine verbesserte Version.",
   "etiqueta_prompt": "Dein Prompt",
-  "etiqueta_resultado": "Welches Ergebnis erwartest du",
-  "ayuda_resultado": "Beschreibe mit deinen eigenen Worten, was du bekommen möchtest. Pflichtfeld.",
   "aviso_envio": "Dein Prompt wird an {proveedor} (Modell {modelo}) gesendet. Gib keine personenbezogenen oder vertraulichen Daten ein.",
   "boton": "Meinen Prompt prüfen",
   "problemas_titulo": "Gefundene Probleme",
@@ -28,7 +26,6 @@
   "cat_8": "Fehlende Beispiele",
   "cat_9": "Zu vage Wörter",
   "error_prompt_vacio": "Schreib einen Prompt, damit wir ihn prüfen können.",
-  "error_falta_resultado": "Gib an, welches Ergebnis du erwartest: Ohne diese Angabe wissen wir nicht, was deinem Prompt fehlt.",
   "error_demasiado_largo": "Dein Prompt ist {n} Zeichen länger als das Maximum von 8.000.",
   "error_limite_de_uso": "Der KI-Dienst hat sein kostenloses Nutzungslimit vorerst erreicht.",
   "error_no_disponible": "Der KI-Dienst ist im Moment nicht verfügbar.",
@@ -59,5 +56,8 @@
   "copiado_completar": "Kopiert. Denk daran, die mit [COMPLETAR: …] markierten Stellen zu ergänzen.",
   "copiar_manual": "Text markiert: Drück Strg+C, um ihn zu kopieren.",
   "tema_oscuro": "Zum dunklen Modus wechseln",
-  "tema_claro": "Zum hellen Modus wechseln"
+  "tema_claro": "Zum hellen Modus wechseln",
+  "selector_idioma": "Sprache der Oberfläche",
+  "ejemplos_titulo": "Du weißt nicht, wo du anfangen sollst? Probier ein Beispiel aus:",
+  "saltar": "Zum Inhalt springen"
 }

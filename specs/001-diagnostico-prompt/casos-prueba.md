@@ -1,6 +1,6 @@
 # Casos de prueba del diagnóstico (spike de modelos)
 
-**Estado:** validado por Àlex Marco el 2026-10-19 · **Versión:** 1.1 (cambios en C08 y C14) · **Spec:** 001 v1.1
+**Estado:** validado por Àlex Marco el 2026-10-19 · **Versión:** 1.2 (1.1: cambios en C08 y C14; 1.2: modo «solo prompt», revisión validada el 2026-10-22 en `evals/casos/revision-solo-prompt.md`) · **Spec:** 001 v1.6
 
 Estos casos son la «respuesta correcta» con la que se medirán RNF-003 (detección y falsos positivos), RNF-004 (citas literales) y, de forma preliminar, RNF-007 (rechazos). Todos los prompts son sintéticos.
 
@@ -38,7 +38,7 @@ Categorías: 1 objetivo ambiguo · 2 falta de contexto · 3 destinatario o tono 
 |---|---|---|
 | T | 5 | «Ha de ser molt breu però que no es perdi cap detall» |
 | A | 3 | Destinatari: la direcció |
-| A | 4 | Format: 5 punts |
+| ~~A~~ | ~~4~~ | ~~Format: 5 punts~~ (retirado: solo prompt) |
 
 ### C03 · Inglés
 **Prompt:**
@@ -76,9 +76,9 @@ Categorías: 1 objetivo ambiguo · 2 falta de contexto · 3 destinatario o tono 
 
 | Tipo | Cat. | Fragmento / qué falta |
 |---|---|---|
-| A | 6 | Regla para la ironía: cuenta como negativo |
+| ~~A~~ | ~~6~~ | ~~Regla para la ironía: cuenta como negativo~~ (retirado: solo prompt) |
 | A | 8 | Ejemplos de clasificación, sobre todo de un caso irónico |
-| A | 4 | Formato: tabla |
+| ~~A~~ | ~~4~~ | ~~Formato: tabla~~ (retirado: solo prompt) |
 
 ### C06 · Catalán
 **Prompt:**
@@ -141,7 +141,7 @@ Categorías: 1 objetivo ambiguo · 2 falta de contexto · 3 destinatario o tono 
 | Tipo | Cat. | Fragmento / qué falta |
 |---|---|---|
 | T | 1 | «hola» |
-| A | 2 | Qué se quiere: explicación de cómo solicitar una beca universitaria |
+| ~~A~~ | ~~2~~ | ~~Qué se quiere: explicación de cómo solicitar una beca universitaria~~ (retirado: solo prompt) |
 
 **Comportamiento esperado:** preguntas aclaratorias sobre el objetivo (P2).
 
@@ -156,7 +156,7 @@ Categorías: 1 objetivo ambiguo · 2 falta de contexto · 3 destinatario o tono 
 | T | 5 | «Answer only with yes or no. Explain your reasoning in detail.» |
 | T | 9 | «good» |
 | A | 2 | El plan de marketing no está incluido |
-| A | 4 | Formato: 3 puntos fuertes y 3 débiles |
+| ~~A~~ | ~~4~~ | ~~Formato: 3 puntos fuertes y 3 débiles~~ (retirado: solo prompt) |
 
 ### C13 · Alemán
 **Prompt:**

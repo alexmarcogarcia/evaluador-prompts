@@ -22,9 +22,9 @@ FUENTES = {"diagnostico.md": cargar("diagnostico")} | {
 }
 
 
-def ejemplos(texto: str) -> list[tuple[str, str, str]]:
-    """(prompt, resultado esperado, respuesta) de cada ejemplo."""
-    campos: dict[str, list[str]] = {"PROMPT: ": [], "RESULTADO ESPERADO: ": [], "RESPUESTA: ": []}
+def ejemplos(texto: str) -> list[tuple[str, str]]:
+    """(prompt, respuesta) de cada ejemplo."""
+    campos: dict[str, list[str]] = {"PROMPT: ": [], "RESPUESTA: ": []}
     for linea in texto.splitlines():
         for prefijo, lista in campos.items():
             if linea.startswith(prefijo):
@@ -38,13 +38,13 @@ def test_el_prompt_oficial_tiene_ejemplos_resueltos() -> None:
 
 @pytest.mark.parametrize("nombre", FUENTES)
 def test_los_ejemplos_cumplen_el_contrato_y_las_reglas_del_dominio(nombre: str) -> None:
-    for texto, resultado, respuesta in ejemplos(FUENTES[nombre]):
-        depurado = reglas.depurar_diagnostico(Prompt(texto, resultado), interpretar_diagnostico(respuesta))
+    for texto, respuesta in ejemplos(FUENTES[nombre]):
+        depurado = reglas.depurar_diagnostico(Prompt(texto), interpretar_diagnostico(respuesta))
         assert depurado.descartados == 0, f"ejemplo inválido: {texto[:40]}"
 
 
 @pytest.mark.parametrize("nombre", FUENTES)
 def test_los_ejemplos_no_repiten_casos_de_evals(nombre: str) -> None:
     prompts_de_evals = {c.prompt for a in ARCHIVOS for c in leer_casos(a.read_text(encoding="utf-8"))}
-    for texto, _, _ in ejemplos(FUENTES[nombre]):
+    for texto, _ in ejemplos(FUENTES[nombre]):
         assert texto not in prompts_de_evals

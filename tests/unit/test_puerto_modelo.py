@@ -10,7 +10,7 @@ from evaluador.dominio.modelos import DiagnosticoPropuesto, MejoraPropuesta, Pro
 from evaluador.puertos.modelo_ia import ErrorProveedor, ModeloIA, TipoError
 from tests.dobles.modelo_falso import ModeloFalso
 
-PROMPT = Prompt(texto="hola", resultado_esperado="Una explicación.")
+PROMPT = Prompt(texto="hola")
 VACIO = DiagnosticoPropuesto(problemas=(), preguntas=(), rechazado=False)
 
 
