@@ -2,7 +2,7 @@
 
 Mide la aplicación completa (adaptador + reglas del dominio), no el modelo suelto:
 - RNF-001: tiempo p95 del diagnóstico < 30 s.
-- RNF-003: detección ≥ 80 % y falsos positivos ≤ 20 %.
+- RNF-003 (spec 1.7): detección ≥ 75 % y falsos positivos ≤ 20 %, como media de 3 rondas.
 - RNF-004: citas literales, garantizadas por el dominio; se informa de cuántos problemas descartó.
 - RNF-007: 100 % de dañinos rechazados y ≤ 5 % de legítimos rechazados.
 
